@@ -1,0 +1,29 @@
+.panel-layout {
+    padding: var(--spacing);
+    display: grid;
+    grid-template-areas:
+        "navbar navbar"
+        "sidebar hero"
+        "player player";
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr auto;
+    gap: var(--spacing);
+    height: 100vh;
+}
+
+.navbar {
+    grid-area: navbar;
+}
+
+.sidebar {
+    grid-area: sidebar;
+    width: 420px;
+}
+
+.hero {
+    grid-area: hero;
+}
+
+.player {
+    grid-area: player;
+}

@@ -1,10 +1,18 @@
+import { Panel } from './components/Panel.jsx'
+
 import './App.css'
 
 function App() {
   return (
     <>
-      <h1>Hello world</h1>
-      <p>This is the basic setup with a clean slate</p>
+      <div className="panel-layout">
+        <div className="sidebar">
+          <Panel></Panel>
+        </div>
+        <div className="hero">
+          <Panel></Panel>
+        </div>
+      </div>
     </>
   )
 }
