@@ -2,7 +2,7 @@
     padding: var(--spacing);
     display: grid;
     grid-template-areas:
-        "navbar navbar"
+        "top-banner top-banner"
         "sidebar hero"
         "player player";
     grid-template-columns: auto 1fr;
@@ -11,8 +11,8 @@
     height: 100vh;
 }
 
-.navbar {
-    grid-area: navbar;
+.top-banner {
+    grid-area: top-banner;
 }
 
 .sidebar {

@@ -1,0 +1,39 @@
+.top-banner {
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    margin: calc(-1 * var(--spacing));
+    padding: var(--spacing);
+}
+
+.top-banner .logo img {
+    height: 100%;
+    width: auto;
+    display: block;
+    margin-left: 12px;
+}
+
+/* place holder styling for search bar*/
+.top-banner p {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.top-banner .icon-wrapper {
+    all: unset;
+    background-color: #1f1f1f;
+    border-radius: 50%;
+    aspect-ratio: 1/1;
+    height: 100%;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 32px;
+    transition: transform var(--shortest) cubic-bezier(0.3, 0, 0 ,1);
+    will-change: transform;
+}
+
+.top-banner .icon-wrapper:hover {
+    transform: scale(1.05);
+}
