@@ -1,12 +1,12 @@
-.top-banner {
+.navbar {
     display: flex;
     justify-content: space-between;
-    height: 64px;
+    height: 100%;
     margin: calc(-1 * var(--spacing));
     padding: var(--spacing);
 }
 
-.top-banner .logo img {
+.navbar .logo img {
     height: 100%;
     width: auto;
     display: block;
@@ -14,13 +14,13 @@
 }
 
 /* place holder styling for search bar*/
-.top-banner p {
+.navbar p {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
 }
 
-.top-banner .icon-wrapper {
+.navbar .icon-wrapper {
     all: unset;
     background-color: #1f1f1f;
     border-radius: 50%;
@@ -34,6 +34,6 @@
     will-change: transform;
 }
 
-.top-banner .icon-wrapper:hover {
+.navbar .icon-wrapper:hover {
     transform: scale(1.05);
 }

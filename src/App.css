@@ -3,10 +3,10 @@
     display: grid;
     grid-template-areas:
         "top-banner top-banner"
-        "sidebar hero"
+        "left-sidebar main-view"
         "player player";
-    grid-template-columns: auto 1fr;
-    grid-template-rows: auto 1fr auto;
+    grid-template-columns: 420px 1fr;
+    grid-template-rows: 64px 1fr auto;
     gap: var(--spacing);
     height: 100vh;
 }
@@ -15,13 +15,12 @@
     grid-area: top-banner;
 }
 
-.sidebar {
-    grid-area: sidebar;
-    width: 420px;
+.left-sidebar {
+    grid-area: left-sidebar;
 }
 
-.hero {
-    grid-area: hero;
+.main-view {
+    grid-area: main-view;
 }
 
 .player {

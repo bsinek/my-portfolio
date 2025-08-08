@@ -1,17 +1,21 @@
-import { Panel } from './components/Panel.jsx'
 import { Navbar } from './components/Navbar.jsx'
 import './App.css'
 
 function App() {
   return (
     <>
-      <div className="panel-layout">
-        <Navbar />
-        <div className="sidebar">
-          <Panel></Panel>
+      <div className='panel-layout'>
+        <div className='top-banner'>
+          <Navbar />
         </div>
-        <div className="hero">
-          <Panel></Panel>
+        <div className='left-sidebar'>
+          {/* <Sidebar /> */}
+        </div>
+        <div className='main-view'>
+          {/* <MainView /> */}
+        </div>
+        <div className='player'>
+          {/* <Player /> */}
         </div>
       </div>
     </>
