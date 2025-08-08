@@ -8,7 +8,9 @@ export const Navbar = () => {
             </a>
 
             {/* search bar is a place holder */}
-            <p>&lt;Search bar here&gt;</p>
+            <div className="search-bar">
+                <p>&lt;Search bar here&gt;</p>
+            </div>
             
             <button className="icon-wrapper">
                 <i className="bi bi-person-circle" />
