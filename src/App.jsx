@@ -1,20 +1,19 @@
 import { Navbar } from './components/Navbar.jsx'
-import './App.css'
 
 function App() {
   return (
     <>
-      <div className='panel-layout'>
-        <div className='top-banner'>
-          <Navbar />
+      <div className='h-screen grid grid-cols-[420px_1fr] grid-rows-[auto_1fr_auto] gap-2 p-2'>
+        <div className='col-span-2 -m-2'>
+          {/* Navbar */} 
         </div>
-        <div className='left-sidebar'>
+        <div className='col-span-1 rounded-lg bg-spotify-grey'>
           {/* <Sidebar /> */}
         </div>
-        <div className='main-view'>
+        <div className='col-span-1 rounded-lg bg-spotify-grey'>
           {/* <MainView /> */}
         </div>
-        <div className='player'>
+        <div className='col-span-2 -m-2'>
           {/* <Player /> */}
         </div>
       </div>
