@@ -1,20 +1,15 @@
-// import './Navbar.css'
-
 export const Navbar = () => {
     return (
-        <nav className="navbar">
-            <a className="logo" href="#">
-                <img src="/logo_black.svg" alt="Sinek" />
+        <nav className="h-16 grid grid-cols-[1fr_auto_1fr] grid-rows-1 p-2">
+            <a href="#" className="h-full">
+                <img src="/logo_black.svg" alt="Sinek" className="h-full w-auto"/>
             </a>
-
-            {/* search bar is a place holder */}
-            <div className="search-bar">
-                <p>&lt;Search bar here&gt;</p>
+            <div>
+                <i class="bi bi-house-door-fill"></i>
+                <div className="bg-[#1f1f1f] rounded-[500px] w-[474px] inline-block">
+                    <p>Search Bar</p>
+                </div>
             </div>
-            
-            <button className="icon-wrapper">
-                <i className="bi bi-person-circle" />
-            </button>
         </nav>
     )
 }
