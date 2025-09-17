@@ -1,6 +1,6 @@
 export const MainView = ({ img, position, size, opacity }) => {
     return (
-        <div className="h-full">
+        <div className="h-full rounded-lg bg-spotify-grey">
             <div className="flex flex-col justify-end h-96 p-5 font-light rounded-t-lg"
                 style={{
                     backgroundImage: `url(${img})`,
