@@ -1,6 +1,6 @@
 export const MainView = ({ img, position, size, opacity }) => {
     return (
-        <section className="h-full rounded-lg bg-spotify-grey">
+        <section className="h-full overflow-y-auto rounded-lg bg-spotify-grey">
             <div className="flex flex-col justify-end h-96 p-5 font-light rounded-t-lg"
                 style={{
                     backgroundImage: `url(${img})`,
@@ -15,7 +15,7 @@ export const MainView = ({ img, position, size, opacity }) => {
                 <h1 className="font-black text-8xl leading-[1.1]">Benjamin Sinek</h1>
                 <span className="mt-3">0 lifetime visitors</span>
             </div>
-            <div className="p-24 border border-amber-50">
+            <div className="p-24">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor sapien ultricies orci vestibulum auctor. Etiam finibus non tortor eget elementum. Aenean sagittis tellus ac nisl eleifend pretium. Duis sollicitudin condimentum magna, at consectetur velit tristique gravida. Ut pretium eget lectus ut sodales. Phasellus in nibh semper, vestibulum purus vel, aliquam neque. Fusce laoreet, dolor eget mollis tristique, felis velit scelerisque purus, nec fringilla felis metus eget risus. Aenean volutpat hendrerit purus id interdum. Nunc feugiat turpis non sem commodo convallis. Curabitur luctus odio ut metus tristique, nec consectetur arcu varius. Donec lobortis dui dolor, ut ullamcorper augue eleifend ut. Curabitur rutrum tristique porttitor. Vestibulum molestie porttitor nisl vitae tristique. In euismod mauris et felis congue efficitur. Morbi interdum pulvinar gravida. Vestibulum ac elit non tellus euismod suscipit.
                 Quisque consequat neque ac efficitur tempor. Aliquam volutpat dapibus ligula quis volutpat. Integer fringilla, turpis quis tincidunt auctor, velit enim placerat lacus, eget bibendum enim nunc vel nisl. Morbi lacinia purus ut finibus luctus. Vestibulum gravida condimentum dolor sollicitudin pulvinar. Aliquam commodo mauris vel lorem tempus, eget consequat orci suscipit. Aliquam sollicitudin porttitor odio, non pharetra est rhoncus eu. Donec eget ullamcorper arcu. Suspendisse molestie vestibulum arcu, at condimentum arcu consectetur a. Aliquam hendrerit justo at metus eleifend, eu eleifend mauris lobortis. Quisque pulvinar non sapien nec laoreet. Nam sagittis egestas nulla, quis sagittis mi vulputate sit amet. Vestibulum cursus laoreet velit a euismod.
                 Curabitur aliquam lacus vel orci ornare, vitae convallis erat iaculis. Sed sapien neque, gravida a volutpat id, dictum a nisl. Praesent bibendum porttitor elit vitae dictum. Nullam venenatis aliquam leo, nec blandit tortor tincidunt ut. Phasellus id massa mattis, fringilla elit ac, condimentum neque. Aenean pulvinar risus non erat mattis, quis elementum erat porttitor. Curabitur orci est, faucibus vel ante ut, pretium pellentesque ipsum. Mauris quam neque, rutrum sagittis nisl non, feugiat mattis turpis. Aliquam euismod eu felis nec laoreet.
