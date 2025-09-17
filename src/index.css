@@ -1,5 +1,9 @@
 @import "tailwindcss";
+@import "./satoshi.css";
 
 @theme { 
+  --font-sans: "Satoshi", ui-sans-serif, system-ui, sans-serif;
   --color-spotify-grey: #121212;
+  --color-spotify-green: #1ed760;
+  --color-light-grey: #b3b3b3;
 }
