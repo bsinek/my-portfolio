@@ -1,9 +1,9 @@
 export const SidebarItem = ({ href, label }) => {
     return (
-       <a href={href} className="group flex gap-3 h-16 p-2 rounded-md hover:bg-white/10">
-            <div className="relative h-12 w-12 rounded-sm bg-amber-500 group-hover:bg-amber-500/50">
+       <a href={href} className="group/item flex gap-3 h-16 p-2 rounded-md hover:bg-white/10">
+            <div className="relative h-12 w-12 rounded-sm bg-amber-500 group-hover/item:bg-amber-500/50">
                 <div className="absolute inset-0 flex justify-center items-center">
-                     <i className="bi bi-play-fill opacity-0 group-hover:opacity-100 text-2xl ml-0.5"/>
+                     <i className="bi bi-play-fill opacity-0 group-hover/item:opacity-100 text-2xl ml-0.5"/>
                 </div>
             </div>
             <div className="flex flex-col justify-center font-light">
