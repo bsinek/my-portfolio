@@ -2,9 +2,10 @@ import { SidebarItem } from "./SidebarItem"
 
 export const Sidebar = () => {
     return (
-        <aside className="w-[420px] h-full">
+        <aside className="group/sidebar w-[420px] h-full">
             <div className="p-4">
-                <h2 className="font-bold">Quick Links</h2>
+                <i class="bi bi-layout-sidebar"></i>
+                <span className="font-semibold">Quick Links</span>
             </div>
             <div className="px-2 h-full">
                 <SidebarItem href="/about" label="About" />
