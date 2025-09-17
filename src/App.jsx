@@ -1,5 +1,6 @@
 // imports
 import { Sidebar } from "./components/Sidebar"
+import { MainView } from "./components/MainView"
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
           <Sidebar />
         </div>
         <div className="col-span-1 rounded-lg bg-spotify-grey">
-          {/* <MainView /> */}
+          <MainView imageUrl="/img/jet.jpg" />
         </div>
         <div className="col-span-2 -m-2">
           {/* <Player /> */}
