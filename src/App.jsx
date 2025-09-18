@@ -1,6 +1,7 @@
 // imports
 import { Sidebar } from "./components/Sidebar"
 import { MainView } from "./components/MainView"
+import { Playbar } from "./components/Playbar"
 
 function App() {
   return (
@@ -12,8 +13,8 @@ function App() {
         <div className="col-span-1 min-h-0">
           <MainView img="/img/jet.jpg" position="center 70%" size="cover" opacity="0.9" />
         </div>
-        <div className="col-span-2 -m-2">
-          {/* <Player /> */}
+        <div className="col-span-2">
+          <Playbar />
         </div>
       </div>
     </>
