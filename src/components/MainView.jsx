@@ -1,8 +1,11 @@
+import { useRef } from "react"
 import { HorizontalScroll } from "./HorizontalScroll"
 
 export const MainView = ({ img, position, size, opacity }) => {
+    const scrollContainerRef = useRef(null);
+
     return (
-        <section className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey">
+        <section ref={scrollContainerRef} className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey">
             {/* fixed image container */}
             <div className="h-96 rounded-t-lg sticky top-0"
                 style={{
@@ -32,10 +35,10 @@ export const MainView = ({ img, position, size, opacity }) => {
                         Praesent at magna ipsum. Duis sodales, dolor vel porttitor malesuada, metus enim ultricies turpis, vitae auctor dolor purus in quam. Nunc pellentesque iaculis aliquet. In venenatis efficitur consequat. Proin a rutrum eros. Praesent sed ipsum quis ex dapibus commodo. Nullam finibus fermentum dolor quis molestie. Aenean ultrices sodales justo id ornare. Fusce consectetur massa id sapien facilisis, ut cursus libero tempor. Etiam quis justo volutpat libero commodo facilisis. Suspendisse potenti. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus congue scelerisque rutrum. Suspendisse sed tristique velit, ac auctor metus. Nulla tristique, lorem nec tincidunt lacinia, nulla nibh posuere mauris, sit amet placerat magna neque ut nunc. Sed id tincidunt nisl, id pharetra diam.
                         Nulla pellentesque nibh vitae placerat hendrerit. Morbi vitae dui suscipit, ultrices lacus vel, bibendum nisi. Etiam fringilla varius ex aliquet finibus. Mauris ultrices nulla consectetur nisi commodo eleifend. Integer condimentum ante vel diam pulvinar tincidunt. Sed massa urna, sodales ut nulla in, bibendum vulputate nisi. Ut pretium molestie imperdiet.
                     </p>
-                    <HorizontalScroll className="h-16 bg-white/10 p-2">
-                        <div className="h-full aspect-square rounded-md bg-amber-800" />
-                        <div className="h-full aspect-square rounded-md bg-green-600" />
-                        <div className="h-full aspect-square rounded-md bg-blue-600" />
+                    <HorizontalScroll scrollContainerRef={scrollContainerRef}>
+                        <div className="h-48 w-3xl rounded-md bg-amber-800" />
+                        <div className="h-48 w-3xl rounded-md bg-green-600" />
+                        <div className="h-48 w-3xl rounded-md bg-blue-600" />
                     </HorizontalScroll>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor sapien ultricies orci vestibulum auctor. Etiam finibus non tortor eget elementum. Aenean sagittis tellus ac nisl eleifend pretium. Duis sollicitudin condimentum magna, at consectetur velit tristique gravida. Ut pretium eget lectus ut sodales. Phasellus in nibh semper, vestibulum purus vel, aliquam neque. Fusce laoreet, dolor eget mollis tristique, felis velit scelerisque purus, nec fringilla felis metus eget risus. Aenean volutpat hendrerit purus id interdum. Nunc feugiat turpis non sem commodo convallis. Curabitur luctus odio ut metus tristique, nec consectetur arcu varius. Donec lobortis dui dolor, ut ullamcorper augue eleifend ut. Curabitur rutrum tristique porttitor. Vestibulum molestie porttitor nisl vitae tristique. In euismod mauris et felis congue efficitur. Morbi interdum pulvinar gravida. Vestibulum ac elit non tellus euismod suscipit.

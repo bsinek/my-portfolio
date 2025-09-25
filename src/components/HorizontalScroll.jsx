@@ -1,26 +1,21 @@
-import { useState, useEffect, useRef } from "react"
+import { useRef } from "react"
+import { motion, useTransform, useScroll } from "motion/react"
 
-export const HorizontalScroll = ({ children }) => {
+export const HorizontalScroll = ({ children, scrollContainerRef }) => {
     const containerRef = useRef(null);
-    const [translateX, setTranslateX] = useState(0);
     
-    useEffect(() => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        const handleWheel = (e) => {
-            e.preventDefault();
-            setTranslateX(prev => prev - e.deltaY);
-        };
-        container.addEventListener("wheel", handleWheel, { passive: false });
-        return () => container.removeEventListener("wheel", handleWheel);
-    }, []);
-
+    const { scrollYProgress } = useScroll({
+        container: scrollContainerRef,
+        target: containerRef,
+    });
+    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-100%"]);
     return (
-        <div ref={containerRef} className="h-[300px] overflow-hidden">
-            <div className="h-full flex transition-transform duration-100" style={{ transform: `translateX(${translateX}px)` }}>
-                {children}
+        <section ref={containerRef} className="relative h-[500vh] bg-neutral-900">
+            <div className="sticky top-1/2 h-[50vh] overflow-hidden">
+                <motion.div style={{ x }} className="absolute flex gap-4">
+                    {children}
+                </motion.div>
             </div>
-        </div>
+        </section>
     );
 }
