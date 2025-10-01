@@ -11,7 +11,12 @@ function App() {
           <Sidebar />
         </div>
         <div className="col-span-1 min-h-0">
-          <MainView img="/img/jet.jpg" position="center 70%" size="cover" opacity="0.9" />
+          <MainView
+            img="/img/jet.jpg"
+            position="center 70%"
+            size="cover"
+            opacity="0.9"
+          />
         </div>
         <div className="col-span-2">
           <Playbar />

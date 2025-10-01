@@ -1,11 +1,9 @@
 import { useRef } from "react"
 import { HorizontalScroll } from "./HorizontalScroll"
 
-export const MainView = ({ img, position, size, opacity }) => {
-    const scrollContainerRef = useRef(null);
-
+const MainViewHeader = ({ img, position, size, opacity }) => {
     return (
-        <section ref={scrollContainerRef} className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey">
+        <>
             {/* fixed image container */}
             <div className="h-96 rounded-t-lg sticky top-0"
                 style={{
@@ -24,38 +22,30 @@ export const MainView = ({ img, position, size, opacity }) => {
                 <h1 className="font-black text-8xl leading-[1.1]">benjamin sinek</h1>
                 <span className="mt-3">0 lifetime visitors</span>
             </div>
-            {/* content section */}
-            <div className="relative p-12 bg-spotify-grey">
-                <div className="absolute inset-0 h-44 bg-gradient-to-b from-zinc-800 to-transparent"></div>
-                <div className="relative">
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor sapien ultricies orci vestibulum auctor. Etiam finibus non tortor eget elementum. Aenean sagittis tellus ac nisl eleifend pretium. Duis sollicitudin condimentum magna, at consectetur velit tristique gravida. Ut pretium eget lectus ut sodales. Phasellus in nibh semper, vestibulum purus vel, aliquam neque. Fusce laoreet, dolor eget mollis tristique, felis velit scelerisque purus, nec fringilla felis metus eget risus. Aenean volutpat hendrerit purus id interdum. Nunc feugiat turpis non sem commodo convallis. Curabitur luctus odio ut metus tristique, nec consectetur arcu varius. Donec lobortis dui dolor, ut ullamcorper augue eleifend ut. Curabitur rutrum tristique porttitor. Vestibulum molestie porttitor nisl vitae tristique. In euismod mauris et felis congue efficitur. Morbi interdum pulvinar gravida. Vestibulum ac elit non tellus euismod suscipit.
-                        Quisque consequat neque ac efficitur tempor. Aliquam volutpat dapibus ligula quis volutpat. Integer fringilla, turpis quis tincidunt auctor, velit enim placerat lacus, eget bibendum enim nunc vel nisl. Morbi lacinia purus ut finibus luctus. Vestibulum gravida condimentum dolor sollicitudin pulvinar. Aliquam commodo mauris vel lorem tempus, eget consequat orci suscipit. Aliquam sollicitudin porttitor odio, non pharetra est rhoncus eu. Donec eget ullamcorper arcu. Suspendisse molestie vestibulum arcu, at condimentum arcu consectetur a. Aliquam hendrerit justo at metus eleifend, eu eleifend mauris lobortis. Quisque pulvinar non sapien nec laoreet. Nam sagittis egestas nulla, quis sagittis mi vulputate sit amet. Vestibulum cursus laoreet velit a euismod.
-                        Curabitur aliquam lacus vel orci ornare, vitae convallis erat iaculis. Sed sapien neque, gravida a volutpat id, dictum a nisl. Praesent bibendum porttitor elit vitae dictum. Nullam venenatis aliquam leo, nec blandit tortor tincidunt ut. Phasellus id massa mattis, fringilla elit ac, condimentum neque. Aenean pulvinar risus non erat mattis, quis elementum erat porttitor. Curabitur orci est, faucibus vel ante ut, pretium pellentesque ipsum. Mauris quam neque, rutrum sagittis nisl non, feugiat mattis turpis. Aliquam euismod eu felis nec laoreet.
-                        Praesent at magna ipsum. Duis sodales, dolor vel porttitor malesuada, metus enim ultricies turpis, vitae auctor dolor purus in quam. Nunc pellentesque iaculis aliquet. In venenatis efficitur consequat. Proin a rutrum eros. Praesent sed ipsum quis ex dapibus commodo. Nullam finibus fermentum dolor quis molestie. Aenean ultrices sodales justo id ornare. Fusce consectetur massa id sapien facilisis, ut cursus libero tempor. Etiam quis justo volutpat libero commodo facilisis. Suspendisse potenti. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus congue scelerisque rutrum. Suspendisse sed tristique velit, ac auctor metus. Nulla tristique, lorem nec tincidunt lacinia, nulla nibh posuere mauris, sit amet placerat magna neque ut nunc. Sed id tincidunt nisl, id pharetra diam.
-                        Nulla pellentesque nibh vitae placerat hendrerit. Morbi vitae dui suscipit, ultrices lacus vel, bibendum nisi. Etiam fringilla varius ex aliquet finibus. Mauris ultrices nulla consectetur nisi commodo eleifend. Integer condimentum ante vel diam pulvinar tincidunt. Sed massa urna, sodales ut nulla in, bibendum vulputate nisi. Ut pretium molestie imperdiet.
-                    </p>
-                    <HorizontalScroll scrollContainerRef={scrollContainerRef}>
-                        <div className="h-48 w-3xl rounded-md bg-amber-800" />
-                        <div className="h-48 w-3xl rounded-md bg-green-600" />
-                        <div className="h-48 w-3xl rounded-md bg-blue-600" />
-                    </HorizontalScroll>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor sapien ultricies orci vestibulum auctor. Etiam finibus non tortor eget elementum. Aenean sagittis tellus ac nisl eleifend pretium. Duis sollicitudin condimentum magna, at consectetur velit tristique gravida. Ut pretium eget lectus ut sodales. Phasellus in nibh semper, vestibulum purus vel, aliquam neque. Fusce laoreet, dolor eget mollis tristique, felis velit scelerisque purus, nec fringilla felis metus eget risus. Aenean volutpat hendrerit purus id interdum. Nunc feugiat turpis non sem commodo convallis. Curabitur luctus odio ut metus tristique, nec consectetur arcu varius. Donec lobortis dui dolor, ut ullamcorper augue eleifend ut. Curabitur rutrum tristique porttitor. Vestibulum molestie porttitor nisl vitae tristique. In euismod mauris et felis congue efficitur. Morbi interdum pulvinar gravida. Vestibulum ac elit non tellus euismod suscipit.
-                        Quisque consequat neque ac efficitur tempor. Aliquam volutpat dapibus ligula quis volutpat. Integer fringilla, turpis quis tincidunt auctor, velit enim placerat lacus, eget bibendum enim nunc vel nisl. Morbi lacinia purus ut finibus luctus. Vestibulum gravida condimentum dolor sollicitudin pulvinar. Aliquam commodo mauris vel lorem tempus, eget consequat orci suscipit. Aliquam sollicitudin porttitor odio, non pharetra est rhoncus eu. Donec eget ullamcorper arcu. Suspendisse molestie vestibulum arcu, at condimentum arcu consectetur a. Aliquam hendrerit justo at metus eleifend, eu eleifend mauris lobortis. Quisque pulvinar non sapien nec laoreet. Nam sagittis egestas nulla, quis sagittis mi vulputate sit amet. Vestibulum cursus laoreet velit a euismod.
-                        Curabitur aliquam lacus vel orci ornare, vitae convallis erat iaculis. Sed sapien neque, gravida a volutpat id, dictum a nisl. Praesent bibendum porttitor elit vitae dictum. Nullam venenatis aliquam leo, nec blandit tortor tincidunt ut. Phasellus id massa mattis, fringilla elit ac, condimentum neque. Aenean pulvinar risus non erat mattis, quis elementum erat porttitor. Curabitur orci est, faucibus vel ante ut, pretium pellentesque ipsum. Mauris quam neque, rutrum sagittis nisl non, feugiat mattis turpis. Aliquam euismod eu felis nec laoreet.
-                        Praesent at magna ipsum. Duis sodales, dolor vel porttitor malesuada, metus enim ultricies turpis, vitae auctor dolor purus in quam. Nunc pellentesque iaculis aliquet. In venenatis efficitur consequat. Proin a rutrum eros. Praesent sed ipsum quis ex dapibus commodo. Nullam finibus fermentum dolor quis molestie. Aenean ultrices sodales justo id ornare. Fusce consectetur massa id sapien facilisis, ut cursus libero tempor. Etiam quis justo volutpat libero commodo facilisis. Suspendisse potenti. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus congue scelerisque rutrum. Suspendisse sed tristique velit, ac auctor metus. Nulla tristique, lorem nec tincidunt lacinia, nulla nibh posuere mauris, sit amet placerat magna neque ut nunc. Sed id tincidunt nisl, id pharetra diam.
-                        Nulla pellentesque nibh vitae placerat hendrerit. Morbi vitae dui suscipit, ultrices lacus vel, bibendum nisi. Etiam fringilla varius ex aliquet finibus. Mauris ultrices nulla consectetur nisi commodo eleifend. Integer condimentum ante vel diam pulvinar tincidunt. Sed massa urna, sodales ut nulla in, bibendum vulputate nisi. Ut pretium molestie imperdiet.
-                    </p>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras porttitor sapien ultricies orci vestibulum auctor. Etiam finibus non tortor eget elementum. Aenean sagittis tellus ac nisl eleifend pretium. Duis sollicitudin condimentum magna, at consectetur velit tristique gravida. Ut pretium eget lectus ut sodales. Phasellus in nibh semper, vestibulum purus vel, aliquam neque. Fusce laoreet, dolor eget mollis tristique, felis velit scelerisque purus, nec fringilla felis metus eget risus. Aenean volutpat hendrerit purus id interdum. Nunc feugiat turpis non sem commodo convallis. Curabitur luctus odio ut metus tristique, nec consectetur arcu varius. Donec lobortis dui dolor, ut ullamcorper augue eleifend ut. Curabitur rutrum tristique porttitor. Vestibulum molestie porttitor nisl vitae tristique. In euismod mauris et felis congue efficitur. Morbi interdum pulvinar gravida. Vestibulum ac elit non tellus euismod suscipit.
-                        Quisque consequat neque ac efficitur tempor. Aliquam volutpat dapibus ligula quis volutpat. Integer fringilla, turpis quis tincidunt auctor, velit enim placerat lacus, eget bibendum enim nunc vel nisl. Morbi lacinia purus ut finibus luctus. Vestibulum gravida condimentum dolor sollicitudin pulvinar. Aliquam commodo mauris vel lorem tempus, eget consequat orci suscipit. Aliquam sollicitudin porttitor odio, non pharetra est rhoncus eu. Donec eget ullamcorper arcu. Suspendisse molestie vestibulum arcu, at condimentum arcu consectetur a. Aliquam hendrerit justo at metus eleifend, eu eleifend mauris lobortis. Quisque pulvinar non sapien nec laoreet. Nam sagittis egestas nulla, quis sagittis mi vulputate sit amet. Vestibulum cursus laoreet velit a euismod.
-                        Curabitur aliquam lacus vel orci ornare, vitae convallis erat iaculis. Sed sapien neque, gravida a volutpat id, dictum a nisl. Praesent bibendum porttitor elit vitae dictum. Nullam venenatis aliquam leo, nec blandit tortor tincidunt ut. Phasellus id massa mattis, fringilla elit ac, condimentum neque. Aenean pulvinar risus non erat mattis, quis elementum erat porttitor. Curabitur orci est, faucibus vel ante ut, pretium pellentesque ipsum. Mauris quam neque, rutrum sagittis nisl non, feugiat mattis turpis. Aliquam euismod eu felis nec laoreet.
-                        Praesent at magna ipsum. Duis sodales, dolor vel porttitor malesuada, metus enim ultricies turpis, vitae auctor dolor purus in quam. Nunc pellentesque iaculis aliquet. In venenatis efficitur consequat. Proin a rutrum eros. Praesent sed ipsum quis ex dapibus commodo. Nullam finibus fermentum dolor quis molestie. Aenean ultrices sodales justo id ornare. Fusce consectetur massa id sapien facilisis, ut cursus libero tempor. Etiam quis justo volutpat libero commodo facilisis. Suspendisse potenti. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vivamus congue scelerisque rutrum. Suspendisse sed tristique velit, ac auctor metus. Nulla tristique, lorem nec tincidunt lacinia, nulla nibh posuere mauris, sit amet placerat magna neque ut nunc. Sed id tincidunt nisl, id pharetra diam.
-                        Nulla pellentesque nibh vitae placerat hendrerit. Morbi vitae dui suscipit, ultrices lacus vel, bibendum nisi. Etiam fringilla varius ex aliquet finibus. Mauris ultrices nulla consectetur nisi commodo eleifend. Integer condimentum ante vel diam pulvinar tincidunt. Sed massa urna, sodales ut nulla in, bibendum vulputate nisi. Ut pretium molestie imperdiet.
-                    </p>
-                </div>
+        </>
+    )
+}
+
+const AboutSection = () => {
+    return (
+        <div className="relative bg-spotify-grey">
+            {/* gradient */}
+            <div className="absolute inset-0 h-44 bg-gradient-to-b from-zinc-800 to-transparent" />
+            {/* content */}
+            <div className="relative p-12">
+                
             </div>
+        </div>
+    )
+}
+
+export const MainView = ({ img, position, size, opacity }) => {
+    const scrollContainerRef = useRef(null);
+
+    return (
+        <section ref={scrollContainerRef} className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey">
+            <MainViewHeader img={img} position={position} size={size} opacity={opacity} />
+            <AboutSection />
         </section>
     )
 }
