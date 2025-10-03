@@ -58,6 +58,8 @@ const AboutSection = () => {
                     </div>
                 </div>
             </div>
+            {/* spacer */}
+            <div className="h-[calc(100vh-816px)]" />
         </section>
     )
 }
