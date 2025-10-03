@@ -4,7 +4,7 @@ import { Lorem } from "../Lorem"
 
 const MainViewHeader = ({ img, position, size, opacity }) => {
     return (
-        <>
+        <section>
             {/* fixed image container */}
             <div className="h-96 rounded-t-lg sticky top-0"
                 style={{
@@ -23,13 +23,13 @@ const MainViewHeader = ({ img, position, size, opacity }) => {
                 <h1 className="font-black text-8xl leading-[1.1]">benjamin sinek</h1>
                 <span className="mt-3">0 lifetime visitors</span>
             </div>
-        </>
+        </section>
     )
 }
 
 const AboutSection = () => {
     return (
-        <div className="relative bg-spotify-grey">
+        <section className="relative bg-spotify-grey">
             {/* gradient */}
             <div className="absolute inset-0 h-44 bg-gradient-to-b from-zinc-800 to-transparent" />
             {/* buttons */}
@@ -58,7 +58,7 @@ const AboutSection = () => {
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     )
 }
 
