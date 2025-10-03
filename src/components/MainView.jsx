@@ -44,7 +44,7 @@ const AboutSection = () => {
                 </button>
             </div>
             {/* content */}
-            <div className="relative grid grid-cols-2 h-48 px-6 gap-6">
+            <div className="relative grid grid-cols-2 px-6 gap-6">
                 <div>
                     <h2 className="text-2xl font-semibold mb-4">About me</h2>
                     <div className="px-4 text-lg">
