@@ -64,12 +64,10 @@ const AboutSection = () => {
     )
 }
 
-const Experience = ({ scrollContainerRef }) => {
+const Experience = () => {
     return (
         <section>
-            <HorizontalScroll scrollContainerRef={scrollContainerRef}>
-                <div className="h-24 w-24 rounded-lg bg-white" />
-            </HorizontalScroll>
+            
         </section>
     )
 }
@@ -81,7 +79,6 @@ export const MainView = ({ img, position, size, opacity }) => {
         <section ref={scrollContainerRef} className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey">
             <MainViewHeader img={img} position={position} size={size} opacity={opacity} />
             <AboutSection />
-            <Experience scrollContainerRef={scrollContainerRef} />
         </section>
     )
 }

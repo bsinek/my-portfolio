@@ -11,7 +11,7 @@ export const HorizontalScroll = ({ children, scrollContainerRef }) => {
     const x = useTransform(scrollYProgress, [0, 1], ["0%", "-100%"]);
     return (
         <div ref={containerRef} className="relative h-[500vh] bg-neutral-900">
-            <div className="sticky top-1/2 h-[50vh]">
+            <div className="sticky top-0">
                 <motion.div style={{ x }} className="absolute flex gap-4">
                     {children}
                 </motion.div>
