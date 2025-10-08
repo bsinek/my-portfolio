@@ -17,11 +17,13 @@ const MainViewHeader = ({ img, position, size, opacity }) => {
             {/* floating hero text */}
             <div className="absolute top-0 flex flex-col justify-end h-96 p-6 font-light">
                 <span className="flex items-center gap-2">
-                    <i className="bi bi-patch-check-fill text-2xl text-[#4bb3ff]"></i>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#4bb3ff" className="h-6">
+                        <path d="M10.814.5a1.66 1.66 0 0 1 2.372 0l2.512 2.572 3.595-.043a1.66 1.66 0 0 1 1.678 1.678l-.043 3.595 2.572 2.512c.667.65.667 1.722 0 2.372l-2.572 2.512.043 3.595a1.66 1.66 0 0 1-1.678 1.678l-3.595-.043-2.512 2.572a1.66 1.66 0 0 1-2.372 0l-2.512-2.572-3.595.043a1.66 1.66 0 0 1-1.678-1.678l.043-3.595L.5 13.186a1.66 1.66 0 0 1 0-2.372l2.572-2.512-.043-3.595a1.66 1.66 0 0 1 1.678-1.678l3.595.043zm6.584 9.12a1 1 0 0 0-1.414-1.413l-6.011 6.01-1.894-1.893a1 1 0 0 0-1.414 1.414l3.308 3.308z"/>
+                    </svg>
                     <span className="text-sm">Certified Baller</span>
                 </span>
-                <h1 className="font-black text-8xl leading-[1.1]">benjamin sinek</h1>
-                <span className="mt-3">0 lifetime visitors</span>
+                <h1 className="font-black text-8xl leading-28">benjamin sinek</h1>
+                <span className="mt-2">0 lifetime visitors</span>
             </div>
         </section>
     )
