@@ -8,7 +8,7 @@ const links = [
 
 const SidebarItem = ({ href, label }) => {
     return (
-       <a href={href} className="group/item flex gap-3 h-16 p-2 rounded-md hover:bg-white/10">
+       <a href={href} className="group/item flex gap-3 h-16 p-2 rounded-md hover:bg-white/5 active:bg-white/10">
             <div className="relative h-12 w-12 rounded-sm bg-white/30 group-hover/item:bg-white/10">
                 <div className="absolute inset-0 p-[15px] opacity-0 group-hover/item:opacity-100">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="h-full">
