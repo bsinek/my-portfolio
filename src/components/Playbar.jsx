@@ -24,7 +24,7 @@ export const Playbar = () => {
                 </div>
                 <div className="flex h-4 items-center justify-center gap-2 text-light-grey text-xs tabular-nums">
                     <div className="w-12 text-right">0:00</div>
-                    <div className="h-1/4 flex-1 bg-[#4d4c4c] rounded-xs"></div>
+                    <div className="h-1/4 flex-1 bg-dark-grey rounded-xs"></div>
                     <div className="w-12 text-left">0:00</div>
                 </div>
             </div>
