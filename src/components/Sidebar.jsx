@@ -38,8 +38,12 @@ const IconWrapper = ({ children, isHovered }) => {
     }, [isHovered, animate, scope]);
 
     return (
-        <div className="relative h-full aspect-square overflow-hidden">
-            <motion.div ref={scope} className="w-full flex flex-col py-1 gap-2 -translate-y-1">
+        <div className="relative h-full aspect-square overflow-hidden p-2"
+            style={{
+                WebkitMaskImage: "linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)",
+                maskImage: "linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%)",
+            }}>
+            <motion.div ref={scope} className="w-full flex flex-col py-2 gap-4 -translate-y-2">
                 {children}
                 {children}
             </motion.div>
@@ -88,7 +92,7 @@ const ContactItem = ({ href, label }) => {
     };
     const [hovered, setHovered] = useState(false);
     return (
-        <a href={href} target="_blank" className="group/contact hover:bg-white/5 hover:scale-105 transition-all flex items-center gap-4 h-14 p-3 rounded-md"
+        <a href={href} target="_blank" className="group/contact hover:bg-white/5 hover:scale-105 transition-all flex items-center gap-1 h-14 rounded-md p-1"
             onMouseEnter={() => setHovered(true)}
             onMouseLeave={() => setHovered(false)}>
             <div className="h-full p-1">
@@ -106,7 +110,7 @@ const ContactItem = ({ href, label }) => {
                     {label === "Phone" && "(805) 702 0556"}
                 </span>
             </div>
-            <div className="h-full ml-auto py-2 opacity-0 group-hover/contact:opacity-100 transition-opacity">
+            <div className="h-full ml-auto py-4 px-3 opacity-0 group-hover/contact:opacity-100 transition-opacity">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="arrow-right h-full" viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
                 </svg>
@@ -154,7 +158,7 @@ export const Sidebar = () => {
                     </svg>
                     <h3 className="ml-1 font-semibold transition-transform duration-200 group-hover/contactlinks:translate-x-6 delay-[50ms] group-hover/contactlinks:delay-0">Contact Me</h3>
                 </div>
-                <div className="flex flex-col gap-0 px-5 -mt-2">
+                <div className="flex flex-col gap-0 px-5">
                     {contacts.map((item) => (
                         <ContactItem key={item.href} {...item} />
                     ))}
