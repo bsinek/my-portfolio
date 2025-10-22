@@ -66,8 +66,14 @@ const HeroSection = ({ img, position, size, opacity }) => {
 
 const Experience = () => {
     return (
-        <section>
-            
+        <section className="h-mainview">
+            <div className="h-full p-72">
+                <div className="relative h-full w-full flex justify-center items-center">
+                    <div className="absolute top-0 left-0 h-12 w-12 border-t-6 border-l-6" />
+                    <h2 className="text-5xl font-semibold">Experience</h2>
+                    <div className="absolute bottom-0 right-0 h-12 w-12 border-b-6 border-r-6" />
+                </div>
+            </div>
         </section>
     )
 }
@@ -78,7 +84,7 @@ export const MainView = ({ img, position, size, opacity }) => {
     return (
         <section ref={scrollContainerRef} className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey">
             <HeroSection img={img} position={position} size={size} opacity={opacity} />
-            <div className="h-mainview" />
+            <Experience />
         </section>
     )
 }
