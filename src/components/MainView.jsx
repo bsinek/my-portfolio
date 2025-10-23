@@ -1,4 +1,5 @@
 import { useRef } from "react"
+import { motion, useInView } from "motion/react"
 import { HorizontalScroll } from "./HorizontalScroll"
 import { Lorem } from "../Lorem"
 
@@ -65,13 +66,30 @@ const HeroSection = ({ img, position, size, opacity }) => {
 }
 
 const Experience = () => {
+    const svgRef = useRef(null);
+    const isInView = useInView(svgRef, { amount: 0.5 });
     return (
         <section className="h-mainview">
             <div className="h-full p-72">
                 <div className="relative h-full w-full flex justify-center items-center">
-                    <div className="absolute top-0 left-0 h-12 w-12 border-t-6 border-l-6" />
-                    <h2 className="text-5xl font-semibold">Experience</h2>
-                    <div className="absolute bottom-0 right-0 h-12 w-12 border-b-6 border-r-6" />
+                    <motion.svg ref={svgRef} viewBox="0 0 690 282" className="absolute inset-0 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
+                        <motion.path
+                            d="M0 48 L0 0 L48 0"
+                            animate={{ pathLength: isInView ? 1 : 0 }}
+                            transition={{ duration: isInView ? 1 : 0.5, delay: isInView ? 0.5 : 0 }}
+                        />
+                        <motion.path
+                            d="M690 234 L690 282 L642 282"
+                            animate={{ pathLength: isInView ? 1 : 0 }}
+                            transition={{ duration: isInView ? 1 : 0.5, delay: isInView ? 0.5 : 0 }}
+                        />
+                    </motion.svg>
+                    <motion.h2 className="text-5xl font-semibold"
+                        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
+                        transition={{ duration: 1 }}
+                    >
+                        <span>Experience</span>
+                    </motion.h2>
                 </div>
             </div>
         </section>
