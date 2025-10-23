@@ -76,12 +76,12 @@ const Experience = () => {
                         <motion.path
                             d="M0 48 L0 0 L48 0"
                             animate={{ pathLength: isInView ? 1 : 0 }}
-                            transition={{ duration: isInView ? 1 : 0.5, delay: isInView ? 0.5 : 0 }}
+                            transition={{ duration: isInView ? 1 : 0.3, delay: isInView ? 0.5 : 0 }}
                         />
                         <motion.path
                             d="M690 234 L690 282 L642 282"
                             animate={{ pathLength: isInView ? 1 : 0 }}
-                            transition={{ duration: isInView ? 1 : 0.5, delay: isInView ? 0.5 : 0 }}
+                            transition={{ duration: isInView ? 1 : 0.3, delay: isInView ? 0.5 : 0 }}
                         />
                     </motion.svg>
                     <motion.h2 className="text-5xl font-semibold"
