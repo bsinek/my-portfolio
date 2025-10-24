@@ -10,3 +10,10 @@
 
   --spacing-mainview: 858px;
 }
+
+html, body {
+  overscroll-behavior: none;
+  scrollbar-color: #9b9b9bab var(--color-spotify-grey);
+  background-color: black;
+  color: white;
+}
