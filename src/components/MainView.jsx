@@ -1,29 +1,35 @@
 import { useRef } from "react"
+import { motion, useScroll, useTransform } from "motion/react"
 import { HorizontalScroll } from "./HorizontalScroll"
 import { Lorem } from "../Lorem"
 
-const HeroSection = ({ img, position, size, opacity }) => {
+const HeroSection = ({ img, position, size, scrollY }) => {
+    const IMAGE_HEIGHT = 384; // h-96 == 384px
+    const scale = useTransform(scrollY, [0, IMAGE_HEIGHT], [1.05, 1]);
+    const opacity = useTransform(scrollY, [0, IMAGE_HEIGHT], [1, 0]);
     return (
         <section className="relative h-mainview">
-                {/* fixed image container */}
-                <div className="h-96 rounded-t-lg sticky top-0"
-                    style={{
-                        backgroundImage: `url(${img})`,
-                        backgroundPosition: position,
-                        backgroundSize: size,
-                        opacity: opacity,
-                    }}>
-                </div>
-                {/* floating hero text */}
-                <div className="absolute top-0 flex flex-col justify-end h-96 p-6 font-light">
-                    <span className="flex items-center gap-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#4bb3ff" className="h-6">
-                            <path d="M10.814.5a1.66 1.66 0 0 1 2.372 0l2.512 2.572 3.595-.043a1.66 1.66 0 0 1 1.678 1.678l-.043 3.595 2.572 2.512c.667.65.667 1.722 0 2.372l-2.572 2.512.043 3.595a1.66 1.66 0 0 1-1.678 1.678l-3.595-.043-2.512 2.572a1.66 1.66 0 0 1-2.372 0l-2.512-2.572-3.595.043a1.66 1.66 0 0 1-1.678-1.678l.043-3.595L.5 13.186a1.66 1.66 0 0 1 0-2.372l2.572-2.512-.043-3.595a1.66 1.66 0 0 1 1.678-1.678l3.595.043zm6.584 9.12a1 1 0 0 0-1.414-1.413l-6.011 6.01-1.894-1.893a1 1 0 0 0-1.414 1.414l3.308 3.308z"/>
-                        </svg>
-                        <span className="text-sm">Certified Baller</span>
-                    </span>
-                    <h1 className="font-black text-8xl leading-28">benjamin sinek</h1>
-                    <span className="mt-2">0 lifetime visitors</span>
+            {/* fixed image container */}
+            <motion.div className="rounded-t-lg sticky top-0"
+                style={{
+                    height: `${IMAGE_HEIGHT}px`,
+                    backgroundImage: `url(${img})`,
+                    backgroundPosition: position,
+                    backgroundSize: size,
+                    scale: scale,
+                    opacity: opacity,
+                }}>
+            </motion.div>
+            {/* floating hero text */}
+            <div className="absolute top-0 flex flex-col justify-end p-6 font-light" style={{ height: `${IMAGE_HEIGHT}px` }}>
+                <span className="flex items-center gap-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#4bb3ff" className="h-6">
+                        <path d="M10.814.5a1.66 1.66 0 0 1 2.372 0l2.512 2.572 3.595-.043a1.66 1.66 0 0 1 1.678 1.678l-.043 3.595 2.572 2.512c.667.65.667 1.722 0 2.372l-2.572 2.512.043 3.595a1.66 1.66 0 0 1-1.678 1.678l-3.595-.043-2.512 2.572a1.66 1.66 0 0 1-2.372 0l-2.512-2.572-3.595.043a1.66 1.66 0 0 1-1.678-1.678l.043-3.595L.5 13.186a1.66 1.66 0 0 1 0-2.372l2.572-2.512-.043-3.595a1.66 1.66 0 0 1 1.678-1.678l3.595.043zm6.584 9.12a1 1 0 0 0-1.414-1.413l-6.011 6.01-1.894-1.893a1 1 0 0 0-1.414 1.414l3.308 3.308z"/>
+                    </svg>
+                    <span className="text-sm">Certified Baller</span>
+                </span>
+                <h1 className="font-black text-8xl leading-28">benjamin sinek</h1>
+                <span className="mt-2">0 lifetime visitors</span>
             </div>
 
             {/* ABOUT ME */}
@@ -69,12 +75,12 @@ const Experience = () => {
     )
 }
 
-export const MainView = ({ img, position, size, opacity }) => {
+export const MainView = ({ img, position, size }) => {
     const scrollContainerRef = useRef(null);
-
+    const { scrollY } = useScroll({ container: scrollContainerRef })
     return (
         <section ref={scrollContainerRef} className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey">
-            <HeroSection img={img} position={position} size={size} opacity={opacity} />
+            <HeroSection img={img} position={position} size={size} scrollY={scrollY} />
             <div className="h-mainview" />
         </section>
     )

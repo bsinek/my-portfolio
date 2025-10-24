@@ -15,7 +15,6 @@ function App() {
             img="img/jet.jpg"
             position="center 70%"
             size="cover"
-            opacity="0.9"
           />
         </div>
         <div className="col-span-2">
