@@ -8,7 +8,7 @@ const HeroSection = ({ img, position, size, scrollY }) => {
     const scale = useTransform(scrollY, [0, IMAGE_HEIGHT], [1.05, 1]);
     const opacity = useTransform(scrollY, [0, IMAGE_HEIGHT], [1, 0]);
     return (
-        <section className="relative h-mainview">
+        <section className="relative h-mainview overflow-x-clip">
             {/* fixed image container */}
             <motion.div className="rounded-t-lg sticky top-0"
                 style={{
