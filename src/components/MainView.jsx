@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { motion, useScroll, useTransform, useInView, easeInOut, time, transform } from "motion/react"
+import { motion, useScroll, useTransform, useInView } from "motion/react"
 import { HorizontalScroll } from "./HorizontalScroll"
 import { Lorem } from "../Lorem"
 
@@ -94,7 +94,10 @@ const Experience = () => {
                                 transition={svgTransition}
                             />
                         </motion.svg>
-                        <motion.div animate={{ opacity: headerInView ? 1 : 0, y: headerInView ? 0 : 50 }} transition={{ duration: 0.5 }}>
+                        <motion.div
+                            animate={{ opacity: headerInView ? 1 : 0, y: headerInView ? 0 : 50 }}
+                            transition={{ duration: 0.5 }}
+                        >
                             <h2 className="text-5xl font-semibold">Experience</h2>
                         </motion.div>
                         <motion.svg viewBox="0 0 48 48" className="rotate-180 h-12 absolute -bottom-24 -right-32 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
