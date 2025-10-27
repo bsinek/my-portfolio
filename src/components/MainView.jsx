@@ -1,5 +1,5 @@
 import { useRef } from "react"
-import { motion, useScroll, useTransform, useInView } from "motion/react"
+import { motion, useScroll, useTransform, useInView, easeInOut, time, transform } from "motion/react"
 import { HorizontalScroll } from "./HorizontalScroll"
 import { Lorem } from "../Lorem"
 
@@ -68,32 +68,57 @@ const HeroSection = ({ img, position, size, scrollY }) => {
 }
 
 const Experience = () => {
-    const svgRef = useRef(null);
-    const isInView = useInView(svgRef, { amount: 0.5 });
+    const headerRef = useRef(null);
+    const timelineRef = useRef(null);
+    const headerInView = useInView(headerRef, { amount: 0.5 });
+    const timelineInView = useInView(timelineRef, { amount: 0 });
+    
+    const svgTransition = { duration: headerInView ? 0.5 : 0.2, delay: headerInView ? 0.3 : 0 };
+    const morphTransition = { duration: 0.8, ease: "easeInOut" };
+    const morphRatio = 0.6; // relative to side panel
+
     return (
-        <section className="h-mainview">
-            <div className="h-full p-72">
-                <div className="relative h-full w-full flex justify-center items-center">
-                    <motion.svg ref={svgRef} viewBox="0 0 690 282" className="absolute inset-0 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
-                        <motion.path
-                            d="M0 48 L0 0 L48 0"
-                            animate={{ pathLength: isInView ? 1 : 0 }}
-                            transition={{ duration: isInView ? 1 : 0.3, delay: isInView ? 0.5 : 0 }}
-                        />
-                        <motion.path
-                            d="M690 234 L690 282 L642 282"
-                            animate={{ pathLength: isInView ? 1 : 0 }}
-                            transition={{ duration: isInView ? 1 : 0.3, delay: isInView ? 0.5 : 0 }}
-                        />
-                    </motion.svg>
-                    <motion.h2 className="text-5xl font-semibold"
-                        animate={{ opacity: isInView ? 1 : 0, y: isInView ? 0 : 50 }}
-                        transition={{ duration: 1 }}
+        <section className="flex">
+            <div className="flex-1">
+                {/* HEADER */}
+                <div ref={headerRef} className="h-mainview flex justify-center items-center">
+                    <motion.div className="relative"
+                        initial={{ scale: 1 }}
+                        animate={{ scale: timelineInView ? 1-morphRatio : 1 }}
+                        transition={morphTransition}
                     >
-                        <span>Experience</span>
-                    </motion.h2>
+                        <motion.svg viewBox="0 0 48 48" className="h-12 absolute -top-24 -left-32 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
+                            <motion.path
+                                d="M0 48 L0 0 L48 0"
+                                animate={{ pathLength: headerInView ? 1 : 0 }}
+                                transition={svgTransition}
+                            />
+                        </motion.svg>
+                        <motion.div animate={{ opacity: headerInView ? 1 : 0, y: headerInView ? 0 : 50 }} transition={{ duration: 0.5 }}>
+                            <h2 className="text-5xl font-semibold">Experience</h2>
+                        </motion.div>
+                        <motion.svg viewBox="0 0 48 48" className="rotate-180 h-12 absolute -bottom-24 -right-32 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
+                            <motion.path
+                                d="M0 48 L0 0 L48 0"
+                                animate={{ pathLength: headerInView ? 1 : 0 }}
+                                transition={svgTransition}
+                            />
+                        </motion.svg>
+                    </motion.div>
+                </div>
+                {/* TIMELINE */}
+                <div ref={timelineRef} className="h-mainview bg-dark-grey flex justify-center">
+                    TIMELINE HERE
                 </div>
             </div>
+            {/* SIDE PANEL */}
+            <motion.div className="sticky top-0 h-mainview flex justify-center items-center bg-amber-200"
+                initial={{ width: 0 }}
+                animate={{ width: timelineInView ? `${morphRatio * 100}%` : 0 }}
+                transition={morphTransition}
+            >
+                <p className="text-stone-950 text-6xl mt-2">111</p>
+            </motion.div>
         </section>
     )
 }
