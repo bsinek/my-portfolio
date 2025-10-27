@@ -112,7 +112,7 @@ const Experience = () => {
                 </div>
             </div>
             {/* SIDE PANEL */}
-            <motion.div className="sticky top-0 h-mainview flex justify-center items-center bg-amber-200"
+            <motion.div className="sticky top-0 h-mainview overflow-hidden flex justify-center items-center bg-amber-200"
                 initial={{ width: 0 }}
                 animate={{ width: timelineInView ? `${morphRatio * 100}%` : 0 }}
                 transition={morphTransition}
