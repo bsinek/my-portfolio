@@ -8,7 +8,7 @@ const HeroSection = ({ img, position, size, scrollY }) => {
     const scale = useTransform(scrollY, [0, IMAGE_HEIGHT], [1.05, 1]);
     const opacity = useTransform(scrollY, [0, IMAGE_HEIGHT], [1, 0]);
     return (
-        <section className="relative h-mainview overflow-x-clip">
+        <section className="relative h-mainview overflow-x-clip flex flex-col">
             {/* fixed image container */}
             <motion.div className="rounded-t-lg sticky top-0"
                 style={{
@@ -33,7 +33,7 @@ const HeroSection = ({ img, position, size, scrollY }) => {
             </div>
 
             {/* ABOUT ME */}
-            <div className="relative h-full bg-spotify-grey">
+            <div className="relative bg-spotify-grey flex-1">
                 {/* gradient */}
                 <div className="absolute inset-0 h-44 bg-gradient-to-b from-zinc-800 to-transparent" />
                 {/* buttons */}

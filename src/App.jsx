@@ -12,7 +12,7 @@ function App() {
         </div>
         <div className="col-span-1 min-h-0">
           <MainView
-            img="img/jet.jpg"
+            img="img/jet_extended.jpg"
             position="center 70%"
             size="cover"
           />
