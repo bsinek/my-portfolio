@@ -71,7 +71,7 @@ const Experience = () => {
     const headerRef = useRef(null);
     const timelineRef = useRef(null);
     const headerInView = useInView(headerRef, { amount: 0.5 });
-    const timelineInView = useInView(timelineRef, { amount: 0 });
+    const timelineInView = useInView(timelineRef, { amount: 1 });
     
     const svgTransition = { duration: headerInView ? 0.5 : 0.2, delay: headerInView ? 0.3 : 0 };
     const morphTransition = { duration: 0.8, ease: "easeInOut" };
@@ -81,10 +81,10 @@ const Experience = () => {
         <section className="flex">
             <div className="flex-1">
                 {/* HEADER */}
-                <div ref={headerRef} className="h-mainview flex justify-center items-center">
+                <div ref={headerRef} className="h-[32rem] mt-24 flex justify-center items-center">
                     <motion.div className="relative"
-                        initial={{ scale: 1 }}
-                        animate={{ scale: timelineInView ? 1-morphRatio : 1 }}
+                        initial={{ opacity: 1 }}
+                        animate={{ opacity: timelineInView ? 0 : 1 }}
                         transition={morphTransition}
                     >
                         <motion.svg viewBox="0 0 48 48" className="h-12 absolute -top-24 -left-32 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
@@ -110,17 +110,18 @@ const Experience = () => {
                     </motion.div>
                 </div>
                 {/* TIMELINE */}
-                <div ref={timelineRef} className="h-mainview bg-dark-grey flex justify-center">
-                    TIMELINE HERE
+                <div ref={timelineRef} className="h-mainview flex justify-center p-16">
+                    <div className="h-full w-1.5 bg-white"></div>
                 </div>
             </div>
             {/* SIDE PANEL */}
-            <motion.div className="sticky top-0 h-mainview overflow-hidden flex justify-center items-center bg-amber-200"
+            <motion.div className="sticky top-0 h-mainview overflow-hidden flex justify-center items-center"
                 initial={{ width: 0 }}
                 animate={{ width: timelineInView ? `${morphRatio * 100}%` : 0 }}
                 transition={morphTransition}
             >
-                <p className="text-stone-950 text-6xl mt-2">111</p>
+                {/* FIX THIS WEIRD STUF DJHGDJSKHGKJSDHGKHDGFKJGHFJKHGK */}
+                <p className="text-6xl mt-2">Item 1</p>
             </motion.div>
         </section>
     )
