@@ -67,6 +67,12 @@ const HeroSection = ({ img, position, size, scrollY }) => {
     )
 }
 
+const TimelineItem = () => {
+    return (
+        <div className="h-5 aspect-square rounded-full bg-white"></div>
+    )
+}
+
 const Experience = () => {
     const headerRef = useRef(null);
     const timelineRef = useRef(null);
@@ -111,7 +117,18 @@ const Experience = () => {
                 </div>
                 {/* TIMELINE */}
                 <div ref={timelineRef} className="h-mainview flex justify-center p-16">
-                    <div className="h-full w-1.5 bg-white"></div>
+                    <div className="relative">
+                        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1.5 bg-white"></div>
+                        <div className="h-full flex flex-col justify-between">
+                            <TimelineItem />
+                            <TimelineItem />
+                            <TimelineItem />
+                            <TimelineItem />
+                            <TimelineItem />
+                            <TimelineItem />
+                            <TimelineItem />
+                        </div>
+                    </div>
                 </div>
             </div>
             {/* SIDE PANEL */}
