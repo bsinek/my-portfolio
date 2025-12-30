@@ -69,15 +69,21 @@ const HeroSection = ({ img, position, size, scrollY }) => {
 
 const TimelineItem = () => {
     return (
-        <div className="h-5 aspect-square rounded-full bg-white"></div>
+        <div className="z-10 h-5 aspect-square rounded-full bg-white"></div>
     )
 }
 
-const Experience = () => {
+const Experience = ({ scrollContainerRef }) => {
     const headerRef = useRef(null);
+    const timelineSectionRef = useRef(null);
     const timelineRef = useRef(null);
     const headerInView = useInView(headerRef, { amount: 0.5 });
     const timelineInView = useInView(timelineRef, { amount: 1 });
+
+    const { scrollYProgress } = useScroll({
+        container: scrollContainerRef,
+        target: timelineSectionRef,
+    });
     
     const svgTransition = { duration: headerInView ? 0.5 : 0.2, delay: headerInView ? 0.3 : 0 };
     const morphTransition = { duration: 0.8, ease: "easeInOut" };
@@ -116,20 +122,28 @@ const Experience = () => {
                     </motion.div>
                 </div>
                 {/* TIMELINE */}
-                <div ref={timelineRef} className="h-mainview flex justify-center p-16">
-                    <div className="relative">
-                        <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1.5 bg-white"></div>
-                        <div className="h-full flex flex-col justify-between">
-                            <TimelineItem />
-                            <TimelineItem />
-                            <TimelineItem />
-                            <TimelineItem />
-                            <TimelineItem />
-                            <TimelineItem />
-                            <TimelineItem />
+                <section ref={timelineSectionRef} className="h-[200vh]">
+                    <div ref={timelineRef} className="sticky top-0 h-mainview flex justify-center p-16">
+                        <div className="relative">
+                            <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 bg-dark-grey/50"/>
+                            <motion.div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 bg-spotify-green"
+                                style={{
+                                    scaleY: scrollYProgress,
+                                    originY: 0,
+                                }}>
+                            </motion.div>
+                            <div className="h-full flex flex-col justify-between">
+                                <TimelineItem />
+                                <TimelineItem />
+                                <TimelineItem />
+                                <TimelineItem />
+                                <TimelineItem />
+                                <TimelineItem />
+                                <TimelineItem />
+                            </div>
                         </div>
                     </div>
-                </div>
+                </section>
             </div>
             {/* SIDE PANEL */}
             <motion.div className="sticky top-0 h-mainview overflow-hidden flex justify-center items-center"
@@ -150,7 +164,7 @@ export const MainView = ({ img, position, size }) => {
     return (
         <section ref={scrollContainerRef} className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey">
             <HeroSection img={img} position={position} size={size} scrollY={scrollY} />
-            <Experience />
+            <Experience scrollContainerRef={scrollContainerRef} />
         </section>
     )
 }
