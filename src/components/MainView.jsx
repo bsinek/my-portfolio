@@ -1,5 +1,5 @@
-import { useRef } from "react"
-import { motion, useScroll, useTransform, useInView } from "motion/react"
+import { useRef, useState } from "react"
+import { motion, useScroll, useTransform, useInView, useMotionValueEvent } from "motion/react"
 import { HorizontalScroll } from "./HorizontalScroll"
 import { Lorem } from "../Lorem"
 
@@ -67,13 +67,31 @@ const HeroSection = ({ img, position, size, scrollY }) => {
     )
 }
 
-const TimelineItem = () => {
+const TimelineDot = ({ isPassed }) => {
     return (
-        <div className="z-10 h-5 aspect-square rounded-full bg-white"></div>
+        <div className="relative z-10 h-5 aspect-square">
+            <div className="absolute inset-0 bg-dark-grey"/>
+            <motion.div className="absolute inset-0 bg-white"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: isPassed ? 1 : 0 }}
+                transition={{ duration: 0.2 }}
+            />
+        </div>
     )
 }
 
 const Experience = ({ scrollContainerRef }) => {
+    //        EDIT WORK EXPERIENCE HERE
+    /*****************************************/
+    const timelineData = [
+        { title: "Item 1" },
+        { title: "Item 2 "},
+        { title: "Item 3 "},
+        { title: "Item 4 "},
+    ]
+    const ITEM_COUNT = timelineData.length;
+    const [activeIndex, setActiveIndex] = useState(0);
+
     const headerRef = useRef(null);
     const timelineSectionRef = useRef(null);
     const timelineRef = useRef(null);
@@ -83,6 +101,11 @@ const Experience = ({ scrollContainerRef }) => {
     const { scrollYProgress } = useScroll({
         container: scrollContainerRef,
         target: timelineSectionRef,
+    });
+
+    useMotionValueEvent(scrollYProgress, "change", (v) => {
+        const index = Math.floor(v * (ITEM_COUNT - 1))
+        setActiveIndex(index)
     });
     
     const svgTransition = { duration: headerInView ? 0.5 : 0.2, delay: headerInView ? 0.3 : 0 };
@@ -133,13 +156,9 @@ const Experience = ({ scrollContainerRef }) => {
                                 }}>
                             </motion.div>
                             <div className="h-full flex flex-col justify-between">
-                                <TimelineItem />
-                                <TimelineItem />
-                                <TimelineItem />
-                                <TimelineItem />
-                                <TimelineItem />
-                                <TimelineItem />
-                                <TimelineItem />
+                                {timelineData.map((_, index) => (
+                                    <TimelineDot key={index} isPassed={timelineInView && (index <= activeIndex)} />
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -152,7 +171,9 @@ const Experience = ({ scrollContainerRef }) => {
                 transition={morphTransition}
             >
                 {/* FIX THIS WEIRD STUF DJHGDJSKHGKJSDHGKHDGFKJGHFJKHGK */}
-                <p className="text-6xl mt-2">Item 1</p>
+                <p className="text-6xl mt-2">
+                    {timelineData[activeIndex].title}
+                </p>
             </motion.div>
         </section>
     )
