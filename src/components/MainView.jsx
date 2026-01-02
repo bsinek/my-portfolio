@@ -80,7 +80,6 @@ const TimelineDot = ({ isPassed, isActive }) => {
     )
 }
 
-
 const TimelineCard = ({ item, isActive, index, activeIndex }) => {
     let x;
     if (index === activeIndex) {
@@ -105,10 +104,54 @@ const Experience = ({ scrollContainerRef }) => {
     //        EDIT WORK EXPERIENCE HERE
     /*****************************************/
     const timelineData = [
-        { title: "Item 1" },
-        { title: "Item 2 "},
-        { title: "Item 3 "},
-        { title: "Item 4 "},
+        { 
+            title: "Senior Software Engineer", 
+            company: "Tech Corp", 
+            location: "San Francisco, CA", 
+            duration: "Jan 2024 - Present", 
+            description: [
+                "Led development of microservices architecture serving 10M+ users",
+                "Reduced API response time by 40% through optimization",
+                "Mentored team of 5 junior developers",
+                "Implemented CI/CD pipeline reducing deployment time by 60%"
+            ]
+        },
+        { 
+            title: "Full Stack Developer", 
+            company: "StartUp Inc", 
+            location: "Remote", 
+            duration: "Mar 2022 - Dec 2023", 
+            description: [
+                "Built responsive web applications using React and Node.js",
+                "Designed and implemented RESTful APIs",
+                "Collaborated with design team on UI/UX improvements",
+                "Increased user engagement by 25% through feature development"
+            ]
+        },
+        { 
+            title: "Frontend Developer", 
+            company: "Digital Agency", 
+            location: "New York, NY", 
+            duration: "Jun 2020 - Feb 2022", 
+            description: [
+                "Developed client websites using modern JavaScript frameworks",
+                "Improved website performance and accessibility scores",
+                "Worked directly with clients to gather requirements",
+                "Maintained and updated legacy codebases"
+            ]
+        },
+        { 
+            title: "Junior Developer", 
+            company: "Software Solutions", 
+            location: "Austin, TX", 
+            duration: "Aug 2018 - May 2020", 
+            description: [
+                "Assisted in development of enterprise web applications",
+                "Fixed bugs and implemented new features",
+                "Participated in code reviews and team meetings",
+                "Learned best practices in software development"
+            ]
+        },
     ]
     const ITEM_COUNT = timelineData.length;
     const [activeIndex, setActiveIndex] = useState(0);
