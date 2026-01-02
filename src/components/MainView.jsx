@@ -67,7 +67,8 @@ const HeroSection = ({ img, position, size, scrollY }) => {
     )
 }
 
-const TimelineDot = ({ isPassed, isActive }) => {
+const TimelineDot = ({ item, isPassed, isActive, index }) => {
+    const isLeft = index % 2 === 0;
     return (
         <div className="relative z-10 h-5 aspect-square">
             <div className="absolute inset-0 bg-dark-grey"/>
@@ -76,6 +77,11 @@ const TimelineDot = ({ isPassed, isActive }) => {
                 animate={{ opacity: isPassed ? 1 : 0, scale: isActive ? 2 : 1 }}
                 transition={{ duration: 0.2 }}
             />
+            <div className={`absolute top-1/2 -translate-y-1/2 flex flex-col ${isLeft ? 'right-full mr-10 ' : 'left-full ml-10'}`}>
+                <span className="font-semibold whitespace-nowrap">{item.title}</span>
+                <span className="text-sm text-light-grey whitespace-nowrap">{item.company} <b>•</b> {item.location}</span>
+                <span className="text-sm text-light-grey whitespace-nowrap">{item.duration}</span>
+            </div>
         </div>
     )
 }
@@ -174,7 +180,7 @@ const Experience = ({ scrollContainerRef }) => {
     
     const svgTransition = { duration: headerInView ? 0.5 : 0.2, delay: headerInView ? 0.3 : 0 };
     const morphTransition = { duration: 0.8, ease: "easeInOut" };
-    const morphRatio = 0.6; // relative to side panel
+    const morphRatio = 0.5; // relative to side panel
 
     return (
         <section className="flex">
@@ -220,8 +226,14 @@ const Experience = ({ scrollContainerRef }) => {
                                 }}>
                             </motion.div>
                             <div className="h-full flex flex-col justify-between">
-                                {timelineData.map((_, index) => (
-                                    <TimelineDot key={index} isPassed={timelineInView && (index <= activeIndex)} isActive={index === activeIndex} />
+                                {timelineData.map((item, index) => (
+                                    <TimelineDot
+                                        key={index}
+                                        item={item}
+                                        isPassed={timelineInView && (index <= activeIndex)}
+                                        isActive={index === activeIndex}
+                                        index={index}
+                                    />
                                 ))}
                             </div>
                         </div>
