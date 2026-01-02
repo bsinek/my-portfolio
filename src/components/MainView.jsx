@@ -67,13 +67,13 @@ const HeroSection = ({ img, position, size, scrollY }) => {
     )
 }
 
-const TimelineDot = ({ isPassed }) => {
+const TimelineDot = ({ isPassed, isActive }) => {
     return (
         <div className="relative z-10 h-5 aspect-square">
             <div className="absolute inset-0 bg-dark-grey"/>
             <motion.div className="absolute inset-0 bg-white"
                 initial={{ opacity: 0 }}
-                animate={{ opacity: isPassed ? 1 : 0 }}
+                animate={{ opacity: isPassed ? 1 : 0, scale: isActive ? 2 : 1 }}
                 transition={{ duration: 0.2 }}
             />
         </div>
@@ -178,7 +178,7 @@ const Experience = ({ scrollContainerRef }) => {
                             </motion.div>
                             <div className="h-full flex flex-col justify-between">
                                 {timelineData.map((_, index) => (
-                                    <TimelineDot key={index} isPassed={timelineInView && (index <= activeIndex)} />
+                                    <TimelineDot key={index} isPassed={timelineInView && (index <= activeIndex)} isActive={index === activeIndex} />
                                 ))}
                             </div>
                         </div>
