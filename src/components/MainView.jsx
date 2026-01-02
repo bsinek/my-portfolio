@@ -80,6 +80,27 @@ const TimelineDot = ({ isPassed }) => {
     )
 }
 
+
+const TimelineCard = ({ item, isActive, index, activeIndex }) => {
+    let x;
+    if (index === activeIndex) {
+        x = 0;
+    } else if (index > activeIndex) {
+        x = '100%';
+    } else {
+        x = '-100%';
+    }
+    
+    return (
+        <motion.div className="absolute"
+            animate={{ opacity: isActive ? 1 : 0, x: x }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+        >
+            {item.title}
+        </motion.div>
+    )
+}
+
 const Experience = ({ scrollContainerRef }) => {
     //        EDIT WORK EXPERIENCE HERE
     /*****************************************/
@@ -170,10 +191,17 @@ const Experience = ({ scrollContainerRef }) => {
                 animate={{ width: timelineInView ? `${morphRatio * 100}%` : 0 }}
                 transition={morphTransition}
             >
-                {/* FIX THIS WEIRD STUF DJHGDJSKHGKJSDHGKHDGFKJGHFJKHGK */}
-                <p className="text-6xl mt-2">
-                    {timelineData[activeIndex].title}
-                </p>
+                <div className="relative h-full w-full flex justify-center items-center">
+                    {timelineData.map((item, index) => (
+                        <TimelineCard 
+                            key={index} 
+                            item={item}
+                            isActive={index === activeIndex}
+                            index={index}
+                            activeIndex={activeIndex}
+                        />
+                    ))}
+                </div>
             </motion.div>
         </section>
     )
