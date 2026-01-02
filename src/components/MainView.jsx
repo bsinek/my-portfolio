@@ -212,8 +212,8 @@ const Experience = ({ scrollContainerRef }) => {
                 <section ref={timelineSectionRef} className="h-[200vh]">
                     <div ref={timelineRef} className="sticky top-0 h-mainview flex justify-center p-16">
                         <div className="relative">
-                            <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 bg-dark-grey/50"/>
-                            <motion.div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2 w-1 bg-spotify-green"
+                            <div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-dark-grey/50"/>
+                            <motion.div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-spotify-green"
                                 style={{
                                     scaleY: scrollYProgress,
                                     originY: 0,
