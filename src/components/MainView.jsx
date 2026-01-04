@@ -69,19 +69,24 @@ const HeroSection = ({ img, position, size, scrollY }) => {
 
 const TimelineDot = ({ item, isPassed, isActive, index }) => {
     const isLeft = index % 2 === 0;
+    const dotTransition = {duration: 0.2};
     return (
         <div className="relative z-10 h-5 aspect-square">
             <div className="absolute inset-0 bg-dark-grey"/>
             <motion.div className="absolute inset-0 bg-white"
-                initial={{ opacity: 0 }}
+                initial={{ opacity: 0, scale: 1 }}
                 animate={{ opacity: isPassed ? 1 : 0, scale: isActive ? 2 : 1 }}
-                transition={{ duration: 0.2 }}
+                transition={dotTransition}
             />
-            <div className={`absolute top-1/2 -translate-y-1/2 flex flex-col ${isLeft ? 'right-full mr-10 ' : 'left-full ml-10'}`}>
+            <motion.div className={`absolute top-1/2 -translate-y-1/2 flex flex-col ${isLeft ? "right-full mr-10" : "left-full ml-10"}`}
+                initial={{ opacity: 0.5, scale: 1 }}
+                animate={{ opacity: isActive ? 1 : 0.5, scale: isActive ? 1.05 : 1 }}
+                transition={dotTransition}
+            >
                 <span className="font-semibold whitespace-nowrap">{item.title}</span>
                 <span className="text-sm text-light-grey whitespace-nowrap">{item.company} <b>•</b> {item.location}</span>
                 <span className="text-sm text-light-grey whitespace-nowrap">{item.duration}</span>
-            </div>
+            </motion.div>
         </div>
     )
 }
