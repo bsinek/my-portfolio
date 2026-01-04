@@ -1,5 +1,5 @@
-import { useRef, useState } from "react"
-import { motion, useScroll, useTransform, useInView, useMotionValueEvent } from "motion/react"
+import { useRef, useState, useEffect } from "react"
+import { motion, useScroll, useTransform, useInView, useMotionValueEvent, AnimatePresence } from "motion/react"
 import { HorizontalScroll } from "./HorizontalScroll"
 import { Lorem } from "../Lorem"
 
@@ -91,24 +91,25 @@ const TimelineDot = ({ item, isPassed, isActive, index }) => {
     )
 }
 
-const TimelineCard = ({ item, isActive }) => {
+const TimelineCard = ({ item }) => {
     return (
         <motion.div className="absolute"
             initial={{ opacity: 0, x: "100%" }}
-            animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
             <div className="relative">
                 {/* underline */}
                 <motion.div className="absolute -bottom-2 right-0 h-0.5 bg-spotify-green"
                     initial={{ width: 0 }}
-                    animate={{ width: isActive ? "100%" : 0 }}
+                    animate={{ width: "100%" }}
                     transition={{ duration: 0.3, delay: 0.3 }}
                 />
                 {/* title */}
                 <motion.h3 className="text-3xl font-bold"
                     initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 10 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.7 }}
                 >
                     {item.title}
@@ -175,6 +176,7 @@ const Experience = ({ scrollContainerRef }) => {
     ]
     const ITEM_COUNT = timelineData.length;
     const [activeIndex, setActiveIndex] = useState(0);
+    const [cardKey, setCardKey] = useState(0);
 
     const headerRef = useRef(null);
     const timelineSectionRef = useRef(null);
@@ -191,6 +193,10 @@ const Experience = ({ scrollContainerRef }) => {
         const index = Math.floor(v * (ITEM_COUNT - 1))
         setActiveIndex(index)
     });
+
+    useEffect(() => {
+        setCardKey(prev => prev + 1);
+    }, [timelineInView, activeIndex]);
     
     const svgTransition = { duration: headerInView ? 0.5 : 0.2, delay: headerInView ? 0.3 : 0 };
     const morphTransition = { duration: 0.8, ease: "easeInOut" };
@@ -261,13 +267,14 @@ const Experience = ({ scrollContainerRef }) => {
                     transition={morphTransition}
                 >
                     <div className="relative h-full w-full flex justify-center items-center whitespace-nowrap">
-                        {timelineData.map((item, index) => (
-                            <TimelineCard 
-                                key={index} 
-                                item={item}
-                                isActive={timelineInView && index === activeIndex}
-                            />
-                        ))}
+                        <AnimatePresence>
+                            {timelineInView && (
+                                <TimelineCard
+                                    key={cardKey}
+                                    item={timelineData[activeIndex]}
+                                />
+                            )}
+                        </AnimatePresence>
                     </div>
                 </motion.div>
             </div>
