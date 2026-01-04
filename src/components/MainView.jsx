@@ -192,39 +192,40 @@ const Experience = ({ scrollContainerRef }) => {
     const morphRatio = 0.5; // relative to side panel
 
     return (
-        <section className="flex">
-            <div className="flex-1">
-                {/* HEADER */}
-                <div ref={headerRef} className="h-[32rem] mt-24 flex justify-center items-center">
-                    <motion.div className="relative"
-                        initial={{ opacity: 1 }}
-                        animate={{ opacity: timelineInView ? 0 : 1 }}
-                        transition={morphTransition}
+        <section>
+            {/* HEADER */}
+            <div ref={headerRef} className="h-[32rem] mt-24 flex justify-center items-center">
+                <motion.div className="relative"
+                    initial={{ opacity: 1 }}
+                    animate={{ opacity: timelineInView ? 0 : 1 }}
+                    transition={morphTransition}
+                >
+                    <motion.svg viewBox="0 0 48 48" className="h-12 absolute -top-24 -left-32 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
+                        <motion.path
+                            d="M0 48 L0 0 L48 0"
+                            animate={{ pathLength: headerInView ? 1 : 0 }}
+                            transition={svgTransition}
+                        />
+                    </motion.svg>
+                    <motion.div
+                        animate={{ opacity: headerInView ? 1 : 0, y: headerInView ? 0 : 50 }}
+                        transition={{ duration: 0.5 }}
                     >
-                        <motion.svg viewBox="0 0 48 48" className="h-12 absolute -top-24 -left-32 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
-                            <motion.path
-                                d="M0 48 L0 0 L48 0"
-                                animate={{ pathLength: headerInView ? 1 : 0 }}
-                                transition={svgTransition}
-                            />
-                        </motion.svg>
-                        <motion.div
-                            animate={{ opacity: headerInView ? 1 : 0, y: headerInView ? 0 : 50 }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <h2 className="text-5xl font-semibold">Experience</h2>
-                        </motion.div>
-                        <motion.svg viewBox="0 0 48 48" className="rotate-180 h-12 absolute -bottom-24 -right-32 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
-                            <motion.path
-                                d="M0 48 L0 0 L48 0"
-                                animate={{ pathLength: headerInView ? 1 : 0 }}
-                                transition={svgTransition}
-                            />
-                        </motion.svg>
+                        <h2 className="text-5xl font-semibold">Experience</h2>
                     </motion.div>
-                </div>
+                    <motion.svg viewBox="0 0 48 48" className="rotate-180 h-12 absolute -bottom-24 -right-32 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
+                        <motion.path
+                            d="M0 48 L0 0 L48 0"
+                            animate={{ pathLength: headerInView ? 1 : 0 }}
+                            transition={svgTransition}
+                        />
+                    </motion.svg>
+                </motion.div>
+            </div>
+            {/* BODY */}
+            <div className="flex">
                 {/* TIMELINE */}
-                <section ref={timelineSectionRef} className="h-[200vh]">
+                <section ref={timelineSectionRef} className="h-[200vh] flex-1">
                     <div ref={timelineRef} className="sticky top-0 h-mainview flex justify-center p-16">
                         <div className="relative">
                             <div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-dark-grey/50"/>
@@ -248,23 +249,23 @@ const Experience = ({ scrollContainerRef }) => {
                         </div>
                     </div>
                 </section>
+                {/* SIDE PANEL */}
+                <motion.div className="sticky top-0 h-mainview overflow-hidden flex justify-center items-center"
+                    initial={{ width: 0 }}
+                    animate={{ width: timelineInView ? `${morphRatio * 100}%` : 0 }}
+                    transition={morphTransition}
+                >
+                    <div className="relative h-full w-full flex justify-center items-center whitespace-nowrap">
+                        {timelineData.map((item, index) => (
+                            <TimelineCard 
+                                key={index} 
+                                item={item}
+                                isActive={timelineInView && index === activeIndex}
+                            />
+                        ))}
+                    </div>
+                </motion.div>
             </div>
-            {/* SIDE PANEL */}
-            <motion.div className="sticky top-0 h-mainview overflow-hidden flex justify-center items-center"
-                initial={{ width: 0 }}
-                animate={{ width: timelineInView ? `${morphRatio * 100}%` : 0 }}
-                transition={morphTransition}
-            >
-                <div className="relative h-full w-full flex justify-center items-center whitespace-nowrap">
-                    {timelineData.map((item, index) => (
-                        <TimelineCard 
-                            key={index} 
-                            item={item}
-                            isActive={timelineInView && index === activeIndex}
-                        />
-                    ))}
-                </div>
-            </motion.div>
         </section>
     )
 }
