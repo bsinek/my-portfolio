@@ -86,22 +86,31 @@ const TimelineDot = ({ item, isPassed, isActive, index }) => {
     )
 }
 
-const TimelineCard = ({ item, isActive, index, activeIndex }) => {
-    let x;
-    if (index === activeIndex) {
-        x = 0;
-    } else if (index > activeIndex) {
-        x = '100%';
-    } else {
-        x = '-100%';
-    }
-    
+const TimelineCard = ({ item, isActive }) => {
     return (
         <motion.div className="absolute"
-            animate={{ opacity: isActive ? 1 : 0, x: x }}
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: isActive ? 1 : 0, x: isActive ? 0 : "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
-            {item.title}
+            <div className="relative">
+                {/* underline */}
+                <motion.div className="absolute -bottom-2 right-0 h-0.5 bg-spotify-green"
+                    initial={{ width: 0 }}
+                    animate={{ width: isActive ? "100%" : 0 }}
+                    transition={{ duration: 0.3, delay: 0.3 }}
+                />
+                {/* title */}
+                <motion.h3 className="text-3xl font-bold"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: isActive ? 1 : 0, y: isActive ? 0 : 10 }}
+                    transition={{ duration: 0.4, delay: 0.7 }}
+                >
+                    {item.title}
+                </motion.h3>
+            </div>
+            
+
         </motion.div>
     )
 }
@@ -251,9 +260,7 @@ const Experience = ({ scrollContainerRef }) => {
                         <TimelineCard 
                             key={index} 
                             item={item}
-                            isActive={index === activeIndex}
-                            index={index}
-                            activeIndex={activeIndex}
+                            isActive={timelineInView && index === activeIndex}
                         />
                     ))}
                 </div>
