@@ -230,8 +230,8 @@ const Experience = ({ scrollContainerRef }) => {
                                     <TimelineDot
                                         key={index}
                                         item={item}
-                                        isPassed={timelineInView && (index <= activeIndex)}
-                                        isActive={index === activeIndex}
+                                        isPassed={timelineInView && index <= activeIndex}
+                                        isActive={timelineInView && index === activeIndex}
                                         index={index}
                                     />
                                 ))}
@@ -246,7 +246,7 @@ const Experience = ({ scrollContainerRef }) => {
                 animate={{ width: timelineInView ? `${morphRatio * 100}%` : 0 }}
                 transition={morphTransition}
             >
-                <div className="relative h-full w-full flex justify-center items-center">
+                <div className="relative h-full w-full flex justify-center items-center whitespace-nowrap">
                     {timelineData.map((item, index) => (
                         <TimelineCard 
                             key={index} 
