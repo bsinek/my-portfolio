@@ -92,6 +92,8 @@ const TimelineDot = ({ item, isPassed, isActive, index }) => {
 }
 
 const TimelineCard = ({ item }) => {
+    const dataRef = useRef(item);
+    const currentItem = dataRef.current;
     return (
         <motion.div className="absolute"
             initial={{ opacity: 0, x: "100%" }}
@@ -112,7 +114,7 @@ const TimelineCard = ({ item }) => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.7 }}
                 >
-                    {item.title}
+                    {currentItem.title}
                 </motion.h3>
             </div>
             
