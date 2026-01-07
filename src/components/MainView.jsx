@@ -242,7 +242,7 @@ const Experience = ({ scrollContainerRef }) => {
     const morphRatio = 0.5; // relative to side panel
 
     return (
-        <section>
+        <section className="min-w-3xl">
             {/* HEADER */}
             <div ref={headerRef} className="h-[32rem] mt-24 flex justify-center items-center">
                 <motion.div className="relative"
@@ -275,7 +275,7 @@ const Experience = ({ scrollContainerRef }) => {
             {/* BODY */}
             <div className="flex">
                 {/* TIMELINE */}
-                <section ref={timelineSectionRef} className="h-[800vh] flex-1">
+                <section ref={timelineSectionRef} className="h-[600vh] flex-1">
                     <div ref={timelineRef} className="sticky top-0 h-mainview flex justify-center p-16">
                         <div className="relative">
                             <div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-dark-grey/50"/>
