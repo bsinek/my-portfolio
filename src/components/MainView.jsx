@@ -224,8 +224,11 @@ const Experience = ({ scrollContainerRef }) => {
         target: timelineSectionRef,
     });
 
+    const timelineProgressMax = (ITEM_COUNT - 1) / ITEM_COUNT;
+    const timelineProgress = useTransform(scrollYProgress, [0, timelineProgressMax], [0, 1]);
+
     useMotionValueEvent(scrollYProgress, "change", (v) => {
-        const index = Math.floor(v * (ITEM_COUNT - 1))
+        const index = Math.min(Math.floor(v * ITEM_COUNT), ITEM_COUNT - 1)
         setActiveIndex(index)
         setTimelineActive(v > 0)
     });
@@ -272,13 +275,13 @@ const Experience = ({ scrollContainerRef }) => {
             {/* BODY */}
             <div className="flex">
                 {/* TIMELINE */}
-                <section ref={timelineSectionRef} className="h-[200vh] flex-1">
+                <section ref={timelineSectionRef} className="h-[800vh] flex-1">
                     <div ref={timelineRef} className="sticky top-0 h-mainview flex justify-center p-16">
                         <div className="relative">
                             <div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-dark-grey/50"/>
                             <motion.div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-spotify-green"
                                 style={{
-                                    scaleY: scrollYProgress,
+                                    scaleY: timelineProgress,
                                     originY: 0,
                                 }}>
                             </motion.div>
