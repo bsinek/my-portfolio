@@ -91,34 +91,67 @@ const TimelineDot = ({ item, isPassed, isActive, index }) => {
     )
 }
 
-const TimelineCard = ({ item }) => {
-    const dataRef = useRef(item);
-    const currentItem = dataRef.current;
+const TimelineCard = ({ item, index }) => {
+    const dataRef = useRef({ item, index });
+    const currentItem = dataRef.current.item;
+    const currentIndex = dataRef.current.index;
+    
     return (
-        <motion.div className="absolute"
+        <motion.div className="absolute w-full flex flex-col gap-6 p-16"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
         >
-            <div className="relative">
-                {/* underline */}
-                <motion.div className="absolute -bottom-2 right-0 h-0.5 bg-spotify-green"
-                    initial={{ width: 0 }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: 0.3, delay: 0.3 }}
-                />
+            <div className="relative flex justify-between items-baseline">
                 {/* title */}
-                <motion.h3 className="text-3xl font-bold"
+                <motion.h3 className="text-4xl font-bold"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 0.7 }}
                 >
                     {currentItem.title}
                 </motion.h3>
+                {/* number */}
+                <motion.span className="text-2xl font-light text-light-grey"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.7 }}
+                >
+                    0{currentIndex + 1}
+                </motion.span>
+                {/* underline */}
+                <motion.div className="absolute -bottom-2 left-0 w-full h-0.5 bg-spotify-green"
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
+                    transition={{ duration: 0.3, delay: 0.3 }}
+                    style={{ transformOrigin: "right" }}
+                />
             </div>
-            
 
+            {/* metadata */}
+            <motion.div className="flex gap-4 text-light-grey mt-1"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.9 }}
+            >
+                <span>{currentItem.company}</span>
+                <span>•</span>
+                <span>{currentItem.location}</span>
+                <span>•</span>
+                <span>{currentItem.duration}</span>
+            </motion.div>
+
+            {/* description */}
+            <motion.ul className="flex flex-col gap-3"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4, delay: 1.1 }}
+            >
+                {currentItem.description.map((desc, index) => (
+                    <li key={index} className="pl-4 border-l-2 border-spotify-green/50">{desc}</li>
+                ))}
+            </motion.ul>
         </motion.div>
     )
 }
@@ -274,6 +307,7 @@ const Experience = ({ scrollContainerRef }) => {
                                 <TimelineCard
                                     key={cardKey}
                                     item={timelineData[activeIndex]}
+                                    index={activeIndex}
                                 />
                             )}
                         </AnimatePresence>
