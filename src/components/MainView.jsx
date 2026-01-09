@@ -250,26 +250,26 @@ const Experience = ({ scrollContainerRef }) => {
                     animate={{ opacity: timelineActive ? 0 : 1 }}
                     transition={morphTransition}
                 >
-                    <motion.svg viewBox="0 0 48 48" className="h-12 absolute -top-24 -left-32 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
+                    <svg viewBox="0 0 48 48" className="h-12 absolute -top-24 -left-32 stroke-white stroke-6 fill-none">
                         <motion.path
-                            d="M0 48 L0 0 L48 0"
+                            d="M3 48 L3 3 L48 3"
                             animate={{ pathLength: headerInView ? 1 : 0 }}
                             transition={svgTransition}
                         />
-                    </motion.svg>
-                    <motion.div
+                    </svg>
+                    <motion.h2 className="text-5xl font-semibold"
                         animate={{ opacity: headerInView ? 1 : 0, y: headerInView ? 0 : 50 }}
                         transition={{ duration: 0.5 }}
                     >
-                        <h2 className="text-5xl font-semibold">Experience</h2>
-                    </motion.div>
-                    <motion.svg viewBox="0 0 48 48" className="rotate-180 h-12 absolute -bottom-24 -right-32 overflow-visible" stroke="currentColor" strokeWidth="6" fill="none">
+                        Experience
+                    </motion.h2>
+                    <svg viewBox="0 0 48 48" className="rotate-180 h-12 absolute -bottom-24 -right-32 stroke-white stroke-6 fill-none">
                         <motion.path
-                            d="M0 48 L0 0 L48 0"
+                            d="M3 48 L3 3 L48 3"
                             animate={{ pathLength: headerInView ? 1 : 0 }}
                             transition={svgTransition}
                         />
-                    </motion.svg>
+                    </svg>
                 </motion.div>
             </div>
             {/* BODY */}
