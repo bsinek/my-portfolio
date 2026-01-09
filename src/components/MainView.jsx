@@ -213,6 +213,7 @@ const Experience = ({ scrollContainerRef }) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [cardKey, setCardKey] = useState(0);
     const [timelineActive, setTimelineActive] = useState(false);
+    const [showIndicator, setShowIndicator] = useState(false);
 
     const headerRef = useRef(null);
     const timelineSectionRef = useRef(null);
@@ -226,11 +227,13 @@ const Experience = ({ scrollContainerRef }) => {
 
     const timelineProgressMax = (ITEM_COUNT - 1) / ITEM_COUNT;
     const timelineProgress = useTransform(scrollYProgress, [0, timelineProgressMax], [0, 1]);
+    const indicatorProgress = useTransform(scrollYProgress, [timelineProgressMax, 1], [0, 1]);
 
     useMotionValueEvent(scrollYProgress, "change", (v) => {
         const index = Math.min(Math.floor(v * ITEM_COUNT), ITEM_COUNT - 1)
         setActiveIndex(index)
         setTimelineActive(v > 0)
+        setShowIndicator(v > timelineProgressMax && v < 1)
     });
 
     useEffect(() => {
@@ -283,8 +286,8 @@ const Experience = ({ scrollContainerRef }) => {
                                 style={{
                                     scaleY: timelineProgress,
                                     originY: 0,
-                                }}>
-                            </motion.div>
+                                }}
+                            />
                             <div className="h-full flex flex-col justify-between">
                                 {timelineData.map((item, index) => (
                                     <TimelineDot
@@ -306,6 +309,7 @@ const Experience = ({ scrollContainerRef }) => {
                     transition={morphTransition}
                 >
                     <div className="relative h-full w-full flex justify-center items-center whitespace-nowrap">
+                        {/* info cards */}
                         <AnimatePresence>
                             {timelineActive && (
                                 <TimelineCard
@@ -315,6 +319,38 @@ const Experience = ({ scrollContainerRef }) => {
                                 />
                             )}
                         </AnimatePresence>
+                        
+                        {/* next section indicator */}
+                        <motion.div 
+                            className="absolute bottom-8 right-8 flex gap-3 items-center"
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: showIndicator ? 1 : 0, y: showIndicator ? 0 : 20 }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            <span className="text-sm text-light-grey">Next Section</span>
+                            <div className="relative h-10 aspect-square flex justify-center items-center">
+                                {/* progress ring */}
+                                <svg viewBox="0 0 40 40" className="absolute inset-0 -rotate-90 stroke-2 fill-none">
+                                    <circle
+                                        cx="20"
+                                        cy="20"
+                                        r="16"
+                                        className="stroke-dark-grey"
+                                    />
+                                    <motion.circle
+                                        cx="20"
+                                        cy="20"
+                                        r="16"
+                                        className="stroke-spotify-green"
+                                        style={{ pathLength: indicatorProgress }}
+                                    />
+                                </svg>
+                                {/* down arrow */}
+                                <svg viewBox="0 0 16 16" className="w-4 h-4 fill-light-grey">
+                                    <path d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+                                </svg>
+                            </div>
+                        </motion.div>
                     </div>
                 </motion.div>
             </div>
