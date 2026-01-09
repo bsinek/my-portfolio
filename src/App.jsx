@@ -1,7 +1,7 @@
 // imports
-import { Sidebar } from "./components/Sidebar"
-import { MainView } from "./components/MainView"
-import { Playbar } from "./components/Playbar"
+import { Sidebar } from "./components/Sidebar/Sidebar"
+import { MainView } from "./components/MainView/MainView"
+import { Playbar } from "./components/Playbar/Playbar"
 
 function App() {
   return (
