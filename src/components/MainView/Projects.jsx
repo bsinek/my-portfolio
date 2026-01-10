@@ -1,15 +1,10 @@
-import EmblaCarousel from "./EmblaCarousel"
-import "./embla.css"
+import { ProjectsCarousel } from "./ProjectsCarousel"
 
 export const Projects = () => {
-    const slides = [0, 1, 2, 3, 4]
     return (
-        <section className="h-mainview">
-            <h2 className="text-4xl font-semibold mb-8">Projects</h2>
-            <EmblaCarousel
-                slides={slides}
-                options={{ loop: true, align: "center" }}
-            />
+        <section className="h-mainview flex flex-col justify-center gap-12 px-8 mt-24">
+            <h2 className="text-5xl font-bold mb-4">Projects</h2>
+            <ProjectsCarousel />
         </section>
     )
 }
