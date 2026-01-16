@@ -1,4 +1,15 @@
-const SkillsItem = ({ name, index }) => {
+// icons from:  https://techicons.dev/
+//              https://icons8.com/
+//              https://www.svgrepo.com/
+//              https://www.streamlinehq.com/
+import { 
+    PythonIcon, JavaIcon, CIcon, JavaScriptIcon, HTMLIcon, CSSIcon, 
+    ReactIcon, TailwindCSSIcon, TensorFlowIcon, DjangoIcon, 
+    NumPyIcon, PandasIcon, ScikitLearnIcon, MatplotlibIcon, KerasIcon, 
+    GitIcon, NodeJSIcon, ViteIcon, QuantConnectIcon, 
+} from "../../icons"
+
+const SkillsItem = ({ index, name, icon: Icon }) => {
     return (
         <div className="group h-14 px-4 flex items-center gap-4 rounded-md hover:bg-white/5">
             <div className="relative w-4 h-full overflow-visible tabular-nums">
@@ -11,7 +22,9 @@ const SkillsItem = ({ name, index }) => {
             </div>
 
             <div className="flex-1 flex gap-3 items-center">
-                <div className="h-10 aspect-square rounded-sm bg-dark-grey"></div>
+                <div className="h-10 aspect-square rounded-sm overflow-hidden">
+                    <Icon />
+                </div>
                 <span className="text-sm">{name}</span>
             </div>
         </div>
@@ -28,7 +41,7 @@ const SkillsCategory = ({ title, items, startIndex, isFirst }) => {
                 <span className="flex-1 text-sm">{title}</span>
             </div>
             {items.map((item, index) => (
-                <SkillsItem key={index} name={item.name} index={startIndex + index} />
+                <SkillsItem key={index} index={startIndex + index} {...item} />
             ))}
         </section>
     )
@@ -37,32 +50,42 @@ const SkillsCategory = ({ title, items, startIndex, isFirst }) => {
 export const SkillsSection = () => {
     const categories = [
         {
-            title: "Development",
+            title: "Languages",
             items: [
-                { name: "React" },
-                { name: "Vite" },
-                { name: "TailwindCSS" },
-                { name: "React" },
-                { name: "Vite" },
-                { name: "TailwindCSS" },
+                { name: "Python", icon: PythonIcon },
+                { name: "Java", icon: JavaIcon },
+                { name: "C", icon: CIcon },
+                { name: "JavaScript", icon: JavaScriptIcon },
+                { name: "HTML", icon: HTMLIcon },
+                { name: "CSS", icon: CSSIcon },
             ]
         },
         {
-            title: "Design",
+            title: "Frameworks",
             items: [
-                { name: "Figma" },
-                { name: "Blender" },
-                { name: "Figma" },
-                { name: "Blender" },
+                { name: "React", icon: ReactIcon },
+                { name: "Tailwind CSS", icon: TailwindCSSIcon },
+                { name: "TensorFlow", icon: TensorFlowIcon },
+                { name: "Django", icon: DjangoIcon },
             ]
         },
         {
-            title: "Admin",
+            title: "Libraries",
             items: [
-                { name: "??" },
-                { name: "??" },
-                { name: "??" },
-                { name: "??" },
+                { name: "NumPy", icon: NumPyIcon },
+                { name: "pandas", icon: PandasIcon },
+                { name: "scikit-learn", icon: ScikitLearnIcon },
+                { name: "matplotlib", icon: MatplotlibIcon },
+                { name: "Keras", icon: KerasIcon },
+            ]
+        },
+        {
+            title: "Tools & Platforms",
+            items: [
+                { name: "Git", icon: GitIcon },
+                { name: "Node.js", icon: NodeJSIcon },
+                { name: "Vite", icon: ViteIcon },
+                { name: "QuantConnect", icon: QuantConnectIcon },
             ]
         },
     ]
@@ -70,9 +93,11 @@ export const SkillsSection = () => {
     const totalSkills = categories.reduce((counter, category) => counter + category.items.length, 0);
 
     return (
-        <section className="pb-8">
+        <section className="pb-8 mt-36">
             <div className="h-72 p-6 flex gap-6">
-                <div className="h-full aspect-square rounded-md bg-dark-grey"/>
+                <div className="h-full aspect-square rounded-md bg-dark-grey">
+                    {/* IMAGE HERE */}
+                </div>
                 <div className="flex flex-col justify-end gap-2">
                     <span>Playlist</span>
                     <span className="text-8xl font-black">Skills</span>
