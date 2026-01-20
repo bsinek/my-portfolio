@@ -6,8 +6,8 @@ const TimelineDot = ({ item, isPassed, isActive, index }) => {
     const dotTransition = {duration: 0.2};
     return (
         <div className="relative z-10 h-5 aspect-square">
-            <div className="absolute inset-0 bg-dark-grey"/>
-            <motion.div className="absolute inset-0 bg-white"
+            <div className="absolute inset-0 bg-dark-grey rounded-sm"/>
+            <motion.div className="absolute inset-0 bg-white rounded-sm"
                 initial={{ opacity: 0, scale: 1 }}
                 animate={{ opacity: isPassed ? 1 : 0, scale: isActive ? 2 : 1 }}
                 transition={dotTransition}
@@ -212,7 +212,7 @@ export const Experience = ({ scrollContainerRef }) => {
             {/* BODY */}
             <div className="flex">
                 {/* TIMELINE */}
-                <section ref={timelineSectionRef} className="h-[600vh] flex-1">
+                <section ref={timelineSectionRef} className="h-[400vh] flex-1">
                     <div ref={timelineRef} className="sticky top-0 h-mainview flex justify-center p-16">
                         <div className="relative">
                             <div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-dark-grey/50"/>
