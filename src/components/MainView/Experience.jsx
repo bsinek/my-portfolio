@@ -6,8 +6,8 @@ const TimelineDot = ({ item, isPassed, isActive, index }) => {
     const dotTransition = {duration: 0.2};
     return (
         <div className="relative z-10 h-5 aspect-square">
-            <div className="absolute inset-0 bg-dark-grey"/>
-            <motion.div className="absolute inset-0 bg-white"
+            <div className="absolute inset-0 bg-dark-grey rounded-sm"/>
+            <motion.div className="absolute inset-0 bg-white rounded-sm"
                 initial={{ opacity: 0, scale: 1 }}
                 animate={{ opacity: isPassed ? 1 : 0, scale: isActive ? 2 : 1 }}
                 transition={dotTransition}
@@ -90,7 +90,7 @@ const TimelineCard = ({ item, index }) => {
     )
 }
 
-export const Experience = ({ scrollContainerRef }) => {
+export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => {
     //        EDIT WORK EXPERIENCE HERE
     /*****************************************/
     const timelineData = [
@@ -143,77 +143,107 @@ export const Experience = ({ scrollContainerRef }) => {
             ]
         },
     ]
+    
+    /*================================= CONFIG & CONSTANTS =================================*/
     const ITEM_COUNT = timelineData.length;
+    const timelineProgressMax = (ITEM_COUNT - 1) / ITEM_COUNT;
+    const morphTransition = { duration: 0.8, ease: "easeInOut" };
+    const morphRatio = 0.5; // relative to side panel
+
+    /*================================= HEADER ANIMATIONS =================================*/
+    // tracking
+    const headerRef = useRef(null);
+    const headerInView = useInView(headerRef, { amount: 0.7 });
+    const { scrollYProgress: headerScrollProgress } = useScroll({
+        container: scrollContainerRef,
+        target: headerRef,
+        offset: ["start end", "end start"]
+    });
+
+    // header variations
+    const scrollHeader = {
+        pathStyle: { pathLength: useTransform(headerScrollProgress, [0.1, 0.5], [0, 1]) },
+        textStyle: { 
+            opacity: useTransform(headerScrollProgress, [0.1, 0.5], [0, 1]), 
+            y: useTransform(headerScrollProgress, [0.1, 0.5], [50, 0])
+        },
+        pathAnimate: undefined,
+        textAnimate: undefined,
+        pathTransition: undefined,
+        textTransition: undefined,
+    };
+    const inViewHeader = {
+        pathStyle: undefined,
+        textStyle: undefined,
+        pathAnimate: { pathLength: headerInView ? 1 : 0 },
+        textAnimate: { opacity: headerInView ? 1 : 0, y: headerInView ? 0 : 50},
+        pathTransition: { duration: headerInView ? 0.5 : 0.2, delay: headerInView ? 0.3 : 0 },
+        textTransition: { duration: 0.5 },
+    };
+    const headers = { scroll: scrollHeader, inView: inViewHeader };
+    const header = headers[headerVariant] ?? headers.scroll;
+
+    /*================================= TIMELINE LOGIC =================================*/
+    // tracking & states
     const [activeIndex, setActiveIndex] = useState(0);
     const [cardKey, setCardKey] = useState(0);
     const [timelineActive, setTimelineActive] = useState(false);
     const [showIndicator, setShowIndicator] = useState(false);
-
-    const headerRef = useRef(null);
     const timelineSectionRef = useRef(null);
-    const timelineRef = useRef(null);
-    const headerInView = useInView(headerRef, { amount: 0.7 });
-
-    const { scrollYProgress } = useScroll({
+    const { scrollYProgress: timelineScrollProgress } = useScroll({
         container: scrollContainerRef,
         target: timelineSectionRef,
+        offset: ["start start", "end end"]
     });
+    const timelineProgress = useTransform(timelineScrollProgress, [0, timelineProgressMax], [0, 1]);
+    const indicatorProgress = useTransform(timelineScrollProgress, [timelineProgressMax, 1], [0, 1]);
 
-    const timelineProgressMax = (ITEM_COUNT - 1) / ITEM_COUNT;
-    const timelineProgress = useTransform(scrollYProgress, [0, timelineProgressMax], [0, 1]);
-    const indicatorProgress = useTransform(scrollYProgress, [timelineProgressMax, 1], [0, 1]);
-
-    useMotionValueEvent(scrollYProgress, "change", (v) => {
+    // active index & card rendering
+    useMotionValueEvent(timelineScrollProgress, "change", (v) => {
         const index = Math.min(Math.floor(v * ITEM_COUNT), ITEM_COUNT - 1)
         setActiveIndex(index)
         setTimelineActive(v > 0)
         setShowIndicator(v > timelineProgressMax && v < 1)
     });
-
     useEffect(() => {
         setCardKey(prev => prev + 1);
     }, [timelineActive, activeIndex]);
-    
-    const svgTransition = { duration: headerInView ? 0.5 : 0.2, delay: headerInView ? 0.3 : 0 };
-    const morphTransition = { duration: 0.8, ease: "easeInOut" };
-    const morphRatio = 0.5; // relative to side panel
 
     return (
         <section className="min-w-3xl">
             {/* HEADER */}
-            <div ref={headerRef} className="h-[32rem] mt-24 flex justify-center items-center">
-                <motion.div className="relative"
-                    initial={{ opacity: 1 }}
-                    animate={{ opacity: timelineActive ? 0 : 1 }}
-                    transition={morphTransition}
-                >
+            <div className="h-128 mt-24 flex justify-center items-center">
+                <div ref={headerRef} className="relative">
                     <svg viewBox="0 0 48 48" className="h-12 absolute -top-24 -left-32 stroke-white stroke-6 fill-none">
                         <motion.path
                             d="M3 48 L3 3 L48 3"
-                            animate={{ pathLength: headerInView ? 1 : 0 }}
-                            transition={svgTransition}
+                            style={header.pathStyle}
+                            animate={header.pathAnimate}
+                            transition={header.pathTransition}
                         />
                     </svg>
                     <motion.h2 className="text-5xl font-semibold"
-                        animate={{ opacity: headerInView ? 1 : 0, y: headerInView ? 0 : 50 }}
-                        transition={{ duration: 0.5 }}
+                        style={header.textStyle}
+                        animate={header.textAnimate}
+                        transition={header.textTransition}
                     >
                         Experience
                     </motion.h2>
                     <svg viewBox="0 0 48 48" className="rotate-180 h-12 absolute -bottom-24 -right-32 stroke-white stroke-6 fill-none">
                         <motion.path
                             d="M3 48 L3 3 L48 3"
-                            animate={{ pathLength: headerInView ? 1 : 0 }}
-                            transition={svgTransition}
+                            style={header.pathStyle}
+                            animate={header.pathAnimate}
+                            transition={header.pathTransition}
                         />
                     </svg>
-                </motion.div>
+                </div>
             </div>
             {/* BODY */}
             <div className="flex">
                 {/* TIMELINE */}
-                <section ref={timelineSectionRef} className="h-[600vh] flex-1">
-                    <div ref={timelineRef} className="sticky top-0 h-mainview flex justify-center p-16">
+                <section ref={timelineSectionRef} className="h-[400vh] flex-1">
+                    <div className="sticky top-0 h-mainview flex justify-center p-16">
                         <div className="relative">
                             <div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-dark-grey/50"/>
                             <motion.div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-spotify-green"

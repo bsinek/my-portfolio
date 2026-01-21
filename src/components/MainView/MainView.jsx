@@ -3,6 +3,7 @@ import { useScroll } from "motion/react"
 import { HeroSection } from "./HeroSection"
 import { Experience } from "./Experience"
 import { Projects } from "./Projects"
+import { SkillsSection } from "./SkillsSection"
 import { Lorem } from "../../Lorem"
 
 export const MainView = ({ img, position, size }) => {
@@ -11,8 +12,9 @@ export const MainView = ({ img, position, size }) => {
     return (
         <section ref={scrollContainerRef} className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey">
             <HeroSection img={img} position={position} size={size} scrollY={scrollY} />
-            <Experience scrollContainerRef={scrollContainerRef} />
+            <Experience scrollContainerRef={scrollContainerRef} headerVariant="scroll" />
             <Projects />
+            <SkillsSection />
         </section>
     )
 }
