@@ -17,14 +17,12 @@ const ProjectsItem = ({ index, name, date, tech }) => {
             </div>
             <span className="flex-3">
                 {tech.map((item, index) => (
-                    <>
-                        <span key={index}>
-                            {item}
-                            {index !== tech.length - 1 && (
-                                <span className="font-bold mx-2">•</span>
-                            )}
-                        </span>
-                    </>
+                    <span key={index}>
+                        {item}
+                        {index !== tech.length - 1 && (
+                            <span className="font-bold mx-2">•</span>
+                        )}
+                    </span>
                 ))}
             </span>
             <span className="w-32">{date}</span>
