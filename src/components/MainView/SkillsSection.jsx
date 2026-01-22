@@ -93,7 +93,7 @@ export const SkillsSection = () => {
     const totalSkills = categories.reduce((counter, category) => counter + category.items.length, 0);
 
     return (
-        <section className="pb-8 mt-36">
+        <section className="pb-8">
             <div className="h-72 p-6 flex gap-6">
                 <div className="h-full aspect-square rounded-md bg-dark-grey">
                     {/* IMAGE HERE */}

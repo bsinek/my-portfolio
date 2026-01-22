@@ -8,7 +8,7 @@ export const HeroSection = ({ img, position, size, scrollY }) => {
     return (
         <section className="relative h-mainview overflow-x-clip flex flex-col">
             {/* fixed image container */}
-            <motion.div className="rounded-t-lg sticky top-0"
+            <motion.div className="sticky top-0"
                 style={{
                     height: `${IMAGE_HEIGHT}px`,
                     backgroundImage: `url(${img})`,
@@ -34,7 +34,7 @@ export const HeroSection = ({ img, position, size, scrollY }) => {
             {/* ABOUT ME */}
             <div className="relative bg-spotify-grey flex-1">
                 {/* gradient */}
-                <div className="absolute inset-0 h-44 bg-gradient-to-b from-zinc-800 to-transparent" />
+                <div className="absolute inset-0 h-44 bg-linear-to-b from-zinc-800 to-transparent" />
                 {/* buttons */}
                 <div className="relative h-24 p-6 flex gap-8 items-center">
                     <button className="h-full aspect-square p-4 rounded-full bg-spotify-green hover:scale-105 transition-transform duration-100">

@@ -10,7 +10,7 @@ export const MainView = ({ img, position, size }) => {
     const scrollContainerRef = useRef(null);
     const { scrollY } = useScroll({ container: scrollContainerRef })
     return (
-        <section ref={scrollContainerRef} className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey">
+        <section ref={scrollContainerRef} className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey flex flex-col gap-36">
             <HeroSection img={img} position={position} size={size} scrollY={scrollY} />
             <Experience scrollContainerRef={scrollContainerRef} headerVariant="scroll" />
             <Projects />
