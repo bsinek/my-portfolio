@@ -8,7 +8,8 @@
   --color-light-grey: #b3b3b3;
   --color-dark-grey: #4d4c4c;
 
-  --spacing-mainview: 858px;
+  /* --spacing-mainview: 858px; */
+  --spacing-mainview: calc(100vh - 6.5rem);
 }
 
 html, body {

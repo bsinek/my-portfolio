@@ -1,6 +1,6 @@
 export const Playbar = () => {
     return (
-        <div className="flex items-center justify-between h-[88px] -m-2 p-2 bg-black">
+        <div className="flex items-center justify-between h-22 -m-2 p-2 bg-black">
             <div className="w-[30%]">
                 CURRENT SECTION HERE
             </div>
