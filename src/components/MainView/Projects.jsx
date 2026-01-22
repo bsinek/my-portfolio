@@ -69,7 +69,7 @@ export const Projects = () => {
                         <div className="h-6 aspect-square rounded-full bg-dark-grey mr-1"/>
                         <h2 className="font-semibold">Benjamin Sinek</h2>
                         <span className="text-light-grey font-bold">•</span>
-                        <span className="text-light-grey font-light">{items.length} items</span>
+                        <span className="text-light-grey font-light">{items.length} {items.length > 1 ? "items" : "item"}</span>
                     </div>
                 </div>
             </div>
