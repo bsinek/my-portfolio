@@ -11,7 +11,7 @@ import {
 
 const SkillsItem = ({ index, name, icon: Icon }) => {
     return (
-        <div className="group h-14 px-4 flex items-center gap-4 rounded-md hover:text-white">
+        <div className="group h-14 px-4 flex items-center gap-4 rounded-md hover:text-white transition-colors">
             <div className="relative w-4 h-full overflow-visible tabular-nums">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-0">
                     <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606"/>
