@@ -35,7 +35,7 @@ const TimelineCard = ({ item, index }) => {
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={{ duration: 0.2 }}
         >
             <div className="relative flex justify-between items-baseline">
                 {/* title */}
