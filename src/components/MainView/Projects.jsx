@@ -57,7 +57,7 @@ export const Projects = () => {
     ]
 
     return (
-        <section className="pb-6">
+        <section id="projects" className="pb-6">
             <div className="h-72 p-6 flex gap-6">
                 <div className="h-full aspect-square rounded-md bg-dark-grey">
                     {/* IMAGE HERE */}

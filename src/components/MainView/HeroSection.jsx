@@ -6,7 +6,7 @@ export const HeroSection = ({ img, position, size, scrollY }) => {
     const scale = useTransform(scrollY, [0, IMAGE_HEIGHT], [1.05, 1]);
     const opacity = useTransform(scrollY, [0, IMAGE_HEIGHT], [1, 0]);
     return (
-        <section className="relative h-mainview overflow-x-clip flex flex-col">
+        <section id="about" className="relative h-mainview overflow-x-clip flex flex-col">
             {/* fixed image container */}
             <motion.div className="sticky top-0"
                 style={{
