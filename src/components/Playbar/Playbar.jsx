@@ -1,8 +1,33 @@
 export const Playbar = ({ activeSection, sectionProgress }) => {
+    const sections = {
+        about: {
+            title: "About",
+            img: "img/smoke1.jpg",
+        },
+        experience: {
+            title: "Experience",
+            img: "img/smoke3.jpg",
+        },
+        projects: {
+            title: "Projects",
+            img: "img/smoke2.jpg",
+        },
+        skills: {
+            title: "Skills",
+            img: "img/smoke4.jpg",
+        },
+    }
+
     return (
         <div className="flex items-center justify-between h-22 -m-2 p-2 bg-black">
-            <div className="w-[30%]">
-                {activeSection}
+            <div className="w-[30%] h-14 flex gap-4 pl-2">
+                <div className="h-14 aspect-square bg-dark-grey rounded-md overflow-hidden">
+                    <img src={sections[activeSection].img}/>
+                </div>
+                <div className="flex flex-col justify-center font-light">
+                    <span className="text-sm">{sections[activeSection].title}</span>
+                    <span className="text-light-grey text-xs">Benjamin Sinek</span>
+                </div>
             </div>
             <div className="flex flex-col flex-1 gap-2">
                 <div className="flex justify-center items-center gap-4 h-8">
@@ -24,18 +49,18 @@ export const Playbar = ({ activeSection, sectionProgress }) => {
                 </div>
                 {/* progress bar */}
                 <div className="flex h-4 items-center justify-center gap-2 text-light-grey text-xs tabular-nums">
-                    <div className="w-12 text-right">0:00</div>
+                    <div className="w-12 text-right"></div>
                     <div className="h-1/4 flex-1 bg-dark-grey rounded-xs relative">
                         <div
                             className="absolute left-0 h-full bg-white rounded-xs"
                             style={{ width: `${sectionProgress * 100}%` }}
                         />
                     </div>
-                    <div className="w-12 text-left">0:00</div>
+                    <div className="w-12 text-left">{Math.round(sectionProgress * 100)}%</div>
                 </div>
             </div>
-            <div className="w-[30%] flex justify-end">
-                ICONS HERE
+            <div className="w-[30%] flex justify-end p-8">
+                <span className="text-[0.6rem] text-light-grey">&copy; Benjamin Sinek</span>
             </div>
         </div>
     )
