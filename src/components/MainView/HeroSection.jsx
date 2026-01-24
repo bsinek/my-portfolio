@@ -1,7 +1,8 @@
-import { motion, useTransform } from "motion/react"
+import { motion, useTransform, useScroll } from "motion/react"
 import { Lorem } from "../../Lorem"
 
-export const HeroSection = ({ img, position, size, scrollY }) => {
+export const HeroSection = ({ scrollContainerRef }) => {
+    const { scrollY } = useScroll({ container: scrollContainerRef })
     const IMAGE_HEIGHT = 384; // h-96 == 384px
     const scale = useTransform(scrollY, [0, IMAGE_HEIGHT], [1.05, 1]);
     const opacity = useTransform(scrollY, [0, IMAGE_HEIGHT], [1, 0]);
@@ -11,9 +12,9 @@ export const HeroSection = ({ img, position, size, scrollY }) => {
             <motion.div className="sticky top-0"
                 style={{
                     height: `${IMAGE_HEIGHT}px`,
-                    backgroundImage: `url(${img})`,
-                    backgroundPosition: position,
-                    backgroundSize: size,
+                    backgroundImage: "url(img/jet_extended.jpg)",
+                    backgroundPosition: "center 70%",
+                    backgroundSize: "cover",
                     scale: scale,
                     opacity: opacity,
                 }}
