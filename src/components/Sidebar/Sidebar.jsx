@@ -1,15 +1,16 @@
 import { motion, useAnimate } from "motion/react"
 import { useRef, useState, useEffect } from "react";
 
-const SidebarItem = ({ href, label }) => {
+const SidebarItem = ({ href, label, img }) => {
     return (
        <a href={href} className="group/item flex items-center gap-3 h-16 p-2 rounded-md hover:bg-white/5 active:bg-white/10 transition-all">
-            <div className="relative h-full aspect-square rounded-sm bg-white/30 group-hover/item:bg-white/10">
+            <div className="relative h-full aspect-square rounded-sm bg-white/30 group-hover/item:bg-white/10 overflow-hidden">
                 <div className="absolute inset-0 p-[15px] opacity-0 group-hover/item:opacity-100">
                     <svg viewBox="0 0 16 16" fill="currentColor" className="playbtn h-full">
                         <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288z"/>
                     </svg>
                 </div>
+                <img src={img} />
             </div>
             <div className="flex flex-col justify-center font-light">
                 <span>{label}</span>
@@ -121,10 +122,10 @@ const ContactItem = ({ href, label }) => {
 
 export const Sidebar = () => {
     const links = [
-        { href: "#about", label: "About" },
-        { href: "#experience", label: "Experience" },
-        { href: "#projects", label: "Projects" },
-        { href: "#skills", label: "Skills" },
+        { href: "#about", label: "About", img: "img/smoke1.jpg" },
+        { href: "#experience", label: "Experience", img: "img/smoke3.jpg" },
+        { href: "#projects", label: "Projects", img: "img/smoke2.jpg" },
+        { href: "#skills", label: "Skills", img: "img/smoke4.jpg" },
     ];
     const contacts = [
         { href: "https://www.linkedin.com/in/bsinek/", label: "LinkedIn" },

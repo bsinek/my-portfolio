@@ -95,8 +95,9 @@ export const SkillsSection = () => {
     return (
         <section id="skills" className="pb-6">
             <div className="h-72 p-6 flex gap-6">
-                <div className="h-full aspect-square rounded-md bg-dark-grey">
+                <div className="h-full aspect-square rounded-md bg-dark-grey overflow-hidden">
                     {/* IMAGE HERE */}
+                    <img src="img/smoke3.jpg"/>
                 </div>
                 <div className="flex flex-col justify-end gap-2">
                     <span>Playlist</span>
