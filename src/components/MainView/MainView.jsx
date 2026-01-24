@@ -16,6 +16,8 @@ export const MainView = ({ img, position, size }) => {
             <Experience scrollContainerRef={scrollContainerRef} headerVariant="scroll" />
             <Projects />
             <SkillsSection /> */}
+
+            {/* FREEZES WHEN SCROLLED AWAY FROM OR WHEN SWITCHING WINDOWS */}
             <ParticleCloud />
         </section>
     )
