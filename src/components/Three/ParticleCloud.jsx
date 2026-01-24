@@ -103,8 +103,9 @@ float base = clamp(0.82 + 0.25 * wave, 0.0, 1.0);
 
   float lit = brightness * edge;
 
-  vec3 baseColor = vec3(0.3, 0.3, 0.3);
-  vec3 color = baseColor * lit;
+  vec3 baseColor = vec3(1.0, 1.0, 1.0);
+  float strength = 0.25;
+  vec3 color = baseColor * lit * strength;
 
   gl_FragColor = vec4(color, lit);
 }
@@ -112,7 +113,7 @@ float base = clamp(0.82 + 0.25 * wave, 0.0, 1.0);
 
 function ParticleDisc() {
   const matRef = useRef();
-  const count = 100000;
+  const count = 120000;
 
   // 🎛 MAIN CONTROLS
   const radius = 6;   // disc size
@@ -144,7 +145,7 @@ function ParticleDisc() {
   });
 
   return (
-    <points position={[3, -1, 0]}>
+    <points position={[4, -1, 0]}>
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
@@ -173,8 +174,8 @@ function ParticleDisc() {
 
 export const ParticleCloud = () => {
   return (
-    <div className="h-full w-full p-32">
-      <Canvas className="border border-light-grey">
+    <div className="h-full w-full">
+      <Canvas>
         <ParticleDisc />
       </Canvas>
     </div>
