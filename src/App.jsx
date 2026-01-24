@@ -1,9 +1,12 @@
-// imports
+import { useState } from "react"
 import { Sidebar } from "./components/Sidebar/Sidebar"
 import { MainView } from "./components/MainView/MainView"
 import { Playbar } from "./components/Playbar/Playbar"
 
 function App() {
+  const [activeSection, setActiveSection] = useState("about")
+  const [sectionProgress, setSectionProgress] = useState(0)
+
   return (
     <>
       <div className="h-screen grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] gap-2 p-2">
@@ -11,14 +14,16 @@ function App() {
           <Sidebar />
         </div>
         <div className="col-span-1 min-h-0">
-          <MainView
-            img="img/jet_extended.jpg"
-            position="center 70%"
-            size="cover"
+          <MainView 
+            setActiveSection={setActiveSection}
+            setSectionProgress={setSectionProgress}
           />
         </div>
         <div className="col-span-2">
-          <Playbar />
+          <Playbar 
+            activeSection={activeSection}
+            sectionProgress={sectionProgress}
+          />
         </div>
       </div>
     </>

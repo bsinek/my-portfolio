@@ -1,8 +1,8 @@
-export const Playbar = () => {
+export const Playbar = ({ activeSection, sectionProgress }) => {
     return (
         <div className="flex items-center justify-between h-22 -m-2 p-2 bg-black">
             <div className="w-[30%]">
-                CURRENT SECTION HERE
+                {activeSection}
             </div>
             <div className="flex flex-col flex-1 gap-2">
                 <div className="flex justify-center items-center gap-4 h-8">
@@ -22,9 +22,15 @@ export const Playbar = () => {
                         </svg>
                     </button>
                 </div>
+                {/* progress bar */}
                 <div className="flex h-4 items-center justify-center gap-2 text-light-grey text-xs tabular-nums">
                     <div className="w-12 text-right">0:00</div>
-                    <div className="h-1/4 flex-1 bg-dark-grey rounded-xs"></div>
+                    <div className="h-1/4 flex-1 bg-dark-grey rounded-xs relative">
+                        <div
+                            className="absolute left-0 h-full bg-white rounded-xs"
+                            style={{ width: `${sectionProgress * 100}%` }}
+                        />
+                    </div>
                     <div className="w-12 text-left">0:00</div>
                 </div>
             </div>
