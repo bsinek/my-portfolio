@@ -9,7 +9,7 @@
   --color-dark-grey: #4d4c4c;
 
   /* --spacing-mainview: 858px; */
-  --spacing-mainview: calc(100vh - 6.5rem);
+  --spacing-mainview: calc(100vh - 6rem);
 }
 
 html, body {
