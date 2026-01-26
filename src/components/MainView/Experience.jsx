@@ -210,9 +210,9 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
     }, [timelineActive, activeIndex]);
 
     return (
-        <section id="experience" className="-mt-36">
+        <section id="experience" className="-mt-32">
             {/* HEADER */}
-            <div className="h-116 flex justify-center items-center">
+            <div className="h-108 flex justify-center items-center">
                 <div ref={headerRef} className="relative">
                     <svg viewBox="0 0 48 48" className="h-12 absolute -top-24 -left-32 stroke-white stroke-6 fill-none">
                         <motion.path
