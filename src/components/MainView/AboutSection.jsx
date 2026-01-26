@@ -3,9 +3,10 @@ import { useRef, useState } from "react"
 
 export const AboutSection = ({ scrollContainerRef }) => {
     const { scrollY } = useScroll({ container: scrollContainerRef })
-    const IMAGE_HEIGHT = 384; // h-96 == 384px
-    const scale = useTransform(scrollY, [0, IMAGE_HEIGHT], [1.05, 1]);
-    const opacity = useTransform(scrollY, [0, IMAGE_HEIGHT], [1, 0]);
+    const IMAGE_HEIGHT_REM = 24; // h-96 = 24rem
+    const imageHeightPx = IMAGE_HEIGHT_REM * 16;
+    const scale = useTransform(scrollY, [0, imageHeightPx], [1.05, 1]);
+    const opacity = useTransform(scrollY, [0, imageHeightPx], [1, 0]);
 
     const doNotPressref = useRef(null);
     const [counter, setCounter] = useState(0);
@@ -15,7 +16,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
             {/* fixed image container */}
             <motion.div className="sticky top-0"
                 style={{
-                    height: `${IMAGE_HEIGHT}px`,
+                    height: `${imageHeightPx}px`,
                     backgroundImage: "url(img/car.jpg)",
                     backgroundPosition: "0% 50%",
                     backgroundSize: "cover",
@@ -25,7 +26,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
             >
             </motion.div>
             {/* floating hero text */}
-            <div className="absolute top-0 flex flex-col justify-end p-6 font-light" style={{ height: `${IMAGE_HEIGHT}px` }}>
+            <div className="absolute top-0 flex flex-col justify-end p-6 font-light" style={{ height: `${imageHeightPx}px` }}>
                 <span className="text-sm ml-1">CS @ Georgia Tech</span>
                 <h1 className="font-black text-8xl leading-28">benjamin sinek</h1>
                 <span className="flex justify-items gap-2 mt-2">
@@ -51,7 +52,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
                             <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288z"/>
                         </svg>
                     </button>
-                    <button className="flex justify-center items-center h-8 rounded-full border-1 border-[#7c7c7c] p-4 hover:scale-[103%] hover:border-white transition-all duration-100"
+                    <button className="flex justify-center items-center h-8 rounded-full border border-[#7c7c7c] p-4 hover:scale-[103%] hover:border-white transition-all duration-100"
                         onClick={() => {
                             if (!doNotPressref.current) return;
                             doNotPressref.current.currentTime = 0;
