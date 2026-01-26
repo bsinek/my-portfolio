@@ -15,8 +15,8 @@ export const AboutSection = ({ scrollContainerRef }) => {
             <motion.div className="sticky top-0"
                 style={{
                     height: `${IMAGE_HEIGHT}px`,
-                    backgroundImage: "url(img/jet_extended.jpg)",
-                    backgroundPosition: "center 70%",
+                    backgroundImage: "url(img/car.jpg)",
+                    backgroundPosition: "0% 50%",
                     backgroundSize: "cover",
                     scale: scale,
                     opacity: opacity,
