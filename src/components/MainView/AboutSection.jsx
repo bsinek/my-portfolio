@@ -47,11 +47,11 @@ export const AboutSection = ({ scrollContainerRef }) => {
                 <div className="absolute inset-0 h-44 bg-linear-to-b from-zinc-800 to-transparent" />
                 {/* buttons */}
                 <div className="relative h-24 p-6 flex gap-8 items-center">
-                    <button className="h-full aspect-square p-4 rounded-full bg-spotify-green hover:scale-105 transition-transform duration-100">
+                    {/* <button className="h-full aspect-square p-4 rounded-full bg-spotify-green hover:scale-105 transition-transform duration-100">
                         <svg viewBox="0 0 16 16" fill="currentColor" className="h-full text-black">
                             <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288z"/>
                         </svg>
-                    </button>
+                    </button> */}
                     <button className="flex justify-center items-center h-8 rounded-full border border-[#7c7c7c] p-4 hover:scale-[103%] hover:border-white transition-all duration-100"
                         onClick={() => {
                             if (!doNotPressref.current) return;
