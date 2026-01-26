@@ -1,3 +1,5 @@
+import { SECTIONS } from "../../config/sections";
+
 const ProjectsItem = ({ index, name, date, tech }) => {
     return (
         <div className="group h-14 px-4 flex items-center gap-4 rounded-md hover:bg-white/5 transition-colors text-sm">
@@ -59,7 +61,7 @@ export const Projects = () => {
             <div className="h-72 p-6 flex gap-6">
                 <div className="h-full aspect-square rounded-md bg-dark-grey overflow-hidden">
                     {/* IMAGE HERE */}
-                    <img src="img/smoke1.jpg"/>
+                    <img src={SECTIONS.projects.img}/>
                 </div>
                 <div className="flex flex-col justify-end gap-2">
                     <span>Playlist</span>

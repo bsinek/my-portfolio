@@ -2,6 +2,7 @@
 //              https://icons8.com/
 //              https://www.svgrepo.com/
 //              https://www.streamlinehq.com/
+import { SECTIONS } from "../../config/sections";
 import { 
     PythonIcon, JavaIcon, CIcon, JavaScriptIcon, HTMLIcon, CSSIcon, 
     ReactIcon, TailwindCSSIcon, TensorFlowIcon, DjangoIcon, 
@@ -97,7 +98,7 @@ export const SkillsSection = () => {
             <div className="h-72 p-6 flex gap-6">
                 <div className="h-full aspect-square rounded-md bg-dark-grey overflow-hidden">
                     {/* IMAGE HERE */}
-                    <img src="img/smoke3.jpg"/>
+                    <img src={SECTIONS.skills.img}/>
                 </div>
                 <div className="flex flex-col justify-end gap-2">
                     <span>Playlist</span>
