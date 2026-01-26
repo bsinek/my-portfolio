@@ -88,7 +88,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
                     </div>
                 </div>
                 {/* bouncing chevron */}
-                <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2"
+                <motion.div className="absolute bottom-14 left-1/2 -translate-x-1/2"
                     animate={{ y: [0, 10, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
                 >
