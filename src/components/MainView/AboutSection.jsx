@@ -1,11 +1,14 @@
 import { motion, useTransform, useScroll } from "motion/react"
-import { Lorem } from "../../Lorem"
+import { useRef } from "react"
 
 export const AboutSection = ({ scrollContainerRef }) => {
     const { scrollY } = useScroll({ container: scrollContainerRef })
     const IMAGE_HEIGHT = 384; // h-96 == 384px
     const scale = useTransform(scrollY, [0, IMAGE_HEIGHT], [1.05, 1]);
     const opacity = useTransform(scrollY, [0, IMAGE_HEIGHT], [1, 0]);
+
+    const doNotPressref = useRef(null);
+
     return (
         <section id="about" className="relative h-mainview overflow-x-clip flex flex-col">
             {/* fixed image container */}
@@ -47,9 +50,16 @@ export const AboutSection = ({ scrollContainerRef }) => {
                             <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288z"/>
                         </svg>
                     </button>
-                    <button className="flex justify-center items-center h-8 rounded-full border-1 border-[#7c7c7c] p-4 hover:scale-[103%] hover:border-white transition-all duration-100">
+                    <button className="flex justify-center items-center h-8 rounded-full border-1 border-[#7c7c7c] p-4 hover:scale-[103%] hover:border-white transition-all duration-100"
+                        onClick={() => {
+                            if (!doNotPressref.current) return;
+                            doNotPressref.current.currentTime = 0;
+                            doNotPressref.current.play();
+                        }}
+                    >
                         <p className="text-sm">Do Not Press</p>
                     </button>
+                    <audio ref={doNotPressref} src="sounds/meow.mp3" preload="auto" />
                 </div>
                 {/* content */}
                 <div className="relative grid grid-cols-2 px-6 gap-6">
