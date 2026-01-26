@@ -138,7 +138,7 @@ export const Sidebar = ({ activeSection }) => {
         { href: "tel:+18057020556", label: "Phone" },
     ];
     return (
-        <aside className="flex flex-col w-105 h-full rounded-lg bg-spotify-grey">
+        <aside className="flex flex-col w-105 h-full bg-spotify-grey">
             {/* quick links */}
             <div className="group/quicklinks flex-1">
                 <div className="p-4 relative flex items-center overflow-hidden">

@@ -55,7 +55,7 @@ export const MainView = ({ setActiveSection, setSectionProgress }) => {
     };
 
     return (
-        <section ref={scrollContainerRef} className="relative h-full overflow-y-auto rounded-lg bg-spotify-grey flex flex-col gap-36 scroll-smooth">
+        <section ref={scrollContainerRef} className="relative h-full overflow-y-auto bg-spotify-grey flex flex-col gap-36 scroll-smooth">
             {SECTION_ORDER.map(id => (
                 <div key={id} ref={refsMap[id]}>
                     {sectionComponents[id]}
