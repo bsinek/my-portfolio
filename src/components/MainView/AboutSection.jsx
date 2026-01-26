@@ -1,7 +1,7 @@
 import { motion, useTransform, useScroll } from "motion/react"
 import { Lorem } from "../../Lorem"
 
-export const HeroSection = ({ scrollContainerRef }) => {
+export const AboutSection = ({ scrollContainerRef }) => {
     const { scrollY } = useScroll({ container: scrollContainerRef })
     const IMAGE_HEIGHT = 384; // h-96 == 384px
     const scale = useTransform(scrollY, [0, IMAGE_HEIGHT], [1.05, 1]);

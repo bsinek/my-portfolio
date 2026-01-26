@@ -1,10 +1,10 @@
 import { useRef } from "react"
-import { HeroSection } from "./HeroSection"
+import { AboutSection } from "./AboutSection"
 import { Experience } from "./Experience"
 import { Projects } from "./Projects"
 import { SkillsSection } from "./SkillsSection"
 import { Lorem } from "../../Lorem"
-import { useMotionValueEvent, useScroll, useTransform } from "motion/react"
+import { useMotionValueEvent, useScroll } from "motion/react"
 import { SECTION_ORDER } from "../../config/sections"
 
 export const MainView = ({ setActiveSection, setSectionProgress }) => {
@@ -48,7 +48,7 @@ export const MainView = ({ setActiveSection, setSectionProgress }) => {
     })
 
     const sectionComponents = {
-        about: <HeroSection scrollContainerRef={scrollContainerRef} />,
+        about: <AboutSection scrollContainerRef={scrollContainerRef} />,
         experience: <Experience scrollContainerRef={scrollContainerRef} headerVariant="scroll" />,
         projects: <Projects />,
         skills: <SkillsSection />,
