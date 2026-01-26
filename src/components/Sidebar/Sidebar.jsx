@@ -1,9 +1,10 @@
 import { motion, useAnimate } from "motion/react"
 import { useRef, useState, useEffect } from "react";
+import { SECTIONS, SECTION_ORDER } from "../../config/sections";
 
-const SidebarItem = ({ href, label, img }) => {
+const SidebarItem = ({ id, title, img }) => {
     return (
-       <a href={href} className="group/item flex items-center gap-3 h-16 p-2 rounded-md hover:bg-white/5 active:bg-white/10 transition-all">
+       <a href={`#${id}`} className="group/item flex items-center gap-3 h-16 p-2 rounded-md hover:bg-white/5 active:bg-white/10 transition-all">
             <div className="relative h-full aspect-square rounded-sm bg-white/30 group-hover/item:bg-white/10 overflow-hidden">
                 <div className="absolute inset-0 p-[15px] opacity-0 group-hover/item:opacity-100">
                     <svg viewBox="0 0 16 16" fill="currentColor" className="playbtn h-full">
@@ -13,7 +14,7 @@ const SidebarItem = ({ href, label, img }) => {
                 <img src={img} />
             </div>
             <div className="flex flex-col justify-center font-light">
-                <span>{label}</span>
+                <span>{title}</span>
                 <span className="text-light-grey text-sm flex items-center">
                     <svg viewBox="0 0 16 16" fill="currentColor" className="pin-angle inline h-3 text-spotify-green mr-1">
                         <path d="M8.822.797a2.72 2.72 0 0 1 3.847 0l2.534 2.533a2.72 2.72 0 0 1 0 3.848l-3.678 3.678-1.337 4.988-4.486-4.486L1.28 15.78a.75.75 0 0 1-1.06-1.06l4.422-4.422L.156 5.812l4.987-1.337z"/>
@@ -121,12 +122,7 @@ const ContactItem = ({ href, label }) => {
 };
 
 export const Sidebar = () => {
-    const links = [
-        { href: "#about", label: "About", img: "img/smoke1.jpg" },
-        { href: "#experience", label: "Experience", img: "img/smoke3.jpg" },
-        { href: "#projects", label: "Projects", img: "img/smoke2.jpg" },
-        { href: "#skills", label: "Skills", img: "img/smoke4.jpg" },
-    ];
+    const links = SECTION_ORDER.map(id => SECTIONS[id]);
     const contacts = [
         { href: "https://www.linkedin.com/in/bsinek/", label: "LinkedIn" },
         { href: "https://github.com/bsinek", label: "GitHub" },
@@ -147,7 +143,7 @@ export const Sidebar = () => {
                 </div>
                 <div className="flex flex-col gap-0 px-2">
                     {links.map((item) => (
-                        <SidebarItem key={item.href} {...item} />
+                        <SidebarItem key={item.id} id={item.id} title={item.title} img={item.img} />
                     ))}
                 </div>
             </div>

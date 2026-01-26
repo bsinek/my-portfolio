@@ -1,24 +1,6 @@
-export const Playbar = ({ activeSection, sectionProgress }) => {
-    const sections = {
-        about: {
-            title: "About",
-            img: "img/smoke1.jpg",
-        },
-        experience: {
-            title: "Experience",
-            img: "img/smoke3.jpg",
-        },
-        projects: {
-            title: "Projects",
-            img: "img/smoke2.jpg",
-        },
-        skills: {
-            title: "Skills",
-            img: "img/smoke4.jpg",
-        },
-    }
+import { SECTIONS, SECTION_ORDER } from "../../config/sections"
 
-    const SECTION_ORDER = ["about", "experience", "projects", "skills"];
+export const Playbar = ({ activeSection, sectionProgress }) => {
     const currentIndex = SECTION_ORDER.indexOf(activeSection);
     const prevSection = SECTION_ORDER[currentIndex - 1] ?? SECTION_ORDER[0];
     const nextSection = SECTION_ORDER[currentIndex + 1] ?? SECTION_ORDER[SECTION_ORDER.length - 1];
@@ -27,10 +9,10 @@ export const Playbar = ({ activeSection, sectionProgress }) => {
         <div className="flex items-center justify-between h-22 -m-2 p-2 bg-black">
             <div className="w-[30%] h-14 flex gap-4 pl-2">
                 <div className="h-14 aspect-square bg-dark-grey rounded-md overflow-hidden">
-                    <img src={sections[activeSection].img}/>
+                    <img src={SECTIONS[activeSection].img}/>
                 </div>
                 <div className="flex flex-col justify-center font-light">
-                    <span className="text-sm">{sections[activeSection].title}</span>
+                    <span className="text-sm">{SECTIONS[activeSection].title}</span>
                     <span className="text-light-grey text-xs">Benjamin Sinek</span>
                 </div>
             </div>
