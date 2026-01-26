@@ -8,17 +8,17 @@ export const SECTIONS = {
   experience: {
     id: "experience",
     title: "Experience",
-    img: "img/smoke3.jpg",
+    img: "img/smoke2.jpg",
   },
   projects: {
     id: "projects",
     title: "Projects",
-    img: "img/smoke2.jpg",
+    img: "img/smoke4.jpg",
   },
   skills: {
     id: "skills",
     title: "Skills",
-    img: "img/smoke4.jpg",
+    img: "img/smoke3.jpg",
   },
 };
 
