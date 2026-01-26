@@ -3,7 +3,7 @@ import { Sidebar } from "./components/Sidebar/Sidebar"
 import { MainView } from "./components/MainView/MainView"
 import { Playbar } from "./components/Playbar/Playbar"
 import { LAYOUT } from "./config/general"
-import { useMotionValue } from "motion/react"
+import { useMotionValue, motion } from "motion/react"
 
 function App() {
   const [activeSection, setActiveSection] = useState("about")
@@ -28,7 +28,12 @@ function App() {
 
   return (
     <>
-      <div className={`h-screen grid ${gridCols} ${gridRows} ${padding} ${gap}`}>
+      <motion.div 
+        className={`h-screen grid ${gridCols} ${gridRows} ${padding} ${gap}`}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.7, ease: "easeOut", delay: 0.5 }}
+      >
         {LAYOUT.showSidebar && <div className={`col-span-1 overflow-hidden ${rounded} ${sidebarColor}`}>
           <Sidebar activeSection={activeSection} />
         </div>}
@@ -44,7 +49,7 @@ function App() {
             progressMV={progressMV}
           />
         </div>}
-      </div>
+      </motion.div>
     </>
   )
 }
