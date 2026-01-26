@@ -11,7 +11,7 @@ function App() {
     <>
       <div className="h-screen grid grid-cols-[auto_1fr] grid-rows-[1fr_auto] gap-2 p-2">
         <div className="col-span-1">
-          <Sidebar />
+          <Sidebar activeSection={activeSection} />
         </div>
         <div className="col-span-1 min-h-0">
           <MainView 

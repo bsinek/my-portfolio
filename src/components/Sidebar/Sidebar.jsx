@@ -2,9 +2,11 @@ import { motion, useAnimate } from "motion/react"
 import { useRef, useState, useEffect } from "react";
 import { SECTIONS, SECTION_ORDER } from "../../config/sections";
 
-const SidebarItem = ({ id, title, img }) => {
+const SidebarItem = ({ id, title, img, isActive }) => {
     return (
-       <a href={`#${id}`} className="group/item flex items-center gap-3 h-16 p-2 rounded-md hover:bg-white/5 active:bg-white/10 transition-all">
+       <a href={`#${id}`} className={`group/item flex items-center gap-3 h-16 p-2 rounded-md transition-all ${
+           isActive ? "bg-white/10" : "hover:bg-white/5 active:bg-white/10"
+       }`}>
             <div className="relative h-full aspect-square rounded-sm bg-white/30 group-hover/item:bg-white/10 overflow-hidden">
                 <div className="absolute inset-0 p-[15px] opacity-0 group-hover/item:opacity-100">
                     <svg viewBox="0 0 16 16" fill="currentColor" className="playbtn h-full">
@@ -13,7 +15,7 @@ const SidebarItem = ({ id, title, img }) => {
                 </div>
                 <img src={img} />
             </div>
-            <div className="flex flex-col justify-center font-light">
+            <div className="flex flex-col justify-center font-light flex-1">
                 <span>{title}</span>
                 <span className="text-light-grey text-sm flex items-center">
                     <svg viewBox="0 0 16 16" fill="currentColor" className="pin-angle inline h-3 text-spotify-green mr-1">
@@ -23,6 +25,11 @@ const SidebarItem = ({ id, title, img }) => {
                     <span className="font-bold mx-0.5">•</span>
                     <span>Sinek</span>
                 </span>
+            </div>
+            <div className={`text-light-grey h-full py-4 px-3 transition-opacity ${isActive ? "opacity-100" : "opacity-0"}`}>
+                <svg fill="currentColor" className="rotate-180 arrow-right h-full" viewBox="0 0 16 16">
+                    <path fillRule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708"/>
+                </svg>
             </div>
        </a>
     );
@@ -121,7 +128,7 @@ const ContactItem = ({ href, label }) => {
     );
 };
 
-export const Sidebar = () => {
+export const Sidebar = ({ activeSection }) => {
     const links = SECTION_ORDER.map(id => SECTIONS[id]);
     const contacts = [
         { href: "https://www.linkedin.com/in/bsinek/", label: "LinkedIn" },
@@ -143,7 +150,13 @@ export const Sidebar = () => {
                 </div>
                 <div className="flex flex-col gap-0 px-2">
                     {links.map((item) => (
-                        <SidebarItem key={item.id} id={item.id} title={item.title} img={item.img} />
+                        <SidebarItem 
+                            key={item.id} 
+                            id={item.id} 
+                            title={item.title} 
+                            img={item.img}
+                            isActive={activeSection === item.id}
+                        />
                     ))}
                 </div>
             </div>
