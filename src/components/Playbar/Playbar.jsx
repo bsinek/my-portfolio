@@ -7,7 +7,7 @@ export const Playbar = ({ activeSection, progressMV }) => {
     const nextSection = SECTION_ORDER[currentIndex + 1] ?? SECTION_ORDER[SECTION_ORDER.length - 1];
 
     return (
-        <div className="flex items-center justify-between h-22 -m-2 p-2 bg-black">
+        <div className="flex items-center justify-between h-22 p-2 bg-black">
             <div className="w-[30%] h-14 flex gap-4 pl-2">
                 <div className="h-14 aspect-square bg-dark-grey rounded-md overflow-hidden">
                     <img src={SECTIONS[activeSection].img}/>
