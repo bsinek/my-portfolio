@@ -64,7 +64,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
                     <audio ref={doNotPressref} src="sounds/meow.mp3" preload="auto" />
                 </div>
                 {/* content */}
-                <div className="relative grid grid-cols-2 px-6 gap-6">
+                <div className="relative grid grid-cols-[4fr_3fr] px-6 gap-6">
                     <div>
                         <h2 className="text-2xl font-semibold mb-4">About me</h2>
                         <div className="px-4 py-5 text-lg leading-relaxed flex flex-col gap-4">
@@ -86,6 +86,15 @@ export const AboutSection = ({ scrollContainerRef }) => {
                         </div>
                     </div>
                 </div>
+                {/* bouncing chevron */}
+                <motion.div className="absolute bottom-8 left-1/2 -translate-x-1/2"
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                >
+                    <svg viewBox="0 0 16 16" fill="currentColor" className="h-6 text-dark-grey">
+                        <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
+                    </svg>
+                </motion.div>
             </div>
         </section>
     )
