@@ -56,7 +56,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
                             if (!doNotPressref.current) return;
                             doNotPressref.current.currentTime = 0;
                             doNotPressref.current.play();
-                            setCounter(counter + 1);
+                            setCounter((counter + 1) % 3);
                         }}
                     >
                         <p className="text-sm">Do Not Press</p>
@@ -81,8 +81,8 @@ export const AboutSection = ({ scrollContainerRef }) => {
                     </div>
                     <div>
                         <h2 className="text-2xl font-semibold mb-4">cat.</h2>
-                        <div className="h-72 flex justify-center items-center rounded-2xl overflow-hidden">
-                            <img src={`img/${counter % 2 === 0 ? "cat1.jpg" : "cat2.jpg"}`} className="w-full h-full object-cover" />
+                        <div className="h-72 flex justify-center items-cesnter rounded-2xl overflow-hidden">
+                            <img src={`img/cat${counter + 1}.jpg`} className="w-full h-full object-cover" />
                         </div>
                     </div>
                 </div>
