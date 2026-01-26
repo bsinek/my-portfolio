@@ -1,6 +1,7 @@
 import { SECTIONS, SECTION_ORDER } from "../../config/sections"
+import { motion } from "motion/react";
 
-export const Playbar = ({ activeSection, sectionProgress }) => {
+export const Playbar = ({ activeSection, progressMV }) => {
     const currentIndex = SECTION_ORDER.indexOf(activeSection);
     const prevSection = SECTION_ORDER[currentIndex - 1] ?? SECTION_ORDER[0];
     const nextSection = SECTION_ORDER[currentIndex + 1] ?? SECTION_ORDER[SECTION_ORDER.length - 1];
@@ -36,11 +37,11 @@ export const Playbar = ({ activeSection, sectionProgress }) => {
                 </div>
                 {/* progress bar */}
                 <div className="flex h-4 items-center justify-center gap-2 text-light-grey text-xs tabular-nums">
-                    <div className="w-12 text-right tabular-nums">{Math.round(sectionProgress * 100)}%</div>
-                    <div className="h-1/4 flex-1 bg-dark-grey rounded-xs relative">
-                        <div
-                            className="absolute left-0 h-full bg-white rounded-xs"
-                            style={{ width: `${sectionProgress * 100}%` }}
+                    <div className="w-12 text-right tabular-nums"></div>
+                    <div className="h-1/4 flex-1 bg-dark-grey rounded-xs">
+                        <motion.div
+                            className="h-full bg-white rounded-xs origin-left"
+                            style={{ scaleX: progressMV }}
                         />
                     </div>
                     <div className="w-12 text-left"></div>

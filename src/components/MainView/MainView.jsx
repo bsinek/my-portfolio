@@ -3,11 +3,10 @@ import { AboutSection } from "./AboutSection"
 import { Experience } from "./Experience"
 import { Projects } from "./Projects"
 import { SkillsSection } from "./SkillsSection"
-import { Lorem } from "../../Lorem"
 import { useMotionValueEvent, useScroll } from "motion/react"
 import { SECTION_ORDER } from "../../config/sections"
 
-export const MainView = ({ setActiveSection, setSectionProgress }) => {
+export const MainView = ({ setActiveSection, progressMV }) => {
     const scrollContainerRef = useRef(null);
 
     const aboutRef = useRef(null)
@@ -41,10 +40,10 @@ export const MainView = ({ setActiveSection, setSectionProgress }) => {
         const start = refsMap[activeId].current.offsetTop;
         const end = nextId ? refsMap[nextId].current.offsetTop : container.scrollHeight - container.clientHeight;
 
-        const progress = (v - start) / (end - start);
+        const progress = Math.max(0, Math.min(1, (v - start) / (end - start)));
 
         setActiveSection(activeId)
-        setSectionProgress(progress)
+        progressMV.set(progress)
     })
 
     const sectionComponents = {

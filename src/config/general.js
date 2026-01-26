@@ -1,9 +1,9 @@
 export const LAYOUT = {
     showSidebar: true,
-    showPlaybar: false,
+    showPlaybar: true,
     rounded: false,
-    padding: false,
-    gap: false,
+    padding: true,
+    gap: true,
 }
 
 export const getMainviewHeight = () => 
