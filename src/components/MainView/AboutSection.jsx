@@ -22,14 +22,18 @@ export const AboutSection = ({ scrollContainerRef }) => {
             </motion.div>
             {/* floating hero text */}
             <div className="absolute top-0 flex flex-col justify-end p-6 font-light" style={{ height: `${IMAGE_HEIGHT}px` }}>
-                <span className="flex items-center gap-2">
-                    <svg viewBox="0 0 24 24" fill="#4bb3ff" className="h-6">
-                        <path d="M10.814.5a1.66 1.66 0 0 1 2.372 0l2.512 2.572 3.595-.043a1.66 1.66 0 0 1 1.678 1.678l-.043 3.595 2.572 2.512c.667.65.667 1.722 0 2.372l-2.572 2.512.043 3.595a1.66 1.66 0 0 1-1.678 1.678l-3.595-.043-2.512 2.572a1.66 1.66 0 0 1-2.372 0l-2.512-2.572-3.595.043a1.66 1.66 0 0 1-1.678-1.678l.043-3.595L.5 13.186a1.66 1.66 0 0 1 0-2.372l2.572-2.512-.043-3.595a1.66 1.66 0 0 1 1.678-1.678l3.595.043zm6.584 9.12a1 1 0 0 0-1.414-1.413l-6.011 6.01-1.894-1.893a1 1 0 0 0-1.414 1.414l3.308 3.308z"/>
-                    </svg>
-                    <span className="text-sm">Certified Baller</span>
-                </span>
+                <span className="text-sm ml-1">CS @ Georgia Tech</span>
                 <h1 className="font-black text-8xl leading-28">benjamin sinek</h1>
-                <span className="mt-2">0 lifetime visitors</span>
+                <span className="flex justify-items gap-2 mt-2">
+                    <svg viewBox="0 0 16 16" fill="currentColor" className="h-6 p-1">
+                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
+                    </svg>
+                    <span className="text-sm flex items-center">
+                        <span>Los Angeles, CA</span>
+                        <span className="mx-2 font-bold">•</span>
+                        <span>Atlanta, GA</span>
+                    </span>
+                </span>
             </div>
 
             {/* ABOUT ME */}
@@ -51,8 +55,16 @@ export const AboutSection = ({ scrollContainerRef }) => {
                 <div className="relative grid grid-cols-2 px-6 gap-6">
                     <div>
                         <h2 className="text-2xl font-semibold mb-4">About me</h2>
-                        <div className="px-4 text-lg">
-                            <Lorem/>
+                        <div className="px-4 py-5 text-lg leading-relaxed flex flex-col gap-4">
+                            <p>
+                                I'm a Computer Science student at Georgia Tech studying AI/ML and exploring their application to financial fields.
+                            </p>
+                            <p>
+                                I enjoy building interactive projects that intersect technology and music, including a hands-free facial emotion-based music recommendation system.
+                            </p>
+                            <p>
+                                Beyond that, I love producing music, tinkering with cars, and snowboarding.
+                            </p>
                         </div>
                     </div>
                     <div>
