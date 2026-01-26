@@ -1,5 +1,5 @@
 import { motion, useTransform, useScroll } from "motion/react"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 export const AboutSection = ({ scrollContainerRef }) => {
     const { scrollY } = useScroll({ container: scrollContainerRef })
@@ -8,6 +8,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
     const opacity = useTransform(scrollY, [0, IMAGE_HEIGHT], [1, 0]);
 
     const doNotPressref = useRef(null);
+    const [counter, setCounter] = useState(0);
 
     return (
         <section id="about" className="relative h-mainview overflow-x-clip flex flex-col">
@@ -55,6 +56,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
                             if (!doNotPressref.current) return;
                             doNotPressref.current.currentTime = 0;
                             doNotPressref.current.play();
+                            setCounter(counter + 1);
                         }}
                     >
                         <p className="text-sm">Do Not Press</p>
@@ -78,9 +80,9 @@ export const AboutSection = ({ scrollContainerRef }) => {
                         </div>
                     </div>
                     <div>
-                        <h2 className="text-2xl font-semibold mb-4">Artist pick</h2>
-                        <div className="h-72 flex justify-center items-center border rounded-2xl">
-                            THINGY HERE
+                        <h2 className="text-2xl font-semibold mb-4">cat.</h2>
+                        <div className="h-72 flex justify-center items-center rounded-2xl overflow-hidden">
+                            <img src={`img/${counter % 2 === 0 ? "cat1.jpg" : "cat2.jpg"}`} className="w-full h-full object-cover" />
                         </div>
                     </div>
                 </div>
