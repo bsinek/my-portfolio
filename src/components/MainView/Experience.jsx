@@ -210,7 +210,7 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
     }, [timelineActive, activeIndex]);
 
     return (
-        <section id="experience" className="-mt-32">
+        <section id="experience" className="-mt-36">
             {/* HEADER */}
             <div className="h-108 flex justify-center items-center">
                 <div ref={headerRef} className="relative">
