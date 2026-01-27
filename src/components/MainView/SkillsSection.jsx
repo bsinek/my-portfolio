@@ -62,30 +62,31 @@ export const SkillsSection = () => {
             ]
         },
         {
-            title: "Frameworks",
+            title: "Full Stack / Web Development",
             items: [
                 { name: "React", icon: ReactIcon },
                 { name: "Tailwind CSS", icon: TailwindCSSIcon },
-                { name: "TensorFlow", icon: TensorFlowIcon },
+                { name: "Vite", icon: ViteIcon },
                 { name: "Django", icon: DjangoIcon },
+                { name: "Node.js", icon: NodeJSIcon },
             ]
         },
         {
-            title: "Libraries",
+            title: "Machine Learning",
             items: [
+                
                 { name: "NumPy", icon: NumPyIcon },
                 { name: "pandas", icon: PandasIcon },
                 { name: "scikit-learn", icon: ScikitLearnIcon },
                 // { name: "matplotlib", icon: MatplotlibIcon },
+                { name: "TensorFlow", icon: TensorFlowIcon },
                 { name: "Keras", icon: KerasIcon },
             ]
         },
         {
-            title: "Tools & Platforms",
+            title: "Tools",
             items: [
                 { name: "Git", icon: GitIcon },
-                { name: "Node.js", icon: NodeJSIcon },
-                { name: "Vite", icon: ViteIcon },
                 // { name: "QuantConnect", icon: QuantConnectIcon },
             ]
         },
