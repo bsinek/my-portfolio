@@ -42,7 +42,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
             </div>
 
             {/* ABOUT ME */}
-            <div className="relative bg-spotify-grey flex-1">
+            <div className="relative bg-spotify-grey flex-1 flex flex-col">
                 {/* gradient */}
                 <div className="absolute inset-0 h-44 bg-linear-to-b from-zinc-800 to-transparent" />
                 {/* buttons */}
@@ -88,14 +88,14 @@ export const AboutSection = ({ scrollContainerRef }) => {
                     </div>
                 </div>
                 {/* bouncing chevron */}
-                <motion.div className="absolute bottom-14 left-1/2 -translate-x-1/2"
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                >
-                    <svg viewBox="0 0 16 16" fill="currentColor" className="h-6 text-dark-grey">
+                <div className="flex-1 flex justify-center items-center">
+                    <motion.svg viewBox="0 0 16 16" fill="currentColor" className="h-6 text-dark-grey"
+                        animate={{ y: [0, 10, 0] }}
+                        transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    >
                         <path fillRule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708"/>
-                    </svg>
-                </motion.div>
+                    </motion.svg>
+                </div>
             </div>
         </section>
     )
