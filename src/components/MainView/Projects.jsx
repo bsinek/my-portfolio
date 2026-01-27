@@ -1,9 +1,9 @@
 import { SECTIONS } from "../../config/sections";
 import { useState } from "react";
 
-const ProjectsItem = ({ index, name, date, tech, onHover, onLeave }) => {
+const ProjectsItem = ({ index, name, date, tech, desc, onHover, onLeave }) => {
     return (
-        <div className="group relative h-14 px-4 flex items-center gap-4 rounded-md hover:bg-white/5 transition-colors text-sm"
+        <div className="group relative h-14 px-4 flex items-center gap-12 rounded-md hover:bg-white/5 transition-colors text-sm"
             onMouseEnter={onHover}
             onMouseLeave={onLeave}
         >
@@ -15,15 +15,16 @@ const ProjectsItem = ({ index, name, date, tech, onHover, onLeave }) => {
                     {index}
                 </span>
             </div>
-            <div className="flex-2 flex gap-3 items-center">
+            <div className="flex-2 flex gap-3 items-center -ml-8">
                 <div className="h-10 aspect-square rounded-sm overflow-hidden bg-dark-grey">
                     {/* <Icon /> */}
                 </div>
                 <span>{name}</span>
             </div>
-            <span className="flex-3">
+            <span className="flex-3">{desc}</span>
+            <span className="flex-3 flex flex-wrap">
                 {tech.map((item, index) => (
-                    <span key={index}>
+                    <span key={index} className="whitespace-nowrap">
                         {item}
                         {index !== tech.length - 1 && (
                             <span className="font-bold mx-2">•</span>
@@ -31,7 +32,7 @@ const ProjectsItem = ({ index, name, date, tech, onHover, onLeave }) => {
                     </span>
                 ))}
             </span>
-            <span className="w-32">{date}</span>
+            <span className="flex-2 flex justify-center">{date}</span>
         </div>
     )
 }
@@ -43,26 +44,26 @@ export const Projects = () => {
         {
             name: "Developer Portfolio",
             date: 2026,
-            tech: ["React", "Tailwind CSS", "Framer Motion"],
-            description: "A modern, interactive portfolio website showcasing my work and skills with smooth animations and a unique Spotify-inspired design."
+            tech: ["React", "Tailwind CSS", "Framer Motion", "Tailwind CSS"],
+            description: "Interactive portfolio with Spotify-inspired design and smooth animations.",
         },
         {
             name: "Developer Portfolio",
             date: 2026,
             tech: ["React", "Tailwind CSS", "Framer Motion"],
-            description: "An interactive showcase of my development projects with modern UI/UX principles and responsive design."
+            description: "Modern showcase of development projects with responsive design.",
         },
         {
             name: "Developer Portfolio",
             date: 2026,
             tech: ["React", "Tailwind CSS", "Framer Motion"],
-            description: "Personal portfolio featuring dynamic content presentation and seamless user experience."
+            description: "Portfolio featuring dynamic content and seamless UX.",
         },
         {
             name: "Developer Portfolio",
             date: 2026,
             tech: ["React", "Tailwind CSS", "Framer Motion"],
-            description: "A comprehensive portfolio demonstrating full-stack development capabilities and modern web technologies."
+            description: "Full-stack demonstration using modern web technologies.",
         },
     ]
 
@@ -91,11 +92,12 @@ export const Projects = () => {
             {/* CONTENT */}
             <section className="px-6 text-light-grey font-light relative">
                 {/* title bar */}
-                <div className="h-9 px-4 mb-4 flex items-center gap-4 border-b border-light-grey/20 text-sm">
-                    <span className="w-4 text-center text-base">#</span>
+                <div className="h-9 px-4 mb-4 flex items-center gap-12 border-b border-light-grey/20 text-sm">
+                    <span className="w-4 text-center text-base -mr-8">#</span>
                     <span className="flex-2">Project Name</span>
+                    <span className="flex-3">Description</span>
                     <span className="flex-3">Tech Stack</span>
-                    <span className="w-32">Year</span>
+                    <span className="flex-2 flex justify-center">Year</span>
                 </div>
                 {/* items */}
                 {items.map((item, index) => (
@@ -105,17 +107,18 @@ export const Projects = () => {
                         name={item.name}
                         date={item.date}
                         tech={item.tech}
+                        desc={item.description}
                         onHover={() => setHoveredIndex(index)}
                         onLeave={() => setHoveredIndex(null)}
                     />
                 ))}
-                {/* floating description */}
+                {/* floating container */}
                 {hoveredIndex !== null && (
-                    <div className="absolute pointer-events-none top-0 left-3/5 -translate-y-1/2 transition-transform duration-300"
+                    <div className="absolute pointer-events-none top-0 right-6 -translate-y-1/2 transition-transform duration-300"
                         style={{ transform: `translateY(${tooltipTop}px)` }}
                     >
-                        <div className="bg-white/10 rounded-md p-2 min-h-24 w-78">
-                            {items[hoveredIndex].description}
+                        <div className="bg-white/10 rounded-md h-34 aspect-video overflow-hidden">
+                            {/* <img src={items[hoveredIndex].img} className="h-full w-full"/> */}
                         </div>
                     </div>
                 )}
