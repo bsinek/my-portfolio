@@ -52,7 +52,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
                             <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288z"/>
                         </svg>
                     </button> */}
-                    <button className="flex justify-center items-center h-8 rounded-full border border-[#7c7c7c] p-4 hover:scale-[103%] hover:border-white transition-all duration-100"
+                    <button className="flex justify-center items-center h-8 rounded-full border border-[#7c7c7c] p-4 hover:scale-[103%] hover:border-white transition-all duration-100 cursor-pointer"
                         onClick={() => {
                             if (!doNotPressref.current) return;
                             doNotPressref.current.currentTime = 0;
