@@ -2,13 +2,21 @@ import { useState, useRef, useEffect } from "react"
 import { Sidebar } from "./components/Sidebar/Sidebar"
 import { MainView } from "./components/MainView/MainView"
 import { Playbar } from "./components/Playbar/Playbar"
+import { LoadingScreen } from "./components/LoadingScreen/LoadingScreen"
 import { LAYOUT } from "./config/general"
-import { useMotionValue, motion } from "motion/react"
+import { useMotionValue, AnimatePresence } from "motion/react"
 
 function App() {
   const [activeSection, setActiveSection] = useState("about")
   const progressMV = useMotionValue(0)
   const mainContentRef = useRef(null)
+  const [showLoading, setShowLoading] = useState(true)
+
+  // loading screen timer
+  useEffect(() => {
+    const timer = setTimeout(() => setShowLoading(false), 2000);
+    return () => clearTimeout(timer);
+  }, []);
 
   // dynamically set mainview size
   useEffect(() => {
@@ -28,12 +36,11 @@ function App() {
 
   return (
     <>
-      <motion.div 
-        className={`h-screen grid ${gridCols} ${gridRows} ${padding} ${gap}`}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.7, ease: "easeOut", delay: 0.5 }}
-      >
+      <AnimatePresence>
+        {showLoading && <LoadingScreen />}
+      </AnimatePresence>
+
+      <div className={`h-screen grid ${gridCols} ${gridRows} ${padding} ${gap}`}>
         {LAYOUT.showSidebar && <div className={`col-span-1 overflow-hidden ${rounded} ${sidebarColor}`}>
           <Sidebar activeSection={activeSection} />
         </div>}
@@ -49,7 +56,7 @@ function App() {
             progressMV={progressMV}
           />
         </div>}
-      </motion.div>
+      </div>
     </>
   )
 }
