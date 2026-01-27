@@ -105,7 +105,9 @@ export const SkillsSection = () => {
                     <span>Playlist</span>
                     <span className="text-8xl font-black">Skills</span>
                     <div className="flex gap-1 text-sm items-center mt-2">
-                        <div className="h-6 aspect-square rounded-full bg-dark-grey mr-1"/>
+                        <div className="h-6 aspect-square rounded-full bg-dark-grey mr-1 overflow-hidden">
+                            <img src="/img/profile.jpg" className="h-full w-full object-cover" />
+                        </div>
                         <h2 className="font-semibold">Benjamin Sinek</h2>
                         <span className="text-light-grey font-bold">•</span>
                         <span className="text-light-grey font-light">{totalSkills} {totalSkills > 1 ? "items" : "item"}</span>
