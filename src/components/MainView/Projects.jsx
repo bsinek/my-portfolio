@@ -1,9 +1,9 @@
 import { SECTIONS } from "../../config/sections";
 import { useState } from "react";
 
-const ProjectsItem = ({ index, name, date, tech, desc, onHover, onLeave }) => {
+const ProjectsItem = ({ index, name, date, tech, desc, icon, href, onHover, onLeave }) => {
     return (
-        <div className="group relative h-14 px-4 flex items-center gap-12 rounded-md hover:bg-white/5 transition-colors text-sm"
+        <a href={href} target="_blank" className="group relative h-14 px-4 flex items-center gap-12 rounded-md hover:bg-white/5 transition-colors text-sm"
             onMouseEnter={onHover}
             onMouseLeave={onLeave}
         >
@@ -16,8 +16,9 @@ const ProjectsItem = ({ index, name, date, tech, desc, onHover, onLeave }) => {
                 </span>
             </div>
             <div className="flex-2 flex gap-3 items-center -ml-8">
-                <div className="h-10 aspect-square rounded-sm overflow-hidden bg-dark-grey">
+                <div className="h-10 aspect-square rounded-sm overflow-hidden">
                     {/* <Icon /> */}
+                    <img src={icon} className="h-full w-full object-cover" />
                 </div>
                 <span>{name}</span>
             </div>
@@ -33,7 +34,7 @@ const ProjectsItem = ({ index, name, date, tech, desc, onHover, onLeave }) => {
                 ))}
             </span>
             <span className="flex-2 flex justify-center">{date}</span>
-        </div>
+        </a>
     )
 }
 
@@ -46,25 +47,28 @@ export const Projects = () => {
             name: "Developer Portfolio",
             date: 2026,
             tech: ["React", "Tailwind CSS", "Framer Motion", "Tailwind CSS"],
-            description: "Interactive portfolio with Spotify-inspired design and smooth animations.",
+            desc: "Interactive portfolio with Spotify-inspired design and smooth animations.",
+            img: "/img/projects/portfolio.jpg",
+            icon: "/img/favicon.svg",
+            href: "https://github.com/bsinek/my-portfolio"
+        },
+        {
+            name: "Chicken Tournament",
+            date: 2026,
+            tech: ["TensorFlow", "Keras", "Python"],
+            desc: "Modern showcase of development projects with responsive design.",
+            img: "/img/projects/chicken.png",
+            icon: "/img/projects/chicken_icon.png",
+            href: "https://github.com/bsinek/cs3600-chicken-game"
         },
         {
             name: "Developer Portfolio",
             date: 2026,
             tech: ["React", "Tailwind CSS", "Framer Motion"],
-            description: "Modern showcase of development projects with responsive design.",
-        },
-        {
-            name: "Developer Portfolio",
-            date: 2026,
-            tech: ["React", "Tailwind CSS", "Framer Motion"],
-            description: "Portfolio featuring dynamic content and seamless UX.",
-        },
-        {
-            name: "Developer Portfolio",
-            date: 2026,
-            tech: ["React", "Tailwind CSS", "Framer Motion"],
-            description: "Full-stack demonstration using modern web technologies.",
+            desc: "Portfolio featuring dynamic content and seamless UX.",
+            img: "/img/projects/travelsmart.jpg",
+            icon: "/img/projects/travelsmart_icon.png",
+            href: "https://github.com/johnkingdon/TravelSmart"
         },
     ]
 
@@ -106,10 +110,7 @@ export const Projects = () => {
                     <ProjectsItem 
                         key={index} 
                         index={index + 1} 
-                        name={item.name}
-                        date={item.date}
-                        tech={item.tech}
-                        desc={item.description}
+                        {...item}
                         onHover={() => { setHoveredIndex(index); setLastHoveredIndex(index); }}
                         onLeave={() => setHoveredIndex(null)}
                     />
@@ -120,7 +121,7 @@ export const Projects = () => {
                 >
                     <div className="bg-white/10 rounded-md h-34 aspect-video overflow-hidden">
                         {hoveredIndex !== null && (
-                            <div className="h-full w-full"/>
+                            <img src={items[hoveredIndex].img} className="h-full w-full object-cover" />
                         )}
                     </div>
                 </div>
