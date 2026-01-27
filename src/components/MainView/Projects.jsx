@@ -39,6 +39,7 @@ const ProjectsItem = ({ index, name, date, tech, desc, onHover, onLeave }) => {
 
 export const Projects = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
+    const [lastHoveredIndex, setLastHoveredIndex] = useState(0);
     
     const items = [
         {
@@ -69,7 +70,8 @@ export const Projects = () => {
 
     const titleBarHeight = 36 + 16; // h-9 + mb-4
     const itemHeight = 56; // h-14
-    const tooltipTop = hoveredIndex !== null ? titleBarHeight + (hoveredIndex * itemHeight) + (itemHeight / 2) : 0;
+    const currentIndex = hoveredIndex !== null ? hoveredIndex : lastHoveredIndex;
+    const tooltipTop = titleBarHeight + (currentIndex * itemHeight) + (itemHeight / 2);
 
     return (
         <section id="projects" className="pb-6">
@@ -108,20 +110,20 @@ export const Projects = () => {
                         date={item.date}
                         tech={item.tech}
                         desc={item.description}
-                        onHover={() => setHoveredIndex(index)}
+                        onHover={() => { setHoveredIndex(index); setLastHoveredIndex(index); }}
                         onLeave={() => setHoveredIndex(null)}
                     />
                 ))}
                 {/* floating container */}
-                {hoveredIndex !== null && (
-                    <div className="absolute pointer-events-none top-0 right-6 -translate-y-1/2 transition-transform duration-300"
-                        style={{ transform: `translateY(${tooltipTop}px)` }}
-                    >
-                        <div className="bg-white/10 rounded-md h-34 aspect-video overflow-hidden">
-                            {/* <img src={items[hoveredIndex].img} className="h-full w-full"/> */}
-                        </div>
+                <div className={`absolute pointer-events-none top-0 right-6 -translate-y-1/2 transition-all duration-300 ${hoveredIndex === null ? 'opacity-0' : 'opacity-100'}`}
+                    style={{ transform: `translateY(${tooltipTop}px)` }}
+                >
+                    <div className="bg-white/10 rounded-md h-34 aspect-video overflow-hidden">
+                        {hoveredIndex !== null && (
+                            <div className="h-full w-full"/>
+                        )}
                     </div>
-                )}
+                </div>
             </section>
         </section>
     )
