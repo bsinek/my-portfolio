@@ -60,7 +60,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
                             setCounter((counter + 1) % 3);
                         }}
                     >
-                        <p className="text-sm">Do Not Press</p>
+                        <p className="text-sm">Mystery Button...</p>
                     </button>
                     <audio ref={doNotPressref} src="/sounds/meow.mp3" preload="auto" />
                 </div>
