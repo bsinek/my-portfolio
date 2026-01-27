@@ -7,7 +7,7 @@ export function LoadingScreen() {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="relative">
+      <div className="relative flex h-12">
         <motion.h1
           className="text-4xl font-extralight tracking-wide"
           initial={{ x: 0, opacity: 1 }}
