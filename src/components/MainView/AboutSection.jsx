@@ -17,7 +17,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
             <motion.div className="sticky top-0"
                 style={{
                     height: `${imageHeightPx}px`,
-                    backgroundImage: "url(img/car.jpg)",
+                    backgroundImage: "url(/img/car.jpg)",
                     backgroundPosition: "0% 50%",
                     backgroundSize: "cover",
                     scale: scale,
@@ -62,7 +62,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
                     >
                         <p className="text-sm">Do Not Press</p>
                     </button>
-                    <audio ref={doNotPressref} src="sounds/meow.mp3" preload="auto" />
+                    <audio ref={doNotPressref} src="/sounds/meow.mp3" preload="auto" />
                 </div>
                 {/* content */}
                 <div className="relative grid grid-cols-[4fr_3fr] px-6 gap-6">
@@ -83,7 +83,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
                     <div>
                         <h2 className="text-2xl font-semibold mb-4">cat.</h2>
                         <div className="h-72 flex justify-center items-cesnter rounded-2xl overflow-hidden">
-                            <img src={`img/cat${counter + 1}.jpg`} className="w-full h-full object-cover" />
+                            <img src={`/img/cat${counter + 1}.jpg`} className="w-full h-full object-cover" />
                         </div>
                     </div>
                 </div>
