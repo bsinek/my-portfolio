@@ -24,10 +24,10 @@ const ProjectsItem = ({ index, name, date, tech, desc, onHover, onLeave }) => {
             <span className="flex-3">{desc}</span>
             <span className="flex-3 flex flex-wrap">
                 {tech.map((item, index) => (
-                    <span key={index} className="whitespace-nowrap">
+                    <span key={index} className="">
                         {item}
                         {index !== tech.length - 1 && (
-                            <span className="font-bold mx-2">•</span>
+                            <span className="mx-1.5">|</span>
                         )}
                     </span>
                 ))}
