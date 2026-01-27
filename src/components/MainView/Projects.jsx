@@ -1,8 +1,12 @@
 import { SECTIONS } from "../../config/sections";
+import { useState } from "react";
 
-const ProjectsItem = ({ index, name, date, tech }) => {
+const ProjectsItem = ({ index, name, date, tech, onHover, onLeave }) => {
     return (
-        <div className="group h-14 px-4 flex items-center gap-4 rounded-md hover:bg-white/5 transition-colors text-sm">
+        <div className="group relative h-14 px-4 flex items-center gap-4 rounded-md hover:bg-white/5 transition-colors text-sm"
+            onMouseEnter={onHover}
+            onMouseLeave={onLeave}
+        >
             <div className="relative w-4 h-full overflow-visible tabular-nums">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="absolute left-1/2 top-1/2 h-4 w-4 -translate-x-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-0">
                     <path d="m7.05 3.606 13.49 7.788a.7.7 0 0 1 0 1.212L7.05 20.394A.7.7 0 0 1 6 19.788V4.212a.7.7 0 0 1 1.05-.606"/>
@@ -33,28 +37,38 @@ const ProjectsItem = ({ index, name, date, tech }) => {
 }
 
 export const Projects = () => {
+    const [hoveredIndex, setHoveredIndex] = useState(null);
+    
     const items = [
         {
             name: "Developer Portfolio",
             date: 2026,
             tech: ["React", "Tailwind CSS", "Framer Motion"],
+            description: "A modern, interactive portfolio website showcasing my work and skills with smooth animations and a unique Spotify-inspired design."
         },
         {
             name: "Developer Portfolio",
             date: 2026,
             tech: ["React", "Tailwind CSS", "Framer Motion"],
+            description: "An interactive showcase of my development projects with modern UI/UX principles and responsive design."
         },
         {
             name: "Developer Portfolio",
             date: 2026,
             tech: ["React", "Tailwind CSS", "Framer Motion"],
+            description: "Personal portfolio featuring dynamic content presentation and seamless user experience."
         },
         {
             name: "Developer Portfolio",
             date: 2026,
             tech: ["React", "Tailwind CSS", "Framer Motion"],
+            description: "A comprehensive portfolio demonstrating full-stack development capabilities and modern web technologies."
         },
     ]
+
+    const titleBarHeight = 36 + 16; // h-9 + mb-4
+    const itemHeight = 56; // h-14
+    const tooltipTop = hoveredIndex !== null ? titleBarHeight + (hoveredIndex * itemHeight) + (itemHeight / 2) : 0;
 
     return (
         <section id="projects" className="pb-6">
@@ -75,7 +89,7 @@ export const Projects = () => {
                 </div>
             </div>
             {/* CONTENT */}
-            <section className="px-6 text-light-grey font-light">
+            <section className="px-6 text-light-grey font-light relative">
                 {/* title bar */}
                 <div className="h-9 px-4 mb-4 flex items-center gap-4 border-b border-light-grey/20 text-sm">
                     <span className="w-4 text-center text-base">#</span>
@@ -85,8 +99,26 @@ export const Projects = () => {
                 </div>
                 {/* items */}
                 {items.map((item, index) => (
-                    <ProjectsItem key={index} index={index + 1} {...item} />
+                    <ProjectsItem 
+                        key={index} 
+                        index={index + 1} 
+                        name={item.name}
+                        date={item.date}
+                        tech={item.tech}
+                        onHover={() => setHoveredIndex(index)}
+                        onLeave={() => setHoveredIndex(null)}
+                    />
                 ))}
+                {/* floating description */}
+                {hoveredIndex !== null && (
+                    <div className="absolute pointer-events-none top-0 left-3/5 -translate-y-1/2 transition-transform duration-300"
+                        style={{ transform: `translateY(${tooltipTop}px)` }}
+                    >
+                        <div className="bg-white/10 rounded-md p-2 min-h-24 w-78">
+                            {items[hoveredIndex].description}
+                        </div>
+                    </div>
+                )}
             </section>
         </section>
     )
