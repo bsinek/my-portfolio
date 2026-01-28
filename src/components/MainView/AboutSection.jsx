@@ -14,7 +14,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
     return (
         <section id="about" className="relative h-mainview overflow-x-clip flex flex-col">
             {/* fixed image container */}
-            <motion.div className="sticky top-0"
+            <motion.div className="sticky top-0 min-h-96"
                 style={{
                     height: `${imageHeightPx}px`,
                     backgroundImage: "url(/img/car.jpg)",
