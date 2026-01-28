@@ -12,7 +12,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
     const [counter, setCounter] = useState(0);
 
     return (
-        <section id="about" className="relative h-mainview overflow-x-clip flex flex-col">
+        <section id="about" className="relative min-h-mainview overflow-x-clip flex flex-col">
             {/* fixed image container */}
             <motion.div className="sticky top-0 min-h-96"
                 style={{
