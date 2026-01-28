@@ -162,10 +162,10 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
 
     // header variations
     const scrollHeader = {
-        pathStyle: { pathLength: useTransform(headerScrollProgress, [0.1, 0.5], [0, 1]) },
+        pathStyle: { pathLength: useTransform(headerScrollProgress, [0.1, 0.55], [0, 1]) },
         textStyle: { 
-            opacity: useTransform(headerScrollProgress, [0.1, 0.5], [0, 1]), 
-            y: useTransform(headerScrollProgress, [0.1, 0.5], [50, 0])
+            opacity: useTransform(headerScrollProgress, [0.1, 0.55], [0, 1]), 
+            y: useTransform(headerScrollProgress, [0.1, 0.55], [50, 0])
         },
         pathAnimate: undefined,
         textAnimate: undefined,
