@@ -65,25 +65,29 @@ export const AboutSection = ({ scrollContainerRef }) => {
                     <audio ref={doNotPressref} src="/sounds/meow.mp3" preload="auto" />
                 </div>
                 {/* content */}
-                <div className="relative grid grid-cols-[4fr_3fr] px-6 gap-6">
-                    <div>
+                <div className="relative grid grid-cols-[1fr_1fr] px-6 gap-16 h-96">
+                    <div className="flex flex-col">
                         <h2 className="text-2xl font-semibold mb-4">About me</h2>
-                        <div className="px-4 py-5 text-lg leading-relaxed flex flex-col gap-4">
-                            <p>
-                                I'm a Computer Science student at Georgia Tech studying AI/ML and exploring their application to financial fields.
-                            </p>
-                            <p>
-                                I enjoy building interactive projects that intersect technology and music, including a hands-free facial emotion-based music recommendation system.
-                            </p>
-                            <p>
-                                Beyond that, I love producing music, tinkering with cars, and snowboarding.
-                            </p>
+                        <div className="flex-1 p-4 flex flex-col">
+                            <div className="text-lg leading-relaxed text-light-grey border-l-2 border-light-grey pl-8 flex flex-col gap-4 justify-around h-full">
+                                <p className="hover:text-white transition-colors">
+                                    I'm a Computer Science student at <span className="text-white font-semibold">Georgia Tech</span> studying <span className="text-white font-semibold">AI/ML</span> and exploring their application to financial fields.
+                                </p>
+                                <p className="hover:text-white transition-colors">
+                                    I enjoy building interactive projects that intersect technology and music, including a hands-free facial emotion-based music recommendation system.
+                                </p>
+                                <p className="hover:text-white transition-colors">
+                                    Beyond that, I love producing music, tinkering with cars, and snowboarding.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                    <div>
+                    <div className="flex flex-col">
                         <h2 className="text-2xl font-semibold mb-4">cat.</h2>
-                        <div className="h-72 flex justify-center items-cesnter rounded-2xl overflow-hidden">
-                            <img src={`/img/cat${counter + 1}.jpg`} className="w-full h-full object-cover" />
+                        <div className="p-4 flex-1">
+                            <div className="rounded-2xl overflow-hidden h-full w-full bg-cover bg-center"
+                                style={{ backgroundImage: `url(/img/cat${counter + 1}.jpg)` }}
+                            />
                         </div>
                     </div>
                 </div>
