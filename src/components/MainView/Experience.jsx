@@ -37,7 +37,7 @@ const TimelineCard = ({ item, index }) => {
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.2 }}
         >
-            <div className="relative flex justify-between items-baseline">
+            <div className="relative min-w-max flex justify-between items-baseline gap-4">
                 {/* title */}
                 <motion.h3 className="text-4xl font-bold"
                     initial={{ opacity: 0, y: 10 }}
@@ -244,7 +244,7 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
                 {/* TIMELINE */}
                 <section ref={timelineSectionRef} className="h-[400vh] flex-1">
                     <div className="sticky top-0 h-mainview flex justify-center p-16">
-                        <div className="relative">
+                        <div className="relative min-h-100">
                             <div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-dark-grey/50"/>
                             <motion.div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-spotify-green"
                                 style={{
