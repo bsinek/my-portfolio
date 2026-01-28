@@ -210,34 +210,32 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
     }, [timelineActive, activeIndex]);
 
     return (
-        <section id="experience" className="-mt-36">
+        <section id="experience">
             {/* HEADER */}
-            <div className="h-108 flex justify-center items-center">
-                <div ref={headerRef} className="relative">
-                    <svg viewBox="0 0 48 48" className="h-12 absolute -top-24 -left-32 stroke-white stroke-6 fill-none">
-                        <motion.path
-                            d="M3 48 L3 3 L48 3"
-                            style={header.pathStyle}
-                            animate={header.pathAnimate}
-                            transition={header.pathTransition}
-                        />
-                    </svg>
-                    <motion.h2 className="text-5xl font-semibold"
-                        style={header.textStyle}
-                        animate={header.textAnimate}
-                        transition={header.textTransition}
-                    >
-                        Experience
-                    </motion.h2>
-                    <svg viewBox="0 0 48 48" className="rotate-180 h-12 absolute -bottom-24 -right-32 stroke-white stroke-6 fill-none">
-                        <motion.path
-                            d="M3 48 L3 3 L48 3"
-                            style={header.pathStyle}
-                            animate={header.pathAnimate}
-                            transition={header.pathTransition}
-                        />
-                    </svg>
-                </div>
+            <div ref={headerRef} className="relative h-60 flex justify-center items-center mb-20">
+                <svg viewBox="0 0 48 48" className="h-12 absolute top-0 left-100 stroke-white stroke-6 fill-none">
+                    <motion.path
+                        d="M3 48 L3 3 L48 3"
+                        style={header.pathStyle}
+                        animate={header.pathAnimate}
+                        transition={header.pathTransition}
+                    />
+                </svg>
+                <motion.h2 className="text-5xl font-semibold"
+                    style={header.textStyle}
+                    animate={header.textAnimate}
+                    transition={header.textTransition}
+                >
+                    Experience
+                </motion.h2>
+                <svg viewBox="0 0 48 48" className="rotate-180 h-12 absolute bottom-0 right-100 stroke-white stroke-6 fill-none">
+                    <motion.path
+                        d="M3 48 L3 3 L48 3"
+                        style={header.pathStyle}
+                        animate={header.pathAnimate}
+                        transition={header.pathTransition}
+                    />
+                </svg>
             </div>
             {/* BODY */}
             <div className="flex">
