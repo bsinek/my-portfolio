@@ -8,7 +8,7 @@ const SidebarItem = ({ id, title, img, isActive }) => {
            isActive ? "bg-white/10" : "hover:bg-white/5 active:bg-white/10"
        }`}>
             <div className="relative h-full aspect-square rounded-sm bg-white/30 group-hover/item:bg-white/10 overflow-hidden">
-                <div className="absolute inset-0 p-[15px] opacity-0 group-hover/item:opacity-100">
+                <div className="absolute inset-0 p-[15px] opacity-0 group-hover/item:opacity-100 transition-opacity">
                     <svg viewBox="0 0 16 16" fill="currentColor" className="playbtn h-full">
                         <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288z"/>
                     </svg>
