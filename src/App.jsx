@@ -49,7 +49,7 @@ function App() {
         {LAYOUT.showSidebar && <div className={`col-span-1 overflow-hidden ${rounded} ${sidebarColor}`}>
           <Sidebar activeSection={activeSection} />
         </div>}
-        <div ref={mainContentRef} className={`col-span-1 min-h-0 min-w-3xl overflow-hidden ${rounded}`}>
+        <div ref={mainContentRef} className={`col-span-1 min-h-0 min-w-4xl overflow-hidden ${rounded}`}>
           <MainView 
             setActiveSection={setActiveSection}
             progressMV={progressMV}
