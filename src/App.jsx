@@ -20,10 +20,15 @@ function App() {
 
   // dynamically set mainview size
   useEffect(() => {
-    if (mainContentRef.current) {
-      const height = mainContentRef.current.offsetHeight;
-      document.documentElement.style.setProperty('--spacing-mainview', `${height}px`);
-    }
+    const updateHeight = () => {
+      if (mainContentRef.current) {
+        const height = mainContentRef.current.offsetHeight;
+        document.documentElement.style.setProperty('--spacing-mainview', `${height}px`);
+      }
+    };
+    updateHeight();
+    window.addEventListener('resize', updateHeight);
+    return () => window.removeEventListener('resize', updateHeight);
   }, [LAYOUT]);
 
   const gridCols = LAYOUT.showSidebar ? "grid-cols-[auto_1fr]" : "grid-cols-[1fr]";
