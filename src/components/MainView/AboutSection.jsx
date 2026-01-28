@@ -68,15 +68,15 @@ export const AboutSection = ({ scrollContainerRef }) => {
                 <div className="relative grid grid-cols-[1fr_1fr] px-6 gap-16 h-96">
                     <div className="flex flex-col">
                         <h2 className="text-2xl font-semibold mb-4">About me</h2>
-                        <div className="flex-1 p-4 flex flex-col">
-                            <div className="text-lg leading-relaxed text-light-grey border-l-2 border-light-grey pl-8 flex flex-col gap-4 justify-around h-full">
-                                <p className="hover:text-white transition-colors">
-                                    I'm a Computer Science student at <span className="text-white font-semibold">Georgia Tech</span> studying <span className="text-white font-semibold">AI/ML</span> and exploring their application to financial fields.
+                        <div className="flex-1 p-4">
+                            <div className="text-lg leading-relaxed text-light-grey flex flex-col gap-4 justify-around h-full">
+                                <p className="hover:text-white hover:border-white transition-colors border-l-2 border-light-grey pl-8">
+                                    I'm a Computer Science student at <span className="text-white">Georgia Tech</span> studying <span className="text-white">AI/ML</span> and exploring their application to financial fields.
                                 </p>
-                                <p className="hover:text-white transition-colors">
+                                <p className="hover:text-white hover:border-white transition-colors border-l-2 border-light-grey pl-8">
                                     I enjoy building interactive projects that intersect technology and music, including a hands-free facial emotion-based music recommendation system.
                                 </p>
-                                <p className="hover:text-white transition-colors">
+                                <p className="hover:text-white hover:border-white transition-colors border-l-2 border-light-grey pl-8">
                                     Beyond that, I love producing music, tinkering with cars, and snowboarding.
                                 </p>
                             </div>
