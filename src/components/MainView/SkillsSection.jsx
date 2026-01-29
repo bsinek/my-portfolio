@@ -7,7 +7,7 @@ import {
     PythonIcon, JavaIcon, CIcon, JavaScriptIcon, HTMLIcon, CSSIcon, 
     ReactIcon, TailwindCSSIcon, TensorFlowIcon, DjangoIcon, 
     NumPyIcon, PandasIcon, ScikitLearnIcon, MatplotlibIcon, KerasIcon, 
-    GitIcon, NodeJSIcon, ViteIcon, QuantConnectIcon, 
+    GitIcon, NodeJSIcon, ViteIcon, QuantConnectIcon, VercelIcon
 } from "../../icons"
 
 const SkillsItem = ({ index, name, icon: Icon }) => {
@@ -57,22 +57,10 @@ export const SkillsSection = () => {
                 { name: "Java", icon: JavaIcon },
                 { name: "C", icon: CIcon },
                 { name: "JavaScript", icon: JavaScriptIcon },
-                { name: "HTML", icon: HTMLIcon },
-                { name: "CSS", icon: CSSIcon },
             ]
         },
         {
-            title: "Full Stack / Web Development",
-            items: [
-                { name: "React", icon: ReactIcon },
-                { name: "Tailwind CSS", icon: TailwindCSSIcon },
-                { name: "Vite", icon: ViteIcon },
-                { name: "Django", icon: DjangoIcon },
-                { name: "Node.js", icon: NodeJSIcon },
-            ]
-        },
-        {
-            title: "Machine Learning",
+            title: "AI & Machine Learning",
             items: [
                 
                 { name: "NumPy", icon: NumPyIcon },
@@ -84,9 +72,22 @@ export const SkillsSection = () => {
             ]
         },
         {
-            title: "Tools",
+            title: "Full Stack",
+            items: [
+                { name: "React", icon: ReactIcon },
+                { name: "Django", icon: DjangoIcon },
+                { name: "Node.js", icon: NodeJSIcon },
+                { name: "Vite", icon: ViteIcon },
+                { name: "Tailwind CSS", icon: TailwindCSSIcon },
+                { name: "HTML", icon: HTMLIcon },
+                { name: "CSS", icon: CSSIcon },
+            ]
+        },
+        {
+            title: "Tools & Platforms",
             items: [
                 { name: "Git", icon: GitIcon },
+                { name: "Vercel", icon: VercelIcon },
                 // { name: "QuantConnect", icon: QuantConnectIcon },
             ]
         },
