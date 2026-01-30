@@ -97,51 +97,27 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
     /*****************************************/
     const timelineData = [
         { 
-            title: "Senior Software Engineer", 
-            company: "Tech Corp", 
-            location: "San Francisco, CA", 
-            duration: "Jan 2024 - Present", 
+            title: "Independent Research Intern", 
+            company: "Chris Mattmann", 
+            location: "Los Angeles, CA", 
+            duration: "Aug 2023 - Jun 2024", 
             description: [
-                "Led development of microservices architecture serving 10M+ users",
-                "Reduced API response time by 40% through optimization",
-                "Mentored team of 5 junior developers",
-                "Implemented CI/CD pipeline reducing deployment time by 60%"
+                "Built an in-car prototype that recommends music based on the driver’s detected emotion",
+                "Predicted driver emotion from camera input using a 5-class facial emotion model",
+                "Mapped predicted emotion outputs to Spotify audio features and metadata",
+                "Designed a modular system to support future EEG-based emotion inputs"
             ]
         },
         { 
-            title: "Full Stack Developer", 
-            company: "StartUp Inc", 
-            location: "Remote", 
-            duration: "Mar 2022 - Dec 2023", 
+            title: "Data Engineer (Contract)", 
+            company: "Bud ADU", 
+            location: "Los Angeles", 
+            duration: "May 2024 - Aug 2024", 
             description: [
-                "Built responsive web applications using React and Node.js",
-                "Designed and implemented RESTful APIs",
-                "Collaborated with design team on UI/UX improvements",
-                "Increased user engagement by 25% through feature development"
-            ]
-        },
-        { 
-            title: "Frontend Developer", 
-            company: "Digital Agency", 
-            location: "New York, NY", 
-            duration: "Jun 2020 - Feb 2022", 
-            description: [
-                "Developed client websites using modern JavaScript frameworks",
-                "Improved website performance and accessibility scores",
-                "Worked directly with clients to gather requirements",
-                "Maintained and updated legacy codebases"
-            ]
-        },
-        { 
-            title: "Junior Developer", 
-            company: "Software Solutions", 
-            location: "Austin, TX", 
-            duration: "Aug 2018 - May 2020", 
-            description: [
-                "Assisted in development of enterprise web applications",
-                "Fixed bugs and implemented new features",
-                "Participated in code reviews and team meetings",
-                "Learned best practices in software development"
+                "Designed a system to coordinate survey teams and prevent duplicate coverage",
+                "Built spreadsheet workflows to consolidate 2,000+ paper surveys into a centralized dataset",
+                "Cleaned and normalized survey data with a CSV-based ETL pipeline using Python (Pandas)",
+                "Produced summary metrics and visualizations for investor-facing materials"
             ]
         },
     ]
