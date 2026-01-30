@@ -20,10 +20,10 @@ const ProjectsItem = ({ index, name, date, tech, desc, icon, href, onHover, onLe
                     {/* <Icon /> */}
                     <img src={icon} className="h-full w-full object-cover" />
                 </div>
-                <span>{name}</span>
+                <span className="line-clamp-1">{name}</span>
             </div>
-            <span className="flex-3">{desc}</span>
-            <span className="flex-3 flex flex-wrap">
+            <span className="flex-3 line-clamp-2">{desc}</span>
+            <span className="flex-3 flex flex-wrap line-clamp-2">
                 {tech.map((item, index) => (
                     <span key={index} className="">
                         {item}
