@@ -17,7 +17,7 @@ const TimelineDot = ({ item, isPassed, isActive, index }) => {
                 animate={{ opacity: isActive ? 1 : 0.5, scale: isActive ? 1.05 : 1 }}
                 transition={dotTransition}
             >
-                <span className="font-semibold whitespace-nowrap">{item.title}</span>
+                <span className="text-base font-semibold whitespace-nowrap">{item.title}</span>
                 <span className="text-sm text-light-grey whitespace-nowrap">{item.company} <b>•</b> {item.location}</span>
                 <span className="text-sm text-light-grey whitespace-nowrap">{item.duration}</span>
             </motion.div>
@@ -31,61 +31,63 @@ const TimelineCard = ({ item, index }) => {
     const currentIndex = dataRef.current.index;
     
     return (
-        <motion.div className="absolute w-full flex flex-col gap-6 p-16"
+        <motion.div className="absolute inset-0 flex justify-center"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
             transition={{ duration: 0.2 }}
         >
-            <div className="relative min-w-max flex justify-between items-baseline gap-4">
-                {/* title */}
-                <motion.h3 className="text-4xl font-bold"
+            <div className="absolute top-[calc(50%-8rem)] left-8 right-16 origin-top">
+                <div className="relative min-w-max flex justify-between items-baseline gap-4">
+                    {/* title */}
+                    <motion.h3 className="text-3xl font-bold"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.8 }}
+                    >
+                        {currentItem.title}
+                    </motion.h3>
+                    {/* number */}
+                    <motion.span className="text-xl font-light text-light-grey"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: 0.8 }}
+                    >
+                        0{currentIndex + 1}
+                    </motion.span>
+                    {/* underline */}
+                    <motion.div className="absolute -bottom-2 left-0 w-full h-0.5 bg-spotify-green"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: 0.3, delay: 0.3 }}
+                        style={{ transformOrigin: "right" }}
+                    />
+                </div>
+
+                {/* metadata */}
+                <motion.div className="flex gap-2 text-light-grey mt-6 whitespace-nowrap"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.7 }}
+                    transition={{ duration: 0.4, delay: 1.0 }}
                 >
-                    {currentItem.title}
-                </motion.h3>
-                {/* number */}
-                <motion.span className="text-2xl font-light text-light-grey"
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: 0.7 }}
+                    <span>{currentItem.company}</span>
+                    <span>•</span>
+                    <span>{currentItem.location}</span>
+                    <span>•</span>
+                    <span>{currentItem.duration}</span>
+                </motion.div>
+
+                {/* description */}
+                <motion.ul className="flex flex-col gap-3 mt-4"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ duration: 0.4, delay: 1.2 }}
                 >
-                    0{currentIndex + 1}
-                </motion.span>
-                {/* underline */}
-                <motion.div className="absolute -bottom-2 left-0 w-full h-0.5 bg-spotify-green"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: 1 }}
-                    transition={{ duration: 0.3, delay: 0.3 }}
-                    style={{ transformOrigin: "right" }}
-                />
+                    {currentItem.description.map((desc, index) => (
+                        <li key={index} className="pl-3 border-l-2 border-spotify-green/50">{desc}</li>
+                    ))}
+                </motion.ul>
             </div>
-
-            {/* metadata */}
-            <motion.div className="flex gap-4 text-light-grey mt-1"
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.9 }}
-            >
-                <span>{currentItem.company}</span>
-                <span>•</span>
-                <span>{currentItem.location}</span>
-                <span>•</span>
-                <span>{currentItem.duration}</span>
-            </motion.div>
-
-            {/* description */}
-            <motion.ul className="flex flex-col gap-3"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.4, delay: 1.1 }}
-            >
-                {currentItem.description.map((desc, index) => (
-                    <li key={index} className="pl-4 border-l-2 border-spotify-green/50">{desc}</li>
-                ))}
-            </motion.ul>
         </motion.div>
     )
 }
@@ -242,7 +244,7 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
             <div className="flex">
                 {/* TIMELINE */}
                 <section ref={timelineSectionRef} className="h-[400vh] flex-1">
-                    <div className="sticky top-0 h-mainview flex justify-center p-16">
+                    <div className="sticky top-0 h-mainview flex justify-center pl-16 py-16">
                         <div className="relative min-h-100">
                             <div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-dark-grey/50"/>
                             <motion.div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-spotify-green"
@@ -271,7 +273,7 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
                     animate={{ width: timelineActive ? `${morphRatio * 100}%` : 0 }}
                     transition={morphTransition}
                 >
-                    <div className="relative h-full w-full flex justify-center items-center whitespace-nowrap">
+                    <div className="relative h-full w-full flex justify-center items-center">
                         {/* info cards */}
                         <AnimatePresence>
                             {timelineActive && (
