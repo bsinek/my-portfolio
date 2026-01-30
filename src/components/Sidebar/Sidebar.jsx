@@ -4,9 +4,12 @@ import { SECTIONS, SECTION_ORDER } from "../../config/sections";
 
 const SidebarItem = ({ id, title, img, isActive }) => {
     return (
-       <a href={`#${id}`} className={`group/item flex items-center gap-3 h-16 p-2 rounded-md transition-all ${
-           isActive ? "bg-white/10" : "hover:bg-white/5 active:bg-white/10"
-       }`}>
+       <a href={`#${id}`} className="group/item relative flex items-center gap-3 h-16 p-2 rounded-md">
+            {/* hover background with transition */}
+            <div className="absolute inset-0 rounded-md bg-white/5 opacity-0 group-hover/item:opacity-100 transition-opacity pointer-events-none" />
+            {/* active background no transition */}
+            {isActive && <div className="absolute inset-0 rounded-md bg-white/10 pointer-events-none" />}
+            
             <div className="relative h-full aspect-square rounded-sm bg-white/30 group-hover/item:bg-white/10 overflow-hidden">
                 <div className="absolute inset-0 p-[15px] opacity-0 group-hover/item:opacity-100 transition-opacity">
                     <svg viewBox="0 0 16 16" fill="currentColor" className="playbtn h-full">
