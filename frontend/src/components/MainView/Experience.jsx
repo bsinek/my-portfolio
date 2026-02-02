@@ -71,9 +71,9 @@ const TimelineCard = ({ item, index }) => {
                     transition={{ duration: 0.4, delay: 1.0 }}
                 >
                     <span>{currentItem.company}</span>
-                    <span>•</span>
+                    <b>•</b>
                     <span>{currentItem.location}</span>
-                    <span>•</span>
+                    <b>•</b>
                     <span>{currentItem.duration}</span>
                 </motion.div>
 
