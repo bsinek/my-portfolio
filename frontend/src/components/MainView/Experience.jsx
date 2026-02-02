@@ -220,7 +220,11 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
             <div className="flex">
                 {/* TIMELINE */}
                 <section ref={timelineSectionRef} className="h-[400vh] flex-1">
-                    <div className="sticky top-0 h-mainview flex justify-center pl-16 py-16">
+                    <motion.div 
+                        className="sticky top-0 h-mainview flex justify-center py-16 pl-16"
+                        animate={{ paddingRight: timelineActive ? 0 : "4rem" }}
+                        transition={morphTransition}
+                    >
                         <div className="relative min-h-100">
                             <div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-dark-grey/50"/>
                             <motion.div className="absolute inset-y-2.5 left-1/2 -translate-x-1/2 w-1 bg-spotify-green"
@@ -241,7 +245,7 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
                                 ))}
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </section>
                 {/* SIDE PANEL */}
                 <motion.div className="sticky top-0 h-mainview overflow-hidden flex justify-center items-center"
