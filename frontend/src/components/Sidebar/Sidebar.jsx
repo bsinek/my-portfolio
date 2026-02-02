@@ -10,13 +10,13 @@ const SidebarItem = ({ id, title, img, isActive }) => {
             {/* active background no transition */}
             {isActive && <div className="absolute inset-0 rounded-md bg-white/10 pointer-events-none" />}
             
-            <div className="relative h-full aspect-square rounded-sm bg-white/30 group-hover/item:bg-white/10 overflow-hidden">
+            <div className="relative h-full aspect-square rounded-sm overflow-hidden bg-black">
                 <div className="absolute inset-0 p-[15px] opacity-0 group-hover/item:opacity-100 transition-opacity">
                     <svg viewBox="0 0 16 16" fill="currentColor" className="playbtn h-full">
                         <path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288z"/>
                     </svg>
                 </div>
-                <img src={img} />
+                <img src={img} className="group-hover/item:opacity-40 transition-opacity" />
             </div>
             <div className="flex flex-col justify-center font-light flex-1">
                 <span>{title}</span>
