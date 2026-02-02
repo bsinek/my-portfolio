@@ -136,7 +136,7 @@ export const Sidebar = ({ activeSection }) => {
     const contacts = [
         { href: "https://www.linkedin.com/in/bsinek/", label: "LinkedIn" },
         { href: "https://github.com/bsinek", label: "GitHub" },
-        { href: "/Benjamin_Sinek_Resume.pdf", label: "Resume" },
+        { href: "/docs/Benjamin_Sinek_Resume.pdf", label: "Resume" },
         { href: "mailto:bsinek2024+contact@gmail.com", label: "Email" },
         { href: "tel:+18057020556", label: "Phone" },
     ];
