@@ -1,5 +1,6 @@
 import { SECTIONS } from "../../config/sections";
 import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 
 const ProjectsItem = ({ index, name, date, tech, desc, icon, href, onHover, onLeave }) => {
     return (
@@ -123,10 +124,18 @@ export const Projects = () => {
                 <div className={`absolute pointer-events-none top-0 right-6 -translate-y-1/2 transition-all duration-300 ${hoveredIndex === null ? 'opacity-0' : 'opacity-100'}`}
                     style={{ transform: `translateY(${tooltipTop}px)` }}
                 >
-                    <div className="bg-white/10 rounded-md h-34 aspect-video overflow-hidden">
-                        {hoveredIndex !== null && (
-                            <img src={items[hoveredIndex].img} className="h-full w-full object-cover" />
-                        )}
+                    <div className="relative bg-white/10 rounded-md h-34 aspect-video overflow-hidden">
+                        <AnimatePresence mode="popLayout">
+                            <motion.img 
+                                key={currentIndex}
+                                src={items[currentIndex].img} 
+                                className="absolute inset-0 h-full w-full object-cover" 
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.2 }}
+                            />
+                        </AnimatePresence>
                     </div>
                 </div>
             </section>
