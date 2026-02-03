@@ -174,7 +174,7 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
         offset: ["start start", "end end"]
     });
     const timelineProgress = useTransform(timelineScrollProgress, [0, timelineProgressMax], [0, 1]);
-    const indicatorProgress = useTransform(timelineScrollProgress, [timelineProgressMax, 1], [0, 1]);
+    const indicatorProgress = useTransform(timelineScrollProgress, [timelineProgressMax, 1], [0, 1.05]);
 
     // active index & card rendering
     useMotionValueEvent(timelineScrollProgress, "change", (v) => {
