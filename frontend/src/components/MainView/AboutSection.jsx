@@ -35,7 +35,7 @@ export const AboutSection = ({ scrollContainerRef }) => {
                     </svg>
                     <span className="text-sm flex items-center">
                         <span>Los Angeles, CA</span>
-                        <span className="mx-2 font-bold">•</span>
+                        <span className="mx-2 font-semibold">•</span>
                         <span>Atlanta, GA</span>
                     </span>
                 </span>
