@@ -5,6 +5,6 @@ from .serializers import ProjectSerializer
 
 @api_view(["GET"])
 def projects_list(request):
-    projects = Project.objects.all().order_by("-year", "name")
+    projects = Project.objects.all()
     serializer = ProjectSerializer(projects, many=True)
     return Response(serializer.data)

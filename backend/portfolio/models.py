@@ -7,6 +7,7 @@ class Skill(models.Model):
         return self.name
 
 class Project(models.Model):
+    order = models.PositiveIntegerField(default=0)
     name = models.CharField(max_length=200)
     description = models.TextField()
     techstack = models.ManyToManyField(Skill, blank=True)
@@ -17,5 +18,9 @@ class Project(models.Model):
     preview = models.CharField(max_length=300)
     icon = models.CharField(max_length=300)
 
+    class Meta:
+        ordering = ["order", "-year"]
+
     def __str__(self):
         return self.name
+    
