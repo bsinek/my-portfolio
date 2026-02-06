@@ -1,5 +1,5 @@
 import { SECTIONS } from "../../config/sections";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 const ProjectsItem = ({ index, name, date, tech, desc, icon, href, onHover, onLeave }) => {
@@ -43,37 +43,28 @@ const ProjectsItem = ({ index, name, date, tech, desc, icon, href, onHover, onLe
 export const Projects = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [lastHoveredIndex, setLastHoveredIndex] = useState(0);
-    
-    const items = [
-        {
-            name: "Developer Portfolio",
-            date: 2026,
-            tech: ["React", "Tailwind CSS", "Framer Motion", "Tailwind CSS"],
-            desc: "A Spotify-inspired, motion-driven portfolio focused on responsive layout and interactive UI",
-            img: "/img/projects/portfolio.jpg",
-            icon: "/img/favicon.svg",
-            href: "https://github.com/bsinek/my-portfolio"
-        },
-        {
-            name: "Chicken Tournament AI",
-            date: 2025,
-            tech: ["Python", "NumPy"],
-            desc: "An AI agent for a hidden-information game using probabilistic reasoning and lookahead search",
-            img: "/img/projects/chicken.jpg",
-            icon: "/img/projects/chicken_icon.jpg",
-            href: "https://github.com/bsinek/cs3600-chicken-game"
-        },
-        {
-            name: "TravelSmart",
-            date: 2025,
-            tech: ["Django", "Python", "Google Maps API"],
-            desc: "A full-stack travel planner for optimizing routes and itineraries using Google Maps API",
-            img: "/img/projects/travelsmart.jpg",
-            icon: "/img/projects/travelsmart_icon.png",
-            href: "https://github.com/johnkingdon/TravelSmart"
-        },
-    ]
+    const [items, setItems] = useState([]);
 
+    // request backend
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/api/projects/")
+            .then(res => res.json())
+            .then(data => {
+                const formatted = data.map(project => (
+                    {
+                        name: project.name,
+                        desc: project.description,
+                        tech: project.techstack,
+                        date: project.year,
+                        href: project.link,
+                        img: project.thumbnail,
+                        icon: project.icon
+                    }
+                ))
+                setItems(formatted)
+            }).catch(err => console.error("Fetch failed:", err))
+    }, [])
+    
     const titleBarHeight = 36 + 16; // h-9 + mb-4
     const itemHeight = 56; // h-14
     const currentIndex = hoveredIndex !== null ? hoveredIndex : lastHoveredIndex;
@@ -129,7 +120,7 @@ export const Projects = () => {
                         <AnimatePresence mode="popLayout">
                             <motion.img 
                                 key={currentIndex}
-                                src={items[currentIndex].img} 
+                                src={items[currentIndex]?.img} 
                                 className="absolute inset-0 h-full w-full object-cover" 
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
