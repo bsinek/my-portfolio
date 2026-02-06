@@ -1,10 +1,47 @@
 from django.db import models
+from django.db.models import F
+
+ 
+# ---------------------------------------------------
+# EXPERIENCE
+# ---------------------------------------------------
+
+class Experience(models.Model):
+    role = models.CharField(max_length=200)
+    company = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    start_date = models.DateField()
+    end_date = models.DateField(blank=True, null=True)
+
+    class Meta:
+        ordering = [F("end_date").desc(nulls_first=True), "-start_date"]
+
+    def __str__(self):
+        return f"{self.role} at {self.company}"
+    
+
+class ExperienceBullet(models.Model):
+    experience = models.ForeignKey(Experience, on_delete=models.CASCADE, related_name="bullets")
+    text = models.TextField()
+    order = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["order"]
+
+    def __str__(self):
+        return f"Bullet {self.order} for {self.experience.role}"
+
+
+# ---------------------------------------------------
+# PROJECTS
+# ---------------------------------------------------
 
 class Skill(models.Model):
     name = models.CharField(max_length=100, unique=True)
 
     def __str__(self):
         return self.name
+
 
 class Project(models.Model):
     order = models.PositiveIntegerField(default=0)
