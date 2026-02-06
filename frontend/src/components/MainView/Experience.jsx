@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform, useInView, useMotionValueEvent, AnimatePresence } from "motion/react"
 
-const TimelineDot = ({ item, isPassed, isActive, index }) => {
+const TimelineDot = ({ experience, isPassed, isActive, index }) => {
     const isLeft = index % 2 === 0;
     const dotTransition = {duration: 0.2};
     return (
@@ -17,17 +17,17 @@ const TimelineDot = ({ item, isPassed, isActive, index }) => {
                 animate={{ opacity: isActive ? 1 : 0.5, scale: isActive ? 1.05 : 1 }}
                 transition={dotTransition}
             >
-                <span className="text-base font-semibold whitespace-nowrap">{item.title}</span>
-                <span className="text-sm text-light-grey whitespace-nowrap">{item.company} <b>•</b> {item.location}</span>
-                <span className="text-sm text-light-grey whitespace-nowrap">{item.duration}</span>
+                <span className="text-base font-semibold whitespace-nowrap">{experience.role}</span>
+                <span className="text-sm text-light-grey whitespace-nowrap">{experience.company} <b>•</b> {experience.location}</span>
+                <span className="text-sm text-light-grey whitespace-nowrap">{experience.date_range}</span>
             </motion.div>
         </div>
     )
 }
 
-const TimelineCard = ({ item, index }) => {
-    const dataRef = useRef({ item, index });
-    const currentItem = dataRef.current.item;
+const TimelineCard = ({ experience, index }) => {
+    const dataRef = useRef({ experience, index });
+    const currentExperience = dataRef.current.experience;
     const currentIndex = dataRef.current.index;
     
     return (
@@ -45,7 +45,7 @@ const TimelineCard = ({ item, index }) => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.4, delay: 0.8 }}
                     >
-                        {currentItem.title}
+                        {currentExperience.role}
                     </motion.h3>
                     {/* number */}
                     <motion.span className="text-xl font-light text-light-grey"
@@ -70,11 +70,11 @@ const TimelineCard = ({ item, index }) => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.4, delay: 1.0 }}
                 >
-                    <span>{currentItem.company}</span>
+                    <span>{currentExperience.company}</span>
                     <b>•</b>
-                    <span>{currentItem.location}</span>
+                    <span>{currentExperience.location}</span>
                     <b>•</b>
-                    <span>{currentItem.duration}</span>
+                    <span>{currentExperience.date_range}</span>
                 </motion.div>
 
                 {/* description */}
@@ -83,8 +83,8 @@ const TimelineCard = ({ item, index }) => {
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.4, delay: 1.2 }}
                 >
-                    {currentItem.description.map((desc, index) => (
-                        <li key={index} className="pl-3 border-l-2 border-spotify-green/50">{desc}</li>
+                    {currentExperience.bullets.map((text, index) => (
+                        <li key={index} className="pl-3 border-l-2 border-spotify-green/50">{text}</li>
                     ))}
                 </motion.ul>
             </div>
@@ -93,38 +93,19 @@ const TimelineCard = ({ item, index }) => {
 }
 
 export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => {
-    //        EDIT WORK EXPERIENCE HERE
-    /*****************************************/
-    const timelineData = [
-        { 
-            title: "Independent Research Intern", 
-            company: "Chris Mattmann", 
-            location: "Los Angeles, CA", 
-            duration: "Aug 2023 - Jun 2024", 
-            description: [
-                "Built an in-car prototype that recommends music based on the driver’s detected emotion",
-                "Predicted driver emotion from camera input using a 5-class facial emotion model",
-                "Mapped predicted emotion outputs to Spotify audio features and metadata",
-                "Designed a modular system to support future EEG-based emotion inputs"
-            ]
-        },
-        { 
-            title: "Data Engineer (Contract)", 
-            company: "Bud ADU", 
-            location: "Los Angeles", 
-            duration: "May 2024 - Aug 2024", 
-            description: [
-                "Designed a system to coordinate survey teams and prevent duplicate coverage",
-                "Built spreadsheet workflows to consolidate 2,000+ paper surveys into a centralized dataset",
-                "Cleaned and normalized survey data with a CSV-based ETL pipeline using Python (Pandas)",
-                "Produced summary metrics and visualizations for investor-facing materials"
-            ]
-        },
-    ]
+    const [experiences, setExperiences] = useState([])
+
+    useEffect(() => {
+        fetch("http://127.0.0.1:8000/api/experiences/")
+            .then(res => res.json())
+            .then(data => {
+                setExperiences(data)
+            }).catch((err) => console.error("Error fetching experience:", err));
+    })
     
     /*================================= CONFIG & CONSTANTS =================================*/
-    const ITEM_COUNT = timelineData.length;
-    const timelineProgressMax = (ITEM_COUNT - 1) / ITEM_COUNT;
+    const EXPERIENCE_COUNT = experiences.length;
+    const timelineProgressMax = (EXPERIENCE_COUNT - 1) / EXPERIENCE_COUNT;
     const morphTransition = { duration: 0.8, ease: "easeInOut" };
     const morphRatio = 0.5; // relative to side panel
 
@@ -178,7 +159,7 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
 
     // active index & card rendering
     useMotionValueEvent(timelineScrollProgress, "change", (v) => {
-        const index = Math.min(Math.floor(v * ITEM_COUNT), ITEM_COUNT - 1)
+        const index = Math.min(Math.floor(v * EXPERIENCE_COUNT), EXPERIENCE_COUNT - 1)
         setActiveIndex(index)
         setTimelineActive(v > 0)
         setShowIndicator(v > timelineProgressMax && v < 1)
@@ -234,10 +215,10 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
                                 }}
                             />
                             <div className="h-full flex flex-col justify-between">
-                                {timelineData.map((item, index) => (
+                                {experiences.map((experience, index) => (
                                     <TimelineDot
                                         key={index}
-                                        item={item}
+                                        experience={experience}
                                         isPassed={timelineActive && index <= activeIndex}
                                         isActive={timelineActive && index === activeIndex}
                                         index={index}
@@ -256,10 +237,10 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
                     <div className="relative h-full w-full flex justify-center items-center">
                         {/* info cards */}
                         <AnimatePresence>
-                            {timelineActive && (
+                            {timelineActive && experiences[activeIndex] && (
                                 <TimelineCard
                                     key={cardKey}
-                                    item={timelineData[activeIndex]}
+                                    experience={experiences[activeIndex]}
                                     index={activeIndex}
                                 />
                             )}
