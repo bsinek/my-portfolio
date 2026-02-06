@@ -15,7 +15,7 @@ class Project(models.Model):
     link = models.URLField()
 
     # image paths
-    preview = models.CharField(max_length=300)
+    thumbnail = models.CharField(max_length=300)
     icon = models.CharField(max_length=300)
 
     class Meta:
