@@ -23,13 +23,9 @@ class Experience(models.Model):
 class ExperienceBullet(models.Model):
     experience = models.ForeignKey(Experience, on_delete=models.CASCADE, related_name="bullets")
     text = models.TextField()
-    order = models.PositiveIntegerField(default=0)
-
-    class Meta:
-        ordering = ["order"]
 
     def __str__(self):
-        return f"Bullet {self.order} for {self.experience.role}"
+        return self.text[:50] + "..." if len(self.text) > 50 else self.text
 
 
 # ---------------------------------------------------
