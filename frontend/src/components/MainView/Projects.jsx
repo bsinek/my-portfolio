@@ -2,9 +2,9 @@ import { SECTIONS } from "../../config/sections";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
-const ProjectsItem = ({ index, name, date, tech, desc, icon, href, onHover, onLeave }) => {
+const ProjectsItem = ({ index, name, desc, tech, year, link, icon, onHover, onLeave }) => {
     return (
-        <a href={href} target="_blank" className="group relative h-14 px-4 flex items-center gap-12 rounded-md text-sm"
+        <a href={link} target="_blank" className="group relative h-14 px-4 flex items-center gap-12 rounded-md text-sm"
             onMouseEnter={onHover}
             onMouseLeave={onLeave}
         >
@@ -35,7 +35,7 @@ const ProjectsItem = ({ index, name, date, tech, desc, icon, href, onHover, onLe
                     </span>
                 ))}
             </span>
-            <span className="flex-2 flex justify-center">{date}</span>
+            <span className="flex-2 flex justify-center">{year}</span>
         </a>
     )
 }
@@ -55,9 +55,9 @@ export const Projects = () => {
                         name: project.name,
                         desc: project.description,
                         tech: project.techstack,
-                        date: project.year,
-                        href: project.link,
-                        img: project.thumbnail,
+                        year: project.year,
+                        link: project.link,
+                        thumb: project.thumbnail,
                         icon: project.icon
                     }
                 ))
@@ -120,7 +120,7 @@ export const Projects = () => {
                         <AnimatePresence mode="popLayout">
                             <motion.img 
                                 key={currentIndex}
-                                src={items[currentIndex]?.img} 
+                                src={items[currentIndex]?.thumb} 
                                 className="absolute inset-0 h-full w-full object-cover" 
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
