@@ -3,6 +3,7 @@ from .models import Experience, Skill, Project, ExperienceBullet
 
 class ExperienceBulletInline(admin.TabularInline):
     model = ExperienceBullet
+    extra = 1
 
 @admin.register(Experience)
 class ExperienceAdmin(admin.ModelAdmin):
