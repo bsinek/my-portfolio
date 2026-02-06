@@ -1,17 +1,21 @@
 from rest_framework import serializers
-from .models import Skill, Project
+from .models import Experience, Project
 
-class SkillSerializer(serializers.ModelSerializer):
+class ExperienceSerializer(serializers.ModelSerializer):
+    date_range = serializers.SerializerMethodField()
+    bullets = serializers.SlugRelatedField(many=True, read_only=True, slug_field="text")
+
     class Meta:
-        model = Skill
-        fields = ["name"]
+        model = Experience
+        fields = ["role", "company", "location", "date_range", "bullets"]
+
+    def get_date_range(self, obj):
+        start = obj.start_date.strftime("%b %Y")
+        end = obj.end_date.strftime("%b %Y") if obj.end_date else "Present"
+        return f"{start} - {end}"
     
 class ProjectSerializer(serializers.ModelSerializer):
-    techstack = serializers.SlugRelatedField(
-        many=True, 
-        read_only=True, 
-        slug_field="name"
-    )
+    techstack = serializers.SlugRelatedField(many=True, read_only=True, slug_field="name")
 
     class Meta:
         model = Project
