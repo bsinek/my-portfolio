@@ -35,12 +35,6 @@ if not DEBUG:
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://my-portfolio-production-deee.up.railway.app",
-    "https://*.up.railway.app"
-]
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -58,6 +52,8 @@ INSTALLED_APPS = [
 ]
 
 CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:5173,https://www.bensinek.dev').split(',')
+
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'http://127.0.0.1:8000,https://www.bensinek.dev').split(',')
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
