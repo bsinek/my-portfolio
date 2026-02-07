@@ -102,7 +102,7 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
             .then(data => {
                 setExperiences(data)
             }).catch((err) => console.error("Error fetching experiences:", err));
-    })
+    }, [])
     
     /*================================= CONFIG & CONSTANTS =================================*/
     const EXPERIENCE_COUNT = experiences.length;
