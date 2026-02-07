@@ -96,7 +96,8 @@ export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => 
     const [experiences, setExperiences] = useState([])
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/experiences/")
+        const apiUrl = import.meta.env.VITE_API_URL;
+        fetch(`${apiUrl}/api/experiences/`)
             .then(res => res.json())
             .then(data => {
                 setExperiences(data)

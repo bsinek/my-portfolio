@@ -46,7 +46,8 @@ export const Projects = () => {
     const [projects, setProjects] = useState([]);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/api/projects/")
+        const apiUrl = import.meta.env.VITE_API_URL
+        fetch(`${apiUrl}/api/projects/`)
             .then(res => res.json())
             .then(data => {
                 setProjects(data)
