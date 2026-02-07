@@ -1,12 +1,40 @@
-# React + Vite
+# Developer Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack portfolio application using a decoupled architecture with a React frontend and a Django REST API.
 
-Currently, two official plugins are available:
+## Tech Stack
+* **Frontend:** React (Vite), Tailwind CSS
+* **Backend:** Django, Django REST Framework
+* **Database:** PostgreSQL (Hosted via Railway)
+* **Deployment:** Vercel (Frontend), Railway (Backend)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Project Structure
+* `/frontend`: React application (Vite).
+* `/backend`: Django project, REST API, and Admin panel.
 
-## Expanding the ESLint configuration
+## Setup and Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Backend
+1. cd backend
+2. python3 -m venv venv
+3. Activate the virtual environment:
+   - source venv/bin/activate (macOS/Linux)
+   - venv\Scripts\activate (Windows)
+4. pip install -r requirements.txt
+5. python manage.py migrate
+6. python manage.py runserver
+
+### Frontend
+1. cd frontend
+2. npm install
+3. Create a .env file with VITE_API_URL=http://127.0.0.1:8000
+4. npm run dev
+
+## Data Management
+Database state is managed via JSON serialization for portability and version control.
+
+* **Export Data:**
+python manage.py dumpdata --natural-foreign --natural-primary -e contenttypes -e auth.Permission --indent 2 > data_backup.json
+
+* **Import Data:**
+python manage.py loaddata data_backup.json
