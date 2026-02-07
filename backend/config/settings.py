@@ -35,6 +35,11 @@ if not DEBUG:
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
+CSRF_TRUSTED_ORIGINS = [
+    "https://my-portfolio-production-deee.up.railway.app",
+    "https://*.up.railway.app"
+]
+
 
 # Application definition
 
