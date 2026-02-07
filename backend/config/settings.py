@@ -52,7 +52,7 @@ INSTALLED_APPS = [
     'portfolio'
 ]
 
-CORS_ALLOWED_ORIGINS = ['http://localhost:5173', 'https://www.bensinek.dev']
+CORS_ALLOWED_ORIGINS = os.environ.get('CORS_ALLOWED_ORIGINS', 'http://localhost:5173,https://www.bensinek.dev').split(',')
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
