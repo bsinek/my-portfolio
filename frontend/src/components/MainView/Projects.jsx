@@ -2,7 +2,7 @@ import { SECTIONS } from "../../config/sections";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
-const ProjectsItem = ({ index, name, desc, tech, year, link, icon, onHover, onLeave }) => {
+const ProjectsItem = ({ index, name, description, techstack, year, link, icon, onHover, onLeave }) => {
     return (
         <a href={link} target="_blank" className="group relative h-14 px-4 flex items-center gap-12 rounded-md text-sm"
             onMouseEnter={onHover}
@@ -24,12 +24,12 @@ const ProjectsItem = ({ index, name, desc, tech, year, link, icon, onHover, onLe
                 </div>
                 <span className="line-clamp-1">{name}</span>
             </div>
-            <span className="flex-3 line-clamp-2">{desc}</span>
+            <span className="flex-3 line-clamp-2">{description}</span>
             <span className="flex-3 flex flex-wrap line-clamp-2">
-                {tech.map((item, index) => (
+                {techstack.map((item, index) => (
                     <span key={index} className="">
                         {item}
-                        {index !== tech.length - 1 && (
+                        {index !== techstack.length - 1 && (
                             <span className="mx-1.5">|</span>
                         )}
                     </span>
@@ -43,26 +43,14 @@ const ProjectsItem = ({ index, name, desc, tech, year, link, icon, onHover, onLe
 export const Projects = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [lastHoveredIndex, setLastHoveredIndex] = useState(0);
-    const [items, setItems] = useState([]);
+    const [projects, setProjects] = useState([]);
 
-    // request backend
     useEffect(() => {
         fetch("http://127.0.0.1:8000/api/projects/")
             .then(res => res.json())
             .then(data => {
-                const formatted = data.map(project => (
-                    {
-                        name: project.name,
-                        desc: project.description,
-                        tech: project.techstack,
-                        year: project.year,
-                        link: project.link,
-                        thumb: project.thumbnail,
-                        icon: project.icon
-                    }
-                ))
-                setItems(formatted)
-            }).catch(err => console.error("Fetch failed:", err))
+                setProjects(data)
+            }).catch(err => console.error("Error fetching projects:", err))
     }, [])
     
     const titleBarHeight = 36 + 16; // h-9 + mb-4
@@ -88,7 +76,7 @@ export const Projects = () => {
                             <h2 className="font-semibold">Benjamin Sinek</h2>
                         </a>
                         <span className="text-light-grey font-bold">•</span>
-                        <span className="text-light-grey font-light">{items.length} {items.length > 1 ? "items" : "item"}</span>
+                        <span className="text-light-grey font-light">{projects.length} {projects.length > 1 ? "items" : "item"}</span>
                     </div>
                 </div>
             </div>
@@ -102,8 +90,8 @@ export const Projects = () => {
                     <span className="flex-3">Tech Stack</span>
                     <span className="flex-2 flex justify-center">Year</span>
                 </div>
-                {/* items */}
-                {items.map((item, index) => (
+                {/* projects */}
+                {projects.map((item, index) => (
                     <ProjectsItem 
                         key={index} 
                         index={index + 1} 
@@ -120,7 +108,7 @@ export const Projects = () => {
                         <AnimatePresence mode="popLayout">
                             <motion.img 
                                 key={currentIndex}
-                                src={items[currentIndex]?.thumb} 
+                                src={projects[currentIndex]?.thumbnail} 
                                 className="absolute inset-0 h-full w-full object-cover" 
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
