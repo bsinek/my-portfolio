@@ -99,8 +99,6 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        # This will use the Railway Postgres URL if it exists, 
-        # otherwise it falls back to your local SQLite file.
         default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
         conn_max_age=600
     )
