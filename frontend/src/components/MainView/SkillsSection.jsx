@@ -66,7 +66,7 @@ export const SkillsSection = () => {
                 { name: "NumPy", icon: NumPyIcon },
                 { name: "pandas", icon: PandasIcon },
                 { name: "scikit-learn", icon: ScikitLearnIcon },
-                // { name: "matplotlib", icon: MatplotlibIcon },
+                { name: "matplotlib", icon: MatplotlibIcon },
                 { name: "TensorFlow", icon: TensorFlowIcon },
                 { name: "Keras", icon: KerasIcon },
             ]
