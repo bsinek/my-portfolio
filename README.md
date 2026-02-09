@@ -1,6 +1,12 @@
 # Developer Portfolio
 
-A full-stack portfolio application using a decoupled architecture with a React frontend and a Django REST API.
+A full-stack portfolio application built with a decoupled React frontend and Django REST API.
+
+See it live: https://bensinek.dev  
+Admin panel (for site management only): https://api.bensinek.dev/admin/
+
+## Preview
+<img src="frontend/public/img/projects/portfolio.jpg" alt="Portfolio Screenshot" width="600">
 
 ## Tech Stack
 * **Frontend:** React (Vite), Tailwind CSS
@@ -34,7 +40,5 @@ A full-stack portfolio application using a decoupled architecture with a React f
 Database state is managed via JSON serialization for portability and version control.
 
 * **Export Data:**
-python manage.py dumpdata --natural-foreign --natural-primary -e contenttypes -e auth.Permission --indent 2 > data_backup.json
-
-* **Import Data:**
-python manage.py loaddata data_backup.json
+```bash
+python3 manage.py dumpdata --natural-foreign --natural-primary -e contenttypes -e auth.Permission --indent 2 > data_backup.json
