@@ -146,7 +146,8 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Media files (uploads)
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# Use environment variable for production volume mount, fallback to local
+MEDIA_ROOT = os.environ.get('MEDIA_ROOT', str(BASE_DIR / 'media'))
 
 STORAGES = {
     "default": {
