@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Experience, Project, Category, Skill
+from .models import Experience, Project, Category, Skill, Resume
 
 class ExperienceSerializer(serializers.ModelSerializer):
     date_range = serializers.SerializerMethodField()
@@ -32,3 +32,8 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ["order", "category", "skills"]
+
+class ResumeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Resume
+        fields = ["title", "file", "uploaded_at"]

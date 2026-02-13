@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ExperienceBullet, Experience, Technology, Project, Skill, Category
+from .models import ExperienceBullet, Experience, Technology, Project, Skill, Category, Resume
 
 class ExperienceBulletInline(admin.TabularInline):
     model = ExperienceBullet
@@ -30,3 +30,9 @@ class CategoryAdmin(admin.ModelAdmin):
 class SkillAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'icon', 'order')
     list_filter = ('category',)
+
+@admin.register(Resume)
+class ResumeAdmin(admin.ModelAdmin):
+    list_display = ('title', 'uploaded_at', 'is_active')
+    list_filter = ('is_active',)
+    readonly_fields = ('uploaded_at',)

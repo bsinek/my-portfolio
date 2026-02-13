@@ -106,7 +106,8 @@ const ContactItem = ({ href, label }) => {
     return (
         <a href={href} target="_blank" className="group/contact hover:bg-white/5 hover:scale-105 transition-all flex items-center gap-1 h-14 rounded-md p-1"
             onMouseEnter={() => setHovered(true)}
-            onMouseLeave={() => setHovered(false)}>
+            onMouseLeave={() => setHovered(false)}
+        >
             <div className="h-full p-1">
                 <IconWrapper isHovered={hovered}>
                     {icon}
@@ -132,11 +133,27 @@ const ContactItem = ({ href, label }) => {
 };
 
 export const Sidebar = ({ activeSection }) => {
+    // fallback incase api is down
+    const fallback = "/docs/Benjamin_Sinek_Resume.pdf";
+    const [resumeUrl, setResumeUrl] = useState(fallback); 
+    
+    useEffect(() => {
+        const apiUrl = import.meta.env.VITE_API_URL;
+        fetch(`${apiUrl}/api/resume/`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.file) {
+                    setResumeUrl(`${apiUrl}${data.file}`);
+                }
+            })
+            .catch(err => console.error("Error fetching resume:", err));
+    }, []);
+
     const links = SECTION_ORDER.map(id => SECTIONS[id]);
     const contacts = [
         { href: "https://www.linkedin.com/in/bsinek/", label: "LinkedIn" },
         { href: "https://github.com/bsinek", label: "GitHub" },
-        { href: "/docs/Benjamin_Sinek_Resume.pdf", label: "Resume" },
+        { href: resumeUrl, label: "Resume" },
         { href: "mailto:bsinek2024+contact@gmail.com", label: "Email" },
         { href: "tel:+18057020556", label: "Phone" },
     ];

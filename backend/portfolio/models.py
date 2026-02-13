@@ -96,3 +96,32 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
+
+
+# ---------------------------------------------------
+# RESUME
+# ---------------------------------------------------
+
+class Resume(models.Model):
+    title = models.CharField(max_length=200, blank=True)
+    file = models.FileField(upload_to='resumes/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    is_active = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ["-uploaded_at"]
+
+    def __str__(self):
+        return f"{self.title} {'(Active)' if self.is_active else ''}"
+    
+    def save(self, *args, **kwargs):
+        # auto generate title with filename if not provided
+        if not self.title and self.file:
+            import os
+            filename = os.path.basename(self.file.name)
+            self.title = os.path.splitext(filename)[0].replace('_', ' ').replace('-', ' ')
+        
+        # If this resume is set to active, deactivate all others
+        if self.is_active:
+            Resume.objects.exclude(pk=self.pk).update(is_active=False)
+        super().save(*args, **kwargs)
