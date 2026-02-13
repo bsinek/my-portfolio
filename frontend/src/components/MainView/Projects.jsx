@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 
 const ProjectsItem = ({ index, name, description, techstack, year, link, icon, onHover, onLeave }) => {
     return (
-        <a href={link} target="_blank" className="group relative h-14 px-4 flex items-center gap-12 rounded-md text-sm"
+        <a href={link} target="_blank" className="group relative h-14 px-4 flex items-center gap-12 rounded-md text-sm hover:text-white transition-colors"
             onMouseEnter={onHover}
             onMouseLeave={onLeave}
         >
