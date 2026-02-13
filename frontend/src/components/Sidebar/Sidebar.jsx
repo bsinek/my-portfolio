@@ -133,9 +133,7 @@ const ContactItem = ({ href, label }) => {
 };
 
 export const Sidebar = ({ activeSection }) => {
-    // fallback incase api is down
-    const fallback = "/docs/Benjamin_Sinek_Resume.pdf";
-    const [resumeUrl, setResumeUrl] = useState(fallback); 
+    const [resumeUrl, setResumeUrl] = useState("/docs/Benjamin_Sinek_Resume.pdf"); 
     
     useEffect(() => {
         const apiUrl = import.meta.env.VITE_API_URL;
@@ -146,7 +144,9 @@ export const Sidebar = ({ activeSection }) => {
                     setResumeUrl(`${apiUrl}${data.file}`);
                 }
             })
-            .catch(err => console.error("Error fetching resume:", err));
+            .catch(() => {
+                console.warn("Failed to fetch resume from API, using static fallback");
+            });
     }, []);
 
     const links = SECTION_ORDER.map(id => SECTIONS[id]);
