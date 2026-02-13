@@ -2,6 +2,7 @@
 //              https://icons8.com/
 //              https://www.svgrepo.com/
 //              https://www.streamlinehq.com/
+import { useEffect, useState } from "react";
 import { SECTIONS } from "../../config/sections";
 import { 
     PythonIcon, JavaIcon, CIcon, JavaScriptIcon, HTMLIcon, CSSIcon, 
@@ -9,6 +10,13 @@ import {
     NumPyIcon, PandasIcon, ScikitLearnIcon, MatplotlibIcon, KerasIcon, 
     GitIcon, NodeJSIcon, ViteIcon, QuantConnectIcon, VercelIcon
 } from "../../icons"
+
+const iconMap = {
+    PythonIcon, JavaIcon, CIcon, JavaScriptIcon, HTMLIcon, CSSIcon,
+    ReactIcon, TailwindCSSIcon, TensorFlowIcon, DjangoIcon,
+    NumPyIcon, PandasIcon, ScikitLearnIcon, MatplotlibIcon, KerasIcon,
+    GitIcon, NodeJSIcon, ViteIcon, QuantConnectIcon, VercelIcon
+};
 
 const SkillsItem = ({ index, name, icon: Icon }) => {
     return (
@@ -32,68 +40,43 @@ const SkillsItem = ({ index, name, icon: Icon }) => {
     )
 }
 
-const SkillsCategory = ({ title, items, startIndex, isFirst }) => {
+const SkillsCategory = ({ category, skills, startIndex, isFirst }) => {
     return (
         <section className={!isFirst ? "mt-4" : ""}>
             <div className="h-9 px-4 mb-4 flex items-center gap-4 border-b border-light-grey/20">
                 <span className="w-4 text-center">
                     {isFirst && "#"}
                 </span>
-                <span className="flex-1 text-sm">{title}</span>
+                <span className="flex-1 text-sm">{category}</span>
             </div>
-            {items.map((item, index) => (
-                <SkillsItem key={index} index={startIndex + index} {...item} />
-            ))}
+            {skills.map((skill, index) => {
+                const IconComponent = iconMap[skill.icon];
+                return (
+                    <SkillsItem 
+                        key={index} 
+                        index={startIndex + index} 
+                        name={skill.name}
+                        icon={IconComponent || (() => <div>?</div>)}
+                    />
+                );
+            })}
         </section>
     )
 }
 
 export const SkillsSection = () => {
-    const categories = [
-        {
-            title: "Languages",
-            items: [
-                { name: "Python", icon: PythonIcon },
-                { name: "Java", icon: JavaIcon },
-                { name: "C", icon: CIcon },
-                { name: "JavaScript", icon: JavaScriptIcon },
-            ]
-        },
-        {
-            title: "AI & Machine Learning",
-            items: [
-                
-                { name: "NumPy", icon: NumPyIcon },
-                { name: "pandas", icon: PandasIcon },
-                { name: "scikit-learn", icon: ScikitLearnIcon },
-                { name: "matplotlib", icon: MatplotlibIcon },
-                { name: "TensorFlow", icon: TensorFlowIcon },
-                { name: "Keras", icon: KerasIcon },
-            ]
-        },
-        {
-            title: "Full Stack",
-            items: [
-                { name: "React", icon: ReactIcon },
-                { name: "Django", icon: DjangoIcon },
-                { name: "Node.js", icon: NodeJSIcon },
-                { name: "Vite", icon: ViteIcon },
-                { name: "Tailwind CSS", icon: TailwindCSSIcon },
-                { name: "HTML", icon: HTMLIcon },
-                { name: "CSS", icon: CSSIcon },
-            ]
-        },
-        {
-            title: "Tools & Platforms",
-            items: [
-                { name: "Git", icon: GitIcon },
-                { name: "Vercel", icon: VercelIcon },
-                // { name: "QuantConnect", icon: QuantConnectIcon },
-            ]
-        },
-    ]
+    const [categories, setCategories] = useState([]);
 
-    const totalSkills = categories.reduce((counter, category) => counter + category.items.length, 0);
+    useEffect(() => {
+        const apiUrl = import.meta.env.VITE_API_URL
+        fetch(`${apiUrl}/api/skills/`)
+            .then(res => res.json())
+            .then(data => {
+                setCategories(data)
+            }).catch(err => console.error("Error fetching skills:", err))
+    }, [])
+
+    const totalSkills = categories.reduce((counter, category) => counter + category.skills.length, 0);
 
     return (
         <section id="skills" className="pb-6">
@@ -120,10 +103,10 @@ export const SkillsSection = () => {
             {/* CONTENT */}
             <div className="px-6 text-light-grey font-light">
                 {categories.map((category, categoryIndex) => {
-                    const startIndex = categories.slice(0, categoryIndex).reduce((counter, prevCategory) => counter + prevCategory.items.length, 1);
+                    const startIndex = categories.slice(0, categoryIndex).reduce((counter, prevCategory) => counter + prevCategory.skills.length, 1);
                     return (
                         <SkillsCategory
-                            key={category.title}
+                            key={category.category}
                             {...category}
                             startIndex={startIndex}
                             isFirst={categoryIndex === 0}

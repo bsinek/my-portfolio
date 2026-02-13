@@ -34,25 +34,34 @@ class ExperienceBullet(models.Model):
 
 class Category(models.Model):
     order = models.PositiveIntegerField(default=0)
-    title = models.CharField(max_length=200)
+    category = models.CharField(max_length=200)
 
     class Meta:
         ordering = ["order"]
-        verbose_name_plural = "Categories"
+        verbose_name_plural = "Skill Categories"
 
     def __str__(self):
-        return self.title
+        return self.category
 
 class Skill(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="skills")
     order = models.PositiveIntegerField(default=0)
     name = models.CharField(max_length=200)
+    icon = models.CharField(max_length=100, blank=True)
 
     class Meta:
         ordering = ["order"]
 
     def __str__(self):
         return self.name
+    
+    def save(self, *args, **kwargs):
+        # auto generates icon if blank
+        if not self.icon:
+            cleaned = self.name.replace("-", " ").replace(".", " ")
+            pascal = "".join(word[:1].upper() + word[1:] for word in cleaned.split())
+            self.icon = f"{pascal}Icon"
+        super().save(*args, **kwargs)
 
 
 # ---------------------------------------------------

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Experience, Project
+from .models import Experience, Project, Category, Skill
 
 class ExperienceSerializer(serializers.ModelSerializer):
     date_range = serializers.SerializerMethodField()
@@ -20,3 +20,15 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         exclude = ["id"]
+
+class SkillSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Skill
+        fields = ["name", "icon", "order"]
+
+class CategorySerializer(serializers.ModelSerializer):
+    skills = SkillSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Category
+        fields = ["order", "category", "skills"]
