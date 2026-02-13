@@ -2,6 +2,7 @@
 export { default as PythonIcon } from "./Python"
 export { default as JavaIcon } from "./Java"
 export { default as CIcon } from "./C"
+export { default as CppIcon } from "./Cpp"
 export { default as JavaScriptIcon } from "./JavaScript"
 
 // AI & Machine Learning

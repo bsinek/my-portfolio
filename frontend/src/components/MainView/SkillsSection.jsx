@@ -5,14 +5,14 @@
 import { useEffect, useState } from "react";
 import { SECTIONS } from "../../config/sections";
 import { 
-    PythonIcon, JavaIcon, CIcon, JavaScriptIcon, HTMLIcon, CSSIcon, 
+    PythonIcon, JavaIcon, CIcon, CppIcon, JavaScriptIcon, HTMLIcon, CSSIcon, 
     ReactIcon, TailwindCSSIcon, TensorFlowIcon, DjangoIcon, 
     NumPyIcon, PandasIcon, ScikitLearnIcon, MatplotlibIcon, KerasIcon, 
     GitIcon, NodeJSIcon, ViteIcon, QuantConnectIcon, VercelIcon
 } from "../../icons"
 
 const iconMap = {
-    PythonIcon, JavaIcon, CIcon, JavaScriptIcon, HTMLIcon, CSSIcon,
+    PythonIcon, JavaIcon, CIcon, CppIcon, JavaScriptIcon, HTMLIcon, CSSIcon,
     ReactIcon, TailwindCSSIcon, TensorFlowIcon, DjangoIcon,
     NumPyIcon, PandasIcon, ScikitLearnIcon, MatplotlibIcon, KerasIcon,
     GitIcon, NodeJSIcon, ViteIcon, QuantConnectIcon, VercelIcon
