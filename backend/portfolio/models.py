@@ -29,6 +29,33 @@ class ExperienceBullet(models.Model):
 
 
 # ---------------------------------------------------
+# SKILLS
+# ---------------------------------------------------
+
+class Category(models.Model):
+    order = models.PositiveIntegerField(default=0)
+    title = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = ["order"]
+        verbose_name_plural = "Categories"
+
+    def __str__(self):
+        return self.title
+
+class Skill(models.Model):
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, related_name="skills")
+    order = models.PositiveIntegerField(default=0)
+    name = models.CharField(max_length=200)
+
+    class Meta:
+        ordering = ["order"]
+
+    def __str__(self):
+        return self.name
+
+
+# ---------------------------------------------------
 # PROJECTS
 # ---------------------------------------------------
 
@@ -38,6 +65,7 @@ class Technology(models.Model):
 
     class Meta:
         ordering = ["order"]
+        verbose_name_plural = "Technologies"
 
     def __str__(self):
         return self.name
