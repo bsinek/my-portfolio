@@ -32,18 +32,21 @@ class ExperienceBullet(models.Model):
 # PROJECTS
 # ---------------------------------------------------
 
-class Skill(models.Model):
+class Technology(models.Model):
+    order = models.PositiveIntegerField(default=0)
     name = models.CharField(max_length=100, unique=True)
+
+    class Meta:
+        ordering = ["order"]
 
     def __str__(self):
         return self.name
-
 
 class Project(models.Model):
     order = models.PositiveIntegerField(default=0)
     name = models.CharField(max_length=200)
     description = models.TextField()
-    techstack = models.ManyToManyField(Skill, blank=True)
+    techstack = models.ManyToManyField(Technology, blank=True)
     year = models.IntegerField()
     link = models.URLField()
 
@@ -56,4 +59,3 @@ class Project(models.Model):
 
     def __str__(self):
         return self.name
-    

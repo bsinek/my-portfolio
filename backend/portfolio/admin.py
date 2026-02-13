@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Experience, Skill, Project, ExperienceBullet
+from .models import ExperienceBullet, Experience, Technology, Project
 
 class ExperienceBulletInline(admin.TabularInline):
     model = ExperienceBullet
@@ -15,4 +15,4 @@ class ProjectAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_display = ('name', 'order', 'year')
 
-admin.site.register(Skill)
+admin.site.register(Technology)
