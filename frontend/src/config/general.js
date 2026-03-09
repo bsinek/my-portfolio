@@ -6,3 +6,5 @@ export const LAYOUT = {
     gap: false,
     contrast: true,
 }
+
+export const MAINTAINENCE = true
