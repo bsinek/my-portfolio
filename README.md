@@ -41,4 +41,5 @@ Database state is managed via JSON serialization for portability and version con
 
 * **Export Data:**
 ```bash
-python3 manage.py dumpdata --natural-foreign --natural-primary -e contenttypes -e auth.Permission --indent 2 > data_backup.json
+python3 manage.py dumpdata portfolio --indent 2 > data_backup.json
+```
