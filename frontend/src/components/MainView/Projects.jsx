@@ -51,6 +51,8 @@ export const Projects = () => {
             .then(res => res.json())
             .then(data => {
                 setProjects(data)
+                // thumbnails only render on hover so warm the cache up front
+                data.forEach(p => { new Image().src = p.thumbnail })
             }).catch(err => console.error("Error fetching projects:", err))
     }, [])
     
