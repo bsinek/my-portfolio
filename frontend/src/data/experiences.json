@@ -1,0 +1,26 @@
+[
+    {
+        "role": "Independent Research Intern",
+        "company": "Chris Mattmann",
+        "location": "Los Angeles, CA",
+        "date_range": "Aug 2023 - Jun 2024",
+        "bullets": [
+            "Built an in-car prototype that recommends music based on the driver\u2019s detected emotion",
+            "Predicted driver emotion from camera input using a 5-class facial emotion model",
+            "Mapped predicted emotion outputs to Spotify audio features and metadata",
+            "Designed a modular system to support future EEG-based emotion inputs"
+        ]
+    },
+    {
+        "role": "Data Engineer (Contract)",
+        "company": "Bud ADU",
+        "location": "Los Angeles, CA",
+        "date_range": "May 2022 - Aug 2022",
+        "bullets": [
+            "Designed a system to coordinate survey teams and prevent duplicate coverage",
+            "Built spreadsheet workflows to consolidate 2,000+ paper surveys into a centralized dataset",
+            "Cleaned and normalized survey data with a CSV-based ETL pipeline using Python (Pandas)",
+            "Produced summary metrics and visualizations for investor-facing mate"
+        ]
+    }
+]

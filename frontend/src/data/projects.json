@@ -1,0 +1,46 @@
+[
+    {
+        "techstack": [
+            "React",
+            "Tailwind CSS",
+            "Django REST",
+            "PostgreSQL",
+            "Vercel",
+            "Railway"
+        ],
+        "order": 1,
+        "name": "Developer Portfolio",
+        "description": "A responsive, motion-driven React portfolio integrated with a Django REST backend",
+        "year": 2026,
+        "link": "https://github.com/bsinek/my-portfolio",
+        "thumbnail": "/img/projects/portfolio.jpg",
+        "icon": "/img/favicon.svg"
+    },
+    {
+        "techstack": [
+            "Python",
+            "NumPy"
+        ],
+        "order": 2,
+        "name": "Chicken Tournament AI",
+        "description": "An AI agent for a hidden-information game using probabilistic reasoning and lookahead search",
+        "year": 2025,
+        "link": "https://github.com/bsinek/cs3600-chicken-game",
+        "thumbnail": "/img/projects/chicken.jpg",
+        "icon": "/img/projects/chicken_icon.jpg"
+    },
+    {
+        "techstack": [
+            "Python",
+            "Django",
+            "Google Maps API"
+        ],
+        "order": 3,
+        "name": "TravelSmart",
+        "description": "A full-stack travel planner for optimizing routes and itineraries using Google Maps API",
+        "year": 2025,
+        "link": "https://github.com/johnkingdon/TravelSmart",
+        "thumbnail": "/img/projects/travelsmart.jpg",
+        "icon": "/img/projects/travelsmart_icon.png"
+    }
+]

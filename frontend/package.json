@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "snapshot": "cd src/data && for e in experiences projects skills; do curl -sf https://api.bensinek.dev/api/$e/ | python3 -m json.tool > $e.json; done"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.13",

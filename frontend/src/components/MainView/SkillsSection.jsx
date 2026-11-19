@@ -4,6 +4,7 @@
 //              https://www.streamlinehq.com/
 import { useEffect, useState } from "react";
 import { SECTIONS } from "../../config/sections";
+import snapshot from "../../data/skills.json";
 import { 
     PythonIcon, JavaIcon, CIcon, CppIcon, JavaScriptIcon, HTMLIcon, CSSIcon, 
     ReactIcon, TailwindCSSIcon, TensorFlowIcon, DjangoIcon, 
@@ -65,15 +66,20 @@ const SkillsCategory = ({ category, skills, startIndex, isFirst }) => {
 }
 
 export const SkillsSection = () => {
-    const [categories, setCategories] = useState([]);
+    const [categories, setCategories] = useState(snapshot);
 
     useEffect(() => {
         const apiUrl = import.meta.env.VITE_API_URL
         fetch(`${apiUrl}/api/skills/`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`)
+                return res.json()
+            })
             .then(data => {
                 setCategories(data)
-            }).catch(err => console.error("Error fetching skills:", err))
+            }).catch(err => {
+                console.warn("Failed to fetch skills, using snapshot:", err)
+            })
     }, [])
 
     const totalSkills = categories.reduce((counter, category) => counter + category.skills.length, 0);

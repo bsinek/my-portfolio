@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react"
 import { motion, useScroll, useTransform, useInView, useMotionValueEvent, AnimatePresence } from "motion/react"
+import snapshot from "../../data/experiences.json"
 
 const TimelineDot = ({ experience, isPassed, isActive, index }) => {
     const isLeft = index % 2 === 0;
@@ -93,15 +94,20 @@ const TimelineCard = ({ experience, index }) => {
 }
 
 export const Experience = ({ scrollContainerRef, headerVariant = "scroll" }) => {
-    const [experiences, setExperiences] = useState([])
+    const [experiences, setExperiences] = useState(snapshot)
 
     useEffect(() => {
         const apiUrl = import.meta.env.VITE_API_URL;
         fetch(`${apiUrl}/api/experiences/`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`)
+                return res.json()
+            })
             .then(data => {
                 setExperiences(data)
-            }).catch((err) => console.error("Error fetching experiences:", err));
+            }).catch((err) => {
+                console.warn("Failed to fetch experiences, using snapshot:", err)
+            });
     }, [])
     
     /*================================= CONFIG & CONSTANTS =================================*/

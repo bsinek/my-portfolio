@@ -1,0 +1,126 @@
+[
+    {
+        "order": 1,
+        "category": "Languages",
+        "skills": [
+            {
+                "name": "Python",
+                "icon": "PythonIcon",
+                "order": 10
+            },
+            {
+                "name": "Java",
+                "icon": "JavaIcon",
+                "order": 20
+            },
+            {
+                "name": "C",
+                "icon": "CIcon",
+                "order": 30
+            },
+            {
+                "name": "C++",
+                "icon": "CppIcon",
+                "order": 40
+            },
+            {
+                "name": "JavaScript",
+                "icon": "JavaScriptIcon",
+                "order": 50
+            }
+        ]
+    },
+    {
+        "order": 2,
+        "category": "AI & Machine Learning",
+        "skills": [
+            {
+                "name": "NumPy",
+                "icon": "NumPyIcon",
+                "order": 10
+            },
+            {
+                "name": "pandas",
+                "icon": "PandasIcon",
+                "order": 20
+            },
+            {
+                "name": "matplotlib",
+                "icon": "MatplotlibIcon",
+                "order": 30
+            },
+            {
+                "name": "scikit-learn",
+                "icon": "ScikitLearnIcon",
+                "order": 40
+            },
+            {
+                "name": "TensorFlow",
+                "icon": "TensorFlowIcon",
+                "order": 50
+            },
+            {
+                "name": "Keras",
+                "icon": "KerasIcon",
+                "order": 60
+            }
+        ]
+    },
+    {
+        "order": 3,
+        "category": "Full Stack",
+        "skills": [
+            {
+                "name": "React",
+                "icon": "ReactIcon",
+                "order": 10
+            },
+            {
+                "name": "Django",
+                "icon": "DjangoIcon",
+                "order": 20
+            },
+            {
+                "name": "Node.js",
+                "icon": "NodeJSIcon",
+                "order": 30
+            },
+            {
+                "name": "Vite",
+                "icon": "ViteIcon",
+                "order": 40
+            },
+            {
+                "name": "Tailwind CSS",
+                "icon": "TailwindCSSIcon",
+                "order": 50
+            },
+            {
+                "name": "HTML",
+                "icon": "HTMLIcon",
+                "order": 60
+            },
+            {
+                "name": "CSS",
+                "icon": "CSSIcon",
+                "order": 70
+            }
+        ]
+    },
+    {
+        "order": 4,
+        "category": "Tools & Platforms",
+        "skills": [
+            {
+                "name": "Git",
+                "icon": "GitIcon",
+                "order": 10
+            },
+            {
+                "name": "Vercel",
+                "icon": "VercelIcon",
+                "order": 20
+            }
+        ]
+    }
+]

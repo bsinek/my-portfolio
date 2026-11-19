@@ -1,6 +1,7 @@
 import { SECTIONS } from "../../config/sections";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import snapshot from "../../data/projects.json";
 
 const ProjectsItem = ({ index, name, description, techstack, year, link, icon, onHover, onLeave }) => {
     return (
@@ -43,17 +44,22 @@ const ProjectsItem = ({ index, name, description, techstack, year, link, icon, o
 export const Projects = () => {
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const [lastHoveredIndex, setLastHoveredIndex] = useState(0);
-    const [projects, setProjects] = useState([]);
+    const [projects, setProjects] = useState(snapshot);
 
     useEffect(() => {
         const apiUrl = import.meta.env.VITE_API_URL
         fetch(`${apiUrl}/api/projects/`)
-            .then(res => res.json())
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}`)
+                return res.json()
+            })
             .then(data => {
                 setProjects(data)
                 // thumbnails only render on hover so warm the cache up front
                 data.forEach(p => { new Image().src = p.thumbnail })
-            }).catch(err => console.error("Error fetching projects:", err))
+            }).catch(err => {
+                console.warn("Failed to fetch projects, using snapshot:", err)
+            })
     }, [])
     
     const titleBarHeight = 36 + 16; // h-9 + mb-4

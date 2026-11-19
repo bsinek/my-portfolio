@@ -43,3 +43,8 @@ Database state is managed via JSON serialization for portability and version con
 ```bash
 python3 manage.py dumpdata portfolio --indent 2 > data_backup.json
 ```
+
+* **Refresh Frontend Snapshot** (offline fallback the site renders if the API is down; re-run after editing content):
+```bash
+cd frontend && npm run snapshot
+```
