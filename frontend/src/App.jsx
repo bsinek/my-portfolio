@@ -30,7 +30,7 @@ function App() {
     updateHeight();
     window.addEventListener('resize', updateHeight);
     return () => window.removeEventListener('resize', updateHeight);
-  }, [LAYOUT]);
+  }, []);
 
   const gridCols = LAYOUT.showSidebar ? "grid-cols-[auto_1fr]" : "grid-cols-[1fr]";
   const gridRows = LAYOUT.showPlaybar ? "grid-rows-[1fr_auto]" : "grid-rows-[1fr]";
