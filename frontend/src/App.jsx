@@ -6,12 +6,15 @@ import { LoadingScreen } from "./components/LoadingScreen/LoadingScreen"
 import { LAYOUT } from "./config/general"
 import { MAINTENANCE } from "./config/general"
 import { useMotionValue, AnimatePresence } from "motion/react"
+import { useIsDesktop } from "./hooks/useIsDesktop"
+import { MobileHome } from "./components/Mobile/MobileHome"
 
 function App() {
   const [activeSection, setActiveSection] = useState("about")
   const progressMV = useMotionValue(0)
   const mainContentRef = useRef(null)
   const [showLoading, setShowLoading] = useState(true)
+  const isDesktop = useIsDesktop()
 
   // loading screen timer
   useEffect(() => {
@@ -59,7 +62,7 @@ function App() {
         </div>
       </div>}
 
-      <div className={`h-screen grid ${gridCols} ${gridRows} ${padding} ${gap}`}>
+      {isDesktop ? <div className={`h-screen grid ${gridCols} ${gridRows} ${padding} ${gap}`}>
         {LAYOUT.showSidebar && <div className={`col-span-1 overflow-hidden ${rounded} ${sidebarColor}`}>
           <Sidebar activeSection={activeSection} />
         </div>}
@@ -75,7 +78,7 @@ function App() {
             progressMV={progressMV}
           />
         </div>}
-      </div>
+      </div> : <MobileHome />}
     </>
   )
 }
