@@ -107,15 +107,25 @@ const Tracks = ({ id, data }) => {
     ))
 }
 
-// a section shown as a Spotify album page
-const Playlist = ({ id, data, onClose }) => (
-    <main className="min-h-svh bg-spotify-grey pb-[calc(32px+env(safe-area-inset-bottom))] text-white">
-        <button onClick={onClose} aria-label="Close" className="fixed top-3 left-3 z-10 grid size-9 place-items-center rounded-full bg-black/45">
-            <CloseIcon className="size-4" />
-        </button>
+const NO_SCROLLBAR = "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+
+// chevron beside a playlist cover: fills the gap between the cover and the screen edge, with the icon in its middle
+const StepButton = ({ label, onClick, flip }) => (
+    <button onClick={onClick} aria-label={label} className="grid h-20 min-w-0 flex-1 place-items-center text-light-grey active:text-white">
+        <ChevronIcon className={`size-5 ${flip ? "rotate-180" : ""}`} />
+    </button>
+)
+
+// a section shown as a Spotify album page, scrolling inside its own box. order is its place in the row
+const Page = ({ id, order, data, onStep }) => (
+    <div style={{ order }} className={`size-full flex-none snap-center snap-always overflow-y-auto bg-spotify-grey pb-[calc(32px+env(safe-area-inset-bottom))] ${NO_SCROLLBAR}`}>
         <div className="bg-linear-to-b from-light-grey to-spotify-grey to-[340px] px-4 pt-14 pb-3">
-            <div className="mx-auto aspect-square w-[236px] rounded-md bg-cover bg-top shadow-[0_8px_32px_rgba(0,0,0,.5)]"
-                style={{ backgroundImage: `url(${SECTIONS[id].img})` }} />
+            <div className="-mx-4 flex items-center">
+                <StepButton label="Previous playlist" onClick={() => onStep(-1)} flip />
+                <div className="aspect-square w-[236px] flex-none rounded-md bg-cover bg-top shadow-[0_8px_32px_rgba(0,0,0,.5)]"
+                    style={{ backgroundImage: `url(${SECTIONS[id].img})` }} />
+                <StepButton label="Next playlist" onClick={() => onStep(1)} />
+            </div>
             <h1 className="mt-5 text-2xl font-bold tracking-[-0.4px]">{SECTIONS[id].title}</h1>
             <div className="mt-2.5 flex items-center gap-2 text-[13px] font-bold">
                 <img src="/img/cat1.jpg" alt="" className="size-6 rounded-full object-cover" />Benjamin Sinek
@@ -125,8 +135,61 @@ const Playlist = ({ id, data, onClose }) => (
         <div className="pt-3">
             <Tracks id={id} data={data} />
         </div>
-    </main>
+    </div>
 )
+
+// the playlists as a looping carousel on the browser's own sideways scrolling, one page per swipe.
+// the open playlist is always the middle of the row: when a swipe rests on a neighbour, onSwitch(1 or -1) makes that
+// the open one and the row is re-ordered and re-centred around it. while the row moves by itself (snapping after a
+// swipe, or scrolling from a chevron) a transparent shield swallows touches.
+// native scrolling because Safari on 120Hz iPhones ran a script-driven drag at 60Hz, which showed as jitter (observed 2026-11-20)
+const Playlists = ({ openId, data, onClose, onSwitch }) => {
+    const row = useRef(null), shield = useRef(null), timer = useRef(0)
+    const down = useRef(false)    // a finger is on the row
+    const wheel = useRef(false)   // the last input was a wheel or trackpad: the shield would cut its scroll off
+    const n = PLAYLISTS.length, cur = PLAYLISTS.indexOf(openId)
+    const offCentre = () => row.current.scrollLeft / row.current.clientWidth - 1   // in pages
+
+    // centre the row on the open playlist, and put the others back at their tops
+    useLayoutEffect(() => {
+        row.current.scrollLeft = row.current.clientWidth
+        ;[...row.current.children].forEach((page, i) => { if (i !== cur) page.scrollTop = 0 })
+    }, [cur])
+    useEffect(() => () => clearTimeout(timer.current), [])
+
+    // called by scrollend, and 100ms after the last scroll event for browsers without it
+    const rested = () => {
+        if (down.current) return
+        shield.current.hidden = true
+        const dir = Math.round(offCentre())
+        if (dir && Math.abs(offCentre() - dir) < 0.01) onSwitch(dir)
+    }
+    const onScroll = () => {
+        if (!down.current && !wheel.current && Math.abs(offCentre()) > 0.01) shield.current.hidden = false
+        clearTimeout(timer.current)
+        timer.current = setTimeout(rested, 100)
+    }
+    const onTouchEnd = () => { down.current = false; onScroll() }
+    const step = dir => {
+        shield.current.hidden = false
+        row.current.scrollBy({ left: dir * row.current.clientWidth, behavior: "smooth" })
+        onScroll()   // starts the timer, so the shield comes down even if nothing scrolls
+    }
+
+    return (
+        <main className="fixed inset-0 text-white">
+            <div ref={row} onScroll={onScroll} onScrollEnd={rested} onWheel={() => { wheel.current = true }}
+                onTouchStart={() => { down.current = true; wheel.current = false }} onTouchEnd={onTouchEnd} onTouchCancel={onTouchEnd}
+                className={`flex h-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain ${NO_SCROLLBAR}`}>
+                {PLAYLISTS.map((id, i) => <Page key={id} id={id} order={(i - cur + n + 1) % n} data={data} onStep={step} />)}
+            </div>
+            <button onClick={onClose} aria-label="Close" className="fixed top-3 left-3 z-10 grid size-9 place-items-center rounded-full bg-black/45">
+                <CloseIcon className="size-4" />
+            </button>
+            <div ref={shield} hidden className="fixed inset-0 z-20 touch-none" />
+        </main>
+    )
+}
 
 // below xl. #experience etc. goes in the address, so the phone's back gesture closes an open playlist
 export const MobileHome = () => {
@@ -161,12 +224,19 @@ export const MobileHome = () => {
 
     const open = id => { homeY.current = window.scrollY; location.hash = id }
 
+    // swiping wraps around, and replaces the address instead of adding to it, so back still goes to the front page
+    const swipe = dir => {
+        const next = PLAYLISTS[(PLAYLISTS.indexOf(openId) + dir + PLAYLISTS.length) % PLAYLISTS.length]
+        history.replaceState(null, "", `#${next}`)
+        setOpenId(next)
+    }
+
     // the front page stays mounted (just hidden) under an open playlist, so closing shows it instantly
     // with its images already loaded instead of rebuilding it and re-fetching every cover
     return (
         <>
             <Home counts={itemCounts(data)} onOpen={open} hidden={!!openId} />
-            {openId && <Playlist id={openId} data={data} onClose={() => history.back()} />}
+            {openId && <Playlists openId={openId} data={data} onClose={() => history.back()} onSwitch={swipe} />}
         </>
     )
 }
