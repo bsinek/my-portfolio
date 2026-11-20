@@ -88,8 +88,24 @@ const Home = ({ counts, onOpen, hidden }) => {
 
 const Tracks = ({ id, data, onProject }) => {
     const { exps, projs, cats } = data
+    // experience: a timeline. the track numbers are its nodes, joined by a line, with each role's bullets beside the line
     if (id === "experience") return exps.map((e, i) => (
-        <Row key={i} num={i + 1} title={e.role} sub={<span>{e.company} · {e.date_range}</span>} />
+        <div key={i} className="mx-2 flex gap-3 px-2">
+            <div className="flex w-4 flex-none flex-col items-center">
+                <span className="flex h-16 items-center text-[15px] text-light-grey">{i + 1}</span>
+                <span className={`w-px flex-1 ${i === exps.length - 1 ? "bg-linear-to-b from-white/20 to-transparent" : "bg-white/20"}`} />
+            </div>
+            <div className="min-w-0 flex-1 pb-5">
+                <div className="flex min-h-16 flex-col justify-center py-2">
+                    <div className="text-base font-semibold">{e.role}</div>
+                    <div className="mt-0.5 text-sm text-light-grey">{e.company} · {e.date_range}</div>
+                </div>
+                <div className="mt-1 mb-3 h-0.5 bg-spotify-green" />
+                <ul className="flex flex-col gap-2.5 text-sm leading-snug text-light-grey">
+                    {e.bullets.map(text => <li key={text}>{text}</li>)}
+                </ul>
+            </div>
+        </div>
     ))
     if (id === "projects") return projs.map((p, i) => (
         <Row key={i} num={i + 1} art={<img src={p.icon} alt="" />} title={p.name} onClick={e => onProject(p, e.currentTarget)}
