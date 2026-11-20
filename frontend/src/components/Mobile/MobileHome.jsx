@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { flushSync } from "react-dom"
 import { AnimatePresence, motion } from "motion/react"
 import { SECTIONS } from "../../config/sections"
 import { contacts } from "../../config/contacts"
@@ -77,9 +78,9 @@ const Home = ({ counts, onOpen, hidden }) => {
                 <Contacts resumeUrl={resumeUrl} />
                 <Heading>Playlists</Heading>
                 {PLAYLISTS.map((id, i) => (
-                    <Row key={id} num={i + 1} onClick={() => onOpen(id)} title={SECTIONS[id].title}
-                        art={<span className="size-full bg-cover bg-top" style={{ backgroundImage: `url(${SECTIONS[id].img})` }} />}
-                        sub={<><PinIcon className="size-[11px] flex-none text-spotify-green" /><span>Playlist · <Items n={counts[id]} /></span></>} />
+                    <Row key={id} num={i + 1} onClick={e => onOpen(id, e.currentTarget)} title={<span className="vt-row-title">{SECTIONS[id].title}</span>}
+                        art={<span className="vt-cover size-full rounded bg-cover bg-top" style={{ backgroundImage: `url(${SECTIONS[id].img})` }} />}
+                        sub={<><PinIcon className="vt-pin size-[11px] flex-none text-spotify-green" /><span className="vt-row-count">Playlist · <Items n={counts[id]} /></span></>} />
                 ))}
                 <Heading>About</Heading>
                 <AboutCard />
@@ -130,29 +131,32 @@ const NO_SCROLLBAR = "[scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
 
 // chevron beside a playlist cover: fills the gap between the cover and the screen edge, with the icon in its middle
 const StepButton = ({ label, onClick, flip }) => (
-    <button onClick={onClick} aria-label={label} className="grid h-20 min-w-0 flex-1 place-items-center text-light-grey active:text-white">
+    <button onClick={onClick} aria-label={label} className={`${flip ? "vt-prev" : "vt-next"} grid h-20 min-w-0 flex-1 place-items-center text-light-grey active:text-white`}>
         <ChevronIcon className={`size-5 ${flip ? "rotate-180" : ""}`} />
     </button>
 )
 
-// a section shown as a Spotify album page, scrolling inside its own box. order is its place in the row
+// a section shown as a Spotify album page, scrolling inside its own box. order is its place in the row.
+// data-vt marks the open page: its vt- pieces take part in the opening transition (see index.css)
 const Page = ({ id, order, data, onStep, onProject, onHome }) => (
-    <div style={{ order }} className={`size-full flex-none snap-center snap-always overflow-y-auto bg-spotify-grey pb-[calc(32px+env(safe-area-inset-bottom))] ${NO_SCROLLBAR}`}>
-        <div className="bg-linear-to-b from-light-grey to-spotify-grey to-[340px] px-4 pt-14 pb-3">
+    <div style={{ order }} data-vt={order === 1 ? "" : undefined} className={`vt-page size-full flex-none snap-center snap-always overflow-y-auto bg-spotify-grey pb-[calc(32px+env(safe-area-inset-bottom))] ${NO_SCROLLBAR}`}>
+        <div className="relative isolate px-4 pt-14 pb-3">
+            {/* the gradient is its own layer so it can fade in during the opening transition */}
+            <div className="vt-glow absolute inset-0 -z-10 bg-linear-to-b from-light-grey to-spotify-grey to-[340px]" />
             <div className="-mx-4 flex items-center">
                 <StepButton label="Previous playlist" onClick={() => onStep(-1)} flip />
-                <div className="aspect-square w-[236px] flex-none rounded-md bg-cover bg-top shadow-[0_8px_32px_rgba(0,0,0,.5)]"
+                <div className="vt-cover aspect-square w-[236px] flex-none rounded-md bg-cover bg-top shadow-[0_8px_32px_rgba(0,0,0,.5)]"
                     style={{ backgroundImage: `url(${SECTIONS[id].img})` }} />
                 <StepButton label="Next playlist" onClick={() => onStep(1)} />
             </div>
-            <h1 className="mt-5 text-2xl font-bold tracking-[-0.4px]">{SECTIONS[id].title}</h1>
+            <h1 className="vt-title mt-5 text-2xl font-bold tracking-[-0.4px]">{SECTIONS[id].title}</h1>
             {/* the byline leads back to the front page, as an artist name does */}
-            <button onClick={onHome} className="mt-2.5 flex items-center gap-2 text-[13px] font-bold active:opacity-60">
+            <button onClick={onHome} className="vt-byline mt-2.5 flex items-center gap-2 text-[13px] font-bold active:opacity-60">
                 <img src="/img/cat1.jpg" alt="" className="size-6 rounded-full object-cover" />Benjamin Sinek
             </button>
-            <div className="mt-2 text-[13px] text-light-grey">Playlist · <Items n={itemCounts(data)[id]} /></div>
+            <div className="vt-count mt-2 text-[13px] text-light-grey">Playlist · <Items n={itemCounts(data)[id]} /></div>
         </div>
-        <div className="pt-3">
+        <div className="vt-tracks pt-3">
             <Tracks id={id} data={data} onProject={onProject} />
         </div>
     </div>
@@ -258,7 +262,7 @@ const Playlists = ({ openId, data, onClose, onSwitch }) => {
                 className={`flex h-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain ${NO_SCROLLBAR}`}>
                 {PLAYLISTS.map((id, i) => <Page key={id} id={id} order={(i - cur + n + 1) % n} data={data} onStep={step} onProject={openProject} onHome={onClose} />)}
             </div>
-            <button onClick={onClose} aria-label="Back" className="fixed top-3 left-2 z-10 grid h-10 w-11 place-items-center drop-shadow-[0_1px_3px_rgba(0,0,0,.6)]">
+            <button onClick={onClose} aria-label="Back" className="vt-back fixed top-3 left-2 z-10 grid h-10 w-11 place-items-center drop-shadow-[0_1px_3px_rgba(0,0,0,.6)]">
                 <BackIcon className="h-5 w-[25px]" />
             </button>
             <div ref={shield} hidden className="fixed inset-0 z-20 touch-none" />
@@ -267,17 +271,23 @@ const Playlists = ({ openId, data, onClose, onSwitch }) => {
     )
 }
 
+const canAnimate = () => document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches
+
 // below xl. #experience etc. goes in the address, so the phone's back gesture closes an open playlist
 export const MobileHome = () => {
     const data = useSiteData()
     const [openId, setOpenId] = useState(null)
     const homeY = useRef(0)
+    const fading = useRef(false)   // the next address change should cross-fade
 
     useEffect(() => {
         if (location.hash) history.replaceState(null, "", location.pathname)   // always start on the front page
         const onHash = () => {
             const id = location.hash.slice(1)
-            setOpenId(PLAYLISTS.includes(id) ? id : null)
+            const show = () => flushSync(() => setOpenId(PLAYLISTS.includes(id) ? id : null))
+            if (fading.current && canAnimate()) document.startViewTransition(show)
+            else show()
+            fading.current = false
         }
         window.addEventListener("hashchange", onHash)
         return () => window.removeEventListener("hashchange", onHash)
@@ -298,7 +308,27 @@ export const MobileHome = () => {
     // playlists open at the top; closing returns to where the front page was
     useLayoutEffect(() => { window.scrollTo(0, openId ? 0 : homeY.current) }, [openId])
 
-    const open = id => { homeY.current = window.scrollY; location.hash = id }
+    // opening is a view transition where the browser has them: a grey panel grows from the tapped row over the front page,
+    // then the row's cover travels to its album place as the gradient fades in behind it, and the album's text fades in
+    // (choreography in index.css).
+    // the switch itself has to be synchronous for that, so the address is pushed here and not left to hashchange
+    const open = (id, row) => {
+        homeY.current = window.scrollY
+        const show = () => { history.pushState(null, "", `#${id}`); flushSync(() => setOpenId(id)) }
+        if (!canAnimate()) return show()
+        const r = row.getBoundingClientRect()
+        document.documentElement.style.setProperty("--vt-from", `inset(${r.top}px 0 ${innerHeight - r.bottom}px 0)`)
+        row.dataset.vt = ""   // names this row's pieces for the transition
+        document.documentElement.classList.add("vt-opening")
+        document.startViewTransition(show).finished.finally(() => {
+            delete row.dataset.vt
+            document.documentElement.classList.remove("vt-opening")
+        })
+    }
+
+    // leaving by the back arrow or the byline cross-fades to the front page.
+    // the phone's back gesture does not: the browser animates that itself
+    const close = () => { fading.current = true; history.back() }
 
     // swiping wraps around, and replaces the address instead of adding to it, so back still goes to the front page
     const swipe = dir => {
@@ -312,7 +342,7 @@ export const MobileHome = () => {
     return (
         <>
             <Home counts={itemCounts(data)} onOpen={open} hidden={!!openId} />
-            {openId && <Playlists openId={openId} data={data} onClose={() => history.back()} onSwitch={swipe} />}
+            {openId && <Playlists openId={openId} data={data} onClose={close} onSwitch={swipe} />}
         </>
     )
 }
