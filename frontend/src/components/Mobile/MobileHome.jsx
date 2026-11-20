@@ -258,8 +258,9 @@ const Playlists = ({ openId, data, onClose, onSwitch }) => {
         onScroll()   // starts the timer, so the shield comes down even if nothing scrolls
     }
 
+    // grey behind the row too: a part of a page the browser hasn't drawn yet would otherwise show the black body
     return (
-        <main className="fixed inset-0 text-white">
+        <main className="fixed inset-0 bg-spotify-grey text-white">
             <div ref={row} onScroll={onScroll} onScrollEnd={rested} onWheel={() => { wheel.current = true }}
                 onTouchStart={() => { down.current = true; wheel.current = false }} onTouchEnd={onTouchEnd} onTouchCancel={onTouchEnd}
                 className={`flex h-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain ${NO_SCROLLBAR}`}>
