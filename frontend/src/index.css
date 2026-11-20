@@ -38,20 +38,18 @@ html, body {
 .vt-opening .vt-back { view-transition-name: back; }
 .vt-opening .vt-page:not([data-vt]) { visibility: hidden; }   /* the neighbouring albums stay out of the picture */
 
-@keyframes vt-reveal { from { clip-path: var(--vt-from); } to { clip-path: inset(0); } }
 @keyframes vt-in { from { opacity: 0; } }
 @keyframes vt-out { to { opacity: 0; } }
 
-/* 1. 0s: the album's plain grey background grows up and down from the tapped row (--vt-from, a full-width band)
-      until it covers the front page, while the row's own text fades out */
+/* 1. 0s: the album's plain grey background fades in over the front page, while the tapped row's own text fades out */
 .vt-opening::view-transition-old(root) { animation: none; mix-blend-mode: normal; }
-.vt-opening::view-transition-new(root) { animation: vt-reveal .5s cubic-bezier(.45, 0, .15, 1) both; mix-blend-mode: normal; }
-.vt-opening::view-transition-old(*) { animation: vt-out .25s both; }
-/* 2. .4s: the cover travels from the row to its album place, while the album's gradient fades in behind it
+.vt-opening::view-transition-new(root) { animation: vt-in .3s ease both; mix-blend-mode: normal; }
+.vt-opening::view-transition-old(*) { animation: vt-out .2s both; }
+/* 2. .2s: the cover travels from the row to its album place, while the album's gradient fades in behind it
       (a normal animation on the page itself, which the transition shows live) */
-.vt-opening::view-transition-group(cover) { animation-duration: .7s; animation-delay: .4s; animation-timing-function: cubic-bezier(.45, 0, .15, 1); }
-.vt-opening::view-transition-old(cover) { animation: vt-out .7s .4s both; }
-.vt-opening::view-transition-new(cover) { animation: vt-in .7s .4s both; }
-.vt-opening .vt-glow { animation: vt-in .7s .4s both; }
-/* 3. 1s: everything else in the album fades in once the cover has landed */
-.vt-opening::view-transition-new(*) { animation: vt-in .35s 1s both; }
+.vt-opening::view-transition-group(cover) { animation-duration: .6s; animation-delay: .2s; animation-timing-function: cubic-bezier(.45, 0, .15, 1); }
+.vt-opening::view-transition-old(cover) { animation: vt-out .6s .2s both; }
+.vt-opening::view-transition-new(cover) { animation: vt-in .6s .2s both; }
+.vt-opening .vt-glow { animation: vt-in .6s .2s both; }
+/* 3. .65s: as the cover lands, everything else in the album fades in together */
+.vt-opening::view-transition-new(*) { animation: vt-in .4s .65s both; }

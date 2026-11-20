@@ -308,16 +308,14 @@ export const MobileHome = () => {
     // playlists open at the top; closing returns to where the front page was
     useLayoutEffect(() => { window.scrollTo(0, openId ? 0 : homeY.current) }, [openId])
 
-    // opening is a view transition where the browser has them: a grey panel grows from the tapped row over the front page,
-    // then the row's cover travels to its album place as the gradient fades in behind it, and the album's text fades in
+    // opening is a view transition where the browser has them: the album's grey fades in over the front page,
+    // then the tapped row's cover travels to its album place as the gradient fades in behind it, and the album's text fades in
     // (choreography in index.css).
     // the switch itself has to be synchronous for that, so the address is pushed here and not left to hashchange
     const open = (id, row) => {
         homeY.current = window.scrollY
         const show = () => { history.pushState(null, "", `#${id}`); flushSync(() => setOpenId(id)) }
         if (!canAnimate()) return show()
-        const r = row.getBoundingClientRect()
-        document.documentElement.style.setProperty("--vt-from", `inset(${r.top}px 0 ${innerHeight - r.bottom}px 0)`)
         row.dataset.vt = ""   // names this row's pieces for the transition
         document.documentElement.classList.add("vt-opening")
         document.startViewTransition(show).finished.finally(() => {
