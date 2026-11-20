@@ -10,14 +10,16 @@ import * as SkillIcons from "../../icons"
 
 const PLAYLISTS = ["experience", "projects", "skills"]
 
-const Icon = ({ d, className, evenOdd }) => (
-    <svg viewBox="0 0 16 16" fill="currentColor" className={className}>
+const Icon = ({ d, className, evenOdd, viewBox = "0 0 16 16" }) => (
+    <svg viewBox={viewBox} fill="currentColor" className={className}>
         <path fillRule={evenOdd ? "evenodd" : undefined} d={d} />
     </svg>
 )
 const DownloadIcon = ({ className }) => <Icon className={className} d="M8 1a.5.5 0 0 1 .5.5v9.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 1 1 .708-.708L7.5 11.293V1.5A.5.5 0 0 1 8 1" />
 const PinIcon = ({ className }) => <Icon className={className} d="M8.822.797a2.72 2.72 0 0 1 3.847 0l2.534 2.533a2.72 2.72 0 0 1 0 3.848l-3.678 3.678-1.337 4.988-4.486-4.486L1.28 15.78a.75.75 0 0 1-1.06-1.06l4.422-4.422L.156 5.812l4.987-1.337z" />
 const ChevronIcon = ({ className }) => <Icon className={className} evenOdd d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708" />
+// bootstrap's arrow-left with a 4px longer shaft
+const BackIcon = ({ className }) => <Icon className={className} evenOdd viewBox="0 0 20 16" d="M19 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H18.5A.5.5 0 0 0 19 8" />
 const CloseIcon = ({ className }) => <Icon className={className} d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
 
 // same wording as desktop: "3 items" / "1 item"
@@ -134,7 +136,7 @@ const StepButton = ({ label, onClick, flip }) => (
 )
 
 // a section shown as a Spotify album page, scrolling inside its own box. order is its place in the row
-const Page = ({ id, order, data, onStep, onProject }) => (
+const Page = ({ id, order, data, onStep, onProject, onHome }) => (
     <div style={{ order }} className={`size-full flex-none snap-center snap-always overflow-y-auto bg-spotify-grey pb-[calc(32px+env(safe-area-inset-bottom))] ${NO_SCROLLBAR}`}>
         <div className="bg-linear-to-b from-light-grey to-spotify-grey to-[340px] px-4 pt-14 pb-3">
             <div className="-mx-4 flex items-center">
@@ -144,9 +146,10 @@ const Page = ({ id, order, data, onStep, onProject }) => (
                 <StepButton label="Next playlist" onClick={() => onStep(1)} />
             </div>
             <h1 className="mt-5 text-2xl font-bold tracking-[-0.4px]">{SECTIONS[id].title}</h1>
-            <div className="mt-2.5 flex items-center gap-2 text-[13px] font-bold">
+            {/* the byline leads back to the front page, as an artist name does */}
+            <button onClick={onHome} className="mt-2.5 flex items-center gap-2 text-[13px] font-bold active:opacity-60">
                 <img src="/img/cat1.jpg" alt="" className="size-6 rounded-full object-cover" />Benjamin Sinek
-            </div>
+            </button>
             <div className="mt-2 text-[13px] text-light-grey">Playlist · <Items n={itemCounts(data)[id]} /></div>
         </div>
         <div className="pt-3">
@@ -174,14 +177,15 @@ const ProjectCard = ({ card, onClose }) => (
             initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, ease: EASE }} />}
         {card && <motion.div key="card" className="pointer-events-none fixed inset-0 z-30 grid place-items-center p-4" style={{ transformOrigin: `${card.x}px ${card.y}px` }}
             initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} transition={{ duration: 0.42, ease: EASE }}>
+            <div className="pointer-events-auto relative w-full max-w-md">
+            <Fade delay={0.3} className="absolute right-0 bottom-full mb-1">
+                <button onClick={onClose} aria-label="Close" className="grid size-9 place-items-center drop-shadow-[0_1px_3px_rgba(0,0,0,.6)]">
+                    <CloseIcon className="size-4" />
+                </button>
+            </Fade>
             <motion.div role="dialog" aria-modal="true" aria-label={card.p.name}
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-                className={`pointer-events-auto relative max-h-[82svh] w-full max-w-md overflow-y-auto overscroll-contain rounded-[20px] bg-[rgba(40,40,40,.45)] px-5 py-6 text-white backdrop-blur-xl backdrop-saturate-[1.6] shadow-[0_20px_60px_rgba(0,0,0,.4)] ${NO_SCROLLBAR}`}>
-                <Fade delay={0.3} className="absolute top-8 right-7 z-10">
-                    <button onClick={onClose} aria-label="Close" className="grid size-8 place-items-center rounded-full bg-black/45">
-                        <CloseIcon className="size-3.5" />
-                    </button>
-                </Fade>
+                className={`max-h-[82svh] overflow-y-auto overscroll-contain rounded-[20px] bg-[rgba(40,40,40,.45)] px-5 py-6 text-white backdrop-blur-xl backdrop-saturate-[1.6] shadow-[0_20px_60px_rgba(0,0,0,.4)] ${NO_SCROLLBAR}`}>
                 <Fade delay={0.45} className="mb-6 aspect-video rounded-xl bg-cover bg-center" style={{ backgroundImage: `url(${card.p.thumbnail})` }} />
                 <Fade delay={0.45} className="relative flex items-baseline justify-between gap-4">
                     <h3 className="text-[26px] leading-[1.15] font-bold">{card.p.name}</h3>
@@ -199,6 +203,7 @@ const ProjectCard = ({ card, onClose }) => (
                     </a>
                 </Fade>
             </motion.div>
+            </div>
         </motion.div>}
     </AnimatePresence>
 )
@@ -251,10 +256,10 @@ const Playlists = ({ openId, data, onClose, onSwitch }) => {
             <div ref={row} onScroll={onScroll} onScrollEnd={rested} onWheel={() => { wheel.current = true }}
                 onTouchStart={() => { down.current = true; wheel.current = false }} onTouchEnd={onTouchEnd} onTouchCancel={onTouchEnd}
                 className={`flex h-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain ${NO_SCROLLBAR}`}>
-                {PLAYLISTS.map((id, i) => <Page key={id} id={id} order={(i - cur + n + 1) % n} data={data} onStep={step} onProject={openProject} />)}
+                {PLAYLISTS.map((id, i) => <Page key={id} id={id} order={(i - cur + n + 1) % n} data={data} onStep={step} onProject={openProject} onHome={onClose} />)}
             </div>
-            <button onClick={onClose} aria-label="Close" className="fixed top-3 left-3 z-10 grid size-9 place-items-center rounded-full bg-black/45">
-                <CloseIcon className="size-4" />
+            <button onClick={onClose} aria-label="Back" className="fixed top-3 left-2 z-10 grid h-10 w-11 place-items-center drop-shadow-[0_1px_3px_rgba(0,0,0,.6)]">
+                <BackIcon className="h-5 w-[25px]" />
             </button>
             <div ref={shield} hidden className="fixed inset-0 z-20 touch-none" />
             <ProjectCard card={card} onClose={() => setCard(null)} />
