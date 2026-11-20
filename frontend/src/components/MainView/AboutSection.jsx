@@ -1,45 +1,15 @@
-import { motion, useTransform, useScroll } from "motion/react"
+import { motion } from "motion/react"
+import { Hero } from "../Hero/Hero"
+import { ABOUT } from "../../config/about"
 import { useRef, useState } from "react"
 
 export const AboutSection = ({ scrollContainerRef }) => {
-    const { scrollY } = useScroll({ container: scrollContainerRef })
-    const IMAGE_HEIGHT_REM = 24; // h-96 = 24rem
-    const imageHeightPx = IMAGE_HEIGHT_REM * 16;
-    const scale = useTransform(scrollY, [0, imageHeightPx], [1.05, 1]);
-    const opacity = useTransform(scrollY, [0, imageHeightPx], [1, 0]);
-
     const doNotPressref = useRef(null);
     const [counter, setCounter] = useState(0);
 
     return (
         <section id="about" className="relative min-h-mainview overflow-x-clip flex flex-col">
-            {/* fixed image container */}
-            <motion.div className="sticky top-0 min-h-96"
-                style={{
-                    height: `${imageHeightPx}px`,
-                    backgroundImage: "url(/img/car.jpg)",
-                    backgroundPosition: "0% 50%",
-                    backgroundSize: "cover",
-                    scale: scale,
-                    opacity: opacity,
-                }}
-            >
-            </motion.div>
-            {/* floating hero text */}
-            <div className="absolute top-0 flex flex-col justify-end p-6 font-light" style={{ height: `${imageHeightPx}px` }}>
-                <span className="text-sm ml-1">CS @ Georgia Tech</span>
-                <h1 className="font-black text-8xl leading-28">benjamin sinek</h1>
-                <span className="flex justify-items gap-2 mt-2">
-                    <svg viewBox="0 0 16 16" fill="currentColor" className="h-6 p-1">
-                        <path d="M8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10m0-7a3 3 0 1 1 0-6 3 3 0 0 1 0 6"/>
-                    </svg>
-                    <span className="text-sm flex items-center">
-                        <span>Los Angeles, CA</span>
-                        <span className="mx-2 font-semibold">•</span>
-                        <span>Atlanta, GA</span>
-                    </span>
-                </span>
-            </div>
+            <Hero scrollContainerRef={scrollContainerRef} />
 
             {/* ABOUT ME */}
             <div className="relative bg-spotify-grey flex-1 flex flex-col">
@@ -70,15 +40,9 @@ export const AboutSection = ({ scrollContainerRef }) => {
                         <h2 className="text-2xl font-semibold mb-4">About me</h2>
                         <div className="flex-1 p-4">
                             <div className="text-lg leading-relaxed text-light-grey flex flex-col gap-4 justify-around h-full">
-                                <p className="hover:text-white hover:border-white transition-colors border-l-2 border-light-grey pl-8">
-                                    I'm a Computer Science student at <span className="text-white">Georgia Tech</span> studying <span className="text-white">AI/ML</span> and exploring their application to financial fields.
-                                </p>
-                                <p className="hover:text-white hover:border-white transition-colors border-l-2 border-light-grey pl-8">
-                                    I enjoy building interactive projects that intersect technology and music, including a hands-free facial emotion-based music recommendation system.
-                                </p>
-                                <p className="hover:text-white hover:border-white transition-colors border-l-2 border-light-grey pl-8">
-                                    Beyond that, I love producing music, tinkering with cars, and snowboarding.
-                                </p>
+                                {ABOUT.map((text, i) => (
+                                    <p key={i} className="hover:text-white hover:border-white transition-colors border-l-2 border-light-grey pl-8">{text}</p>
+                                ))}
                             </div>
                         </div>
                     </div>
