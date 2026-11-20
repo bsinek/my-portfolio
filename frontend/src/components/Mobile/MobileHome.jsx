@@ -176,7 +176,7 @@ const ProjectCard = ({ card, onClose }) => (
             initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} transition={{ duration: 0.42, ease: EASE }}>
             <motion.div role="dialog" aria-modal="true" aria-label={card.p.name}
                 initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
-                className={`pointer-events-auto relative max-h-[82svh] w-full max-w-md overflow-y-auto overscroll-contain rounded-[20px] bg-[rgba(40,40,40,.45)] px-5 py-6 text-white backdrop-blur-xl backdrop-saturate-[1.6] shadow-[inset_0_1px_0_rgba(255,255,255,.14),inset_0_0_0_1px_rgba(255,255,255,.08),0_20px_60px_rgba(0,0,0,.4)] ${NO_SCROLLBAR}`}>
+                className={`pointer-events-auto relative max-h-[82svh] w-full max-w-md overflow-y-auto overscroll-contain rounded-[20px] bg-[rgba(40,40,40,.45)] px-5 py-6 text-white backdrop-blur-xl backdrop-saturate-[1.6] shadow-[0_20px_60px_rgba(0,0,0,.4)] ${NO_SCROLLBAR}`}>
                 <Fade delay={0.3} className="absolute top-8 right-7 z-10">
                     <button onClick={onClose} aria-label="Close" className="grid size-8 place-items-center rounded-full bg-black/45">
                         <CloseIcon className="size-3.5" />
