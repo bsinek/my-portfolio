@@ -23,6 +23,9 @@ const ChevronIcon = ({ className }) => <Icon className={className} evenOdd d="M4
 const BackIcon = ({ className }) => <Icon className={className} evenOdd viewBox="0 0 20 16" d="M19 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H18.5A.5.5 0 0 0 19 8" />
 const CloseIcon = ({ className }) => <Icon className={className} d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
 
+// separator between two facts on a line, the same bullet as the desktop sidebar
+const Dot = () => <span className="font-semibold">•</span>
+
 // same wording as desktop: "3 items" / "1 item"
 const Items = ({ n }) => <>{n} {n === 1 ? "item" : "items"}</>
 
@@ -80,7 +83,7 @@ const Home = ({ counts, onOpen, hidden }) => {
                 {PLAYLISTS.map((id, i) => (
                     <Row key={id} num={i + 1} onClick={e => onOpen(id, e.currentTarget)} title={<span className="vt-row-title">{SECTIONS[id].title}</span>}
                         art={<span className="vt-cover size-full rounded bg-cover bg-top" style={{ backgroundImage: `url(${SECTIONS[id].img})` }} />}
-                        sub={<><PinIcon className="vt-pin size-[11px] flex-none text-spotify-green" /><span className="vt-row-count">Playlist · <Items n={counts[id]} /></span></>} />
+                        sub={<><PinIcon className="vt-pin size-[11px] flex-none text-spotify-green" /><span className="vt-row-count">Playlist <Dot /> <Items n={counts[id]} /></span></>} />
                 ))}
                 <Heading>About</Heading>
                 <AboutCard />
@@ -101,7 +104,7 @@ const Tracks = ({ id, data, onProject }) => {
             <div className="min-w-0 flex-1 pb-5">
                 <div className="flex min-h-16 flex-col justify-center py-2">
                     <div className="text-base font-semibold">{e.role}</div>
-                    <div className="mt-0.5 text-sm text-light-grey">{e.company} · {e.date_range}</div>
+                    <div className="mt-0.5 text-sm text-light-grey">{e.company} <Dot /> {e.date_range}</div>
                 </div>
                 <div className="mt-1 mb-3 h-0.5 bg-spotify-green" />
                 <ul className="flex flex-col gap-2.5 text-sm leading-snug text-light-grey">
@@ -112,7 +115,7 @@ const Tracks = ({ id, data, onProject }) => {
     ))
     if (id === "projects") return projs.map((p, i) => (
         <Row key={i} num={i + 1} art={<img src={p.icon} alt="" />} title={p.name} onClick={e => onProject(p, e.currentTarget)}
-            sub={<span>{p.year} · {p.techstack.slice(0, 3).join(", ")}</span>} />
+            sub={<span>{p.year} <Dot /> {p.techstack.slice(0, 3).join(", ")}</span>} />
     ))
     // skills: numbered straight through, grouped under category headings
     let n = 0
@@ -154,7 +157,7 @@ const Page = ({ id, order, data, onStep, onProject, onHome }) => (
             <button onClick={onHome} className="vt-byline mt-2.5 flex items-center gap-2 text-[13px] font-bold active:opacity-60">
                 <img src="/img/cat1.jpg" alt="" className="size-6 rounded-full object-cover" />Benjamin Sinek
             </button>
-            <div className="vt-count mt-2 text-[13px] text-light-grey">Playlist · <Items n={itemCounts(data)[id]} /></div>
+            <div className="vt-count mt-2 text-[13px] text-light-grey">Playlist <Dot /> <Items n={itemCounts(data)[id]} /></div>
         </div>
         <div className="vt-tracks pt-3">
             <Tracks id={id} data={data} onProject={onProject} />
