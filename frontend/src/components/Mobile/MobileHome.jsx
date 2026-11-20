@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
+import { AnimatePresence, motion } from "motion/react"
 import { SECTIONS } from "../../config/sections"
 import { contacts } from "../../config/contacts"
 import { ABOUT } from "../../config/about"
@@ -85,13 +86,13 @@ const Home = ({ counts, onOpen, hidden }) => {
     )
 }
 
-const Tracks = ({ id, data }) => {
+const Tracks = ({ id, data, onProject }) => {
     const { exps, projs, cats } = data
     if (id === "experience") return exps.map((e, i) => (
         <Row key={i} num={i + 1} title={e.role} sub={<span>{e.company} · {e.date_range}</span>} />
     ))
     if (id === "projects") return projs.map((p, i) => (
-        <Row key={i} num={i + 1} art={<img src={p.icon} alt="" />} title={p.name}
+        <Row key={i} num={i + 1} art={<img src={p.icon} alt="" />} title={p.name} onClick={e => onProject(p, e.currentTarget)}
             sub={<span>{p.year} · {p.techstack.slice(0, 3).join(", ")}</span>} />
     ))
     // skills: numbered straight through, grouped under category headings
@@ -117,7 +118,7 @@ const StepButton = ({ label, onClick, flip }) => (
 )
 
 // a section shown as a Spotify album page, scrolling inside its own box. order is its place in the row
-const Page = ({ id, order, data, onStep }) => (
+const Page = ({ id, order, data, onStep, onProject }) => (
     <div style={{ order }} className={`size-full flex-none snap-center snap-always overflow-y-auto bg-spotify-grey pb-[calc(32px+env(safe-area-inset-bottom))] ${NO_SCROLLBAR}`}>
         <div className="bg-linear-to-b from-light-grey to-spotify-grey to-[340px] px-4 pt-14 pb-3">
             <div className="-mx-4 flex items-center">
@@ -133,9 +134,57 @@ const Page = ({ id, order, data, onStep }) => (
             <div className="mt-2 text-[13px] text-light-grey">Playlist · <Items n={itemCounts(data)[id]} /></div>
         </div>
         <div className="pt-3">
-            <Tracks id={id} data={data} />
+            <Tracks id={id} data={data} onProject={onProject} />
         </div>
     </div>
+)
+
+const GITHUB = contacts().find(c => c.label === "GitHub").d
+const EASE = [0.2, 0, 0, 1]   // fast start, long soft landing, no overshoot
+
+// a piece of the card's content, fading in where it sits
+const Fade = ({ delay, className, style, children }) => (
+    <motion.div className={className} style={style} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay, duration: 0.4 }}>
+        {children}
+    </motion.div>
+)
+
+// a project as a frosted glass card that grows out of the tapped row (card.x, card.y: the row's centre on screen).
+// the growing is on a wrapper and the fade on the card itself: opacity on a parent would stop the card blurring what is behind it.
+// once the card has grown, content fades in where it sits, top to bottom, and the underline draws in from the right
+const ProjectCard = ({ card, onClose }) => (
+    <AnimatePresence>
+        {card && <motion.div key="dim" onClick={onClose} className="fixed inset-0 z-30 bg-black/20"
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3, ease: EASE }} />}
+        {card && <motion.div key="card" className="pointer-events-none fixed inset-0 z-30 grid place-items-center p-4" style={{ transformOrigin: `${card.x}px ${card.y}px` }}
+            initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} transition={{ duration: 0.42, ease: EASE }}>
+            <motion.div role="dialog" aria-modal="true" aria-label={card.p.name}
+                initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.2 }}
+                className={`pointer-events-auto relative max-h-[82svh] w-full max-w-md overflow-y-auto overscroll-contain rounded-[20px] bg-[rgba(40,40,40,.45)] px-5 py-6 text-white backdrop-blur-xl backdrop-saturate-[1.6] shadow-[inset_0_1px_0_rgba(255,255,255,.14),inset_0_0_0_1px_rgba(255,255,255,.08),0_20px_60px_rgba(0,0,0,.4)] ${NO_SCROLLBAR}`}>
+                <Fade delay={0.3} className="absolute top-8 right-7 z-10">
+                    <button onClick={onClose} aria-label="Close" className="grid size-8 place-items-center rounded-full bg-black/45">
+                        <CloseIcon className="size-3.5" />
+                    </button>
+                </Fade>
+                <Fade delay={0.45} className="mb-6 aspect-video rounded-xl bg-cover bg-center" style={{ backgroundImage: `url(${card.p.thumbnail})` }} />
+                <Fade delay={0.45} className="relative flex items-baseline justify-between gap-4">
+                    <h3 className="text-[26px] leading-[1.15] font-bold">{card.p.name}</h3>
+                    <span className="flex-none text-lg font-light text-light-grey">{card.p.year}</span>
+                    <motion.div className="absolute inset-x-0 -bottom-2 h-0.5 origin-right bg-spotify-green"
+                        initial={{ scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ delay: 0.55, duration: 0.3 }} />
+                </Fade>
+                <Fade delay={0.55} className="mt-6 flex flex-wrap gap-x-2 text-[15px] text-light-grey">
+                    {card.p.techstack.map((t, i) => <span key={t}>{i > 0 && <span className="mr-2">|</span>}{t}</span>)}
+                </Fade>
+                <Fade delay={0.65}>
+                    <p className="mt-4 text-[15px] leading-normal">{card.p.description}</p>
+                    <a href={card.p.link} target="_blank" className="mt-5 inline-flex items-center gap-1.5 text-sm text-light-grey active:text-white">
+                        <Icon d={GITHUB} className="size-4" />View on GitHub ↗
+                    </a>
+                </Fade>
+            </motion.div>
+        </motion.div>}
+    </AnimatePresence>
 )
 
 // the playlists as a looping carousel on the browser's own sideways scrolling, one page per swipe.
@@ -145,6 +194,11 @@ const Page = ({ id, order, data, onStep }) => (
 // native scrolling because Safari on 120Hz iPhones ran a script-driven drag at 60Hz, which showed as jitter (observed 2026-11-20)
 const Playlists = ({ openId, data, onClose, onSwitch }) => {
     const row = useRef(null), shield = useRef(null), timer = useRef(0)
+    const [card, setCard] = useState(null)   // the open project and where on screen it was tapped
+    const openProject = (p, el) => {
+        const r = el.getBoundingClientRect()
+        setCard({ p, x: r.left + r.width / 2, y: r.top + r.height / 2 })
+    }
     const down = useRef(false)    // a finger is on the row
     const wheel = useRef(false)   // the last input was a wheel or trackpad: the shield would cut its scroll off
     const n = PLAYLISTS.length, cur = PLAYLISTS.indexOf(openId)
@@ -181,12 +235,13 @@ const Playlists = ({ openId, data, onClose, onSwitch }) => {
             <div ref={row} onScroll={onScroll} onScrollEnd={rested} onWheel={() => { wheel.current = true }}
                 onTouchStart={() => { down.current = true; wheel.current = false }} onTouchEnd={onTouchEnd} onTouchCancel={onTouchEnd}
                 className={`flex h-full snap-x snap-mandatory overflow-x-auto overscroll-x-contain ${NO_SCROLLBAR}`}>
-                {PLAYLISTS.map((id, i) => <Page key={id} id={id} order={(i - cur + n + 1) % n} data={data} onStep={step} />)}
+                {PLAYLISTS.map((id, i) => <Page key={id} id={id} order={(i - cur + n + 1) % n} data={data} onStep={step} onProject={openProject} />)}
             </div>
             <button onClick={onClose} aria-label="Close" className="fixed top-3 left-3 z-10 grid size-9 place-items-center rounded-full bg-black/45">
                 <CloseIcon className="size-4" />
             </button>
             <div ref={shield} hidden className="fixed inset-0 z-20 touch-none" />
+            <ProjectCard card={card} onClose={() => setCard(null)} />
         </main>
     )
 }
